@@ -1,0 +1,77 @@
+
+.create_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #FDFDFD;
+    color: #1D1D1D;
+
+}
+
+.details_1{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    text-align: left;
+}
+.details_1 > p{
+    font-weight: 700;
+    font-size: 1.563rem;
+}
+.details_1_box{
+    display: flex;
+    flex-direction: row;
+    gap:15px;
+}
+.details_1_box input{
+    background:#E3EDF9;
+    width: 307px;
+    height:54px;
+    border-radius: 9px;
+}
+.Heading_CF{
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+.Heading_CF > span{
+    position: relative;
+    right:10px;
+    top:5px;
+}
+.SbHeading_CF{
+    font-size: 1.563rem;
+    font-weight: 400;
+}
+.Buttons_flex{
+    display: flex;
+    flex-direction: row;
+   gap:2%;
+   margin-top: 5%;;
+}
+.Reset_button{
+    display: flex;
+    border:2px solid #F04465;
+    border-radius: 14px;
+    width: 385.62px;
+    height:70.63px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color:red;
+    font-weight: 700;
+    background-color: #FDFDFD;
+}
+.Submit_button{
+    display: flex;
+    border:2px solid #2C6016;
+    border-radius: 14px;
+    width: 385.62px;
+    height:70.63px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color:#fdfdfd;
+    font-weight: 700;
+    background-color: #2C6016;
+}

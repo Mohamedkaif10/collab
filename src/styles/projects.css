@@ -1,0 +1,150 @@
+.main_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.main_div >p{
+    text-align: left;
+    color:#253D90;
+    font-weight: 700;
+    font-size: 1.875rem;
+}
+.first_boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.first_boxes > button{
+    width:411px;
+    height:141px;
+    border-radius: 16px;
+    border-color: #B4B7BD;
+    font-weight: 700;
+    color:#1D1D1D;
+    font-size: 1.563rem;
+    border-width: 1px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+} 
+.first_boxes > button.active {
+    background-color: #253D90;
+    color:#FFC20E;
+    border-color: black;
+  }
+.CAF{
+    background-color: #E3EDF9;
+    border-radius: 10px;
+    width:1322px;
+    height:203px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
+.CAF img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    object-fit:contain; 
+  }
+.CAF >p{
+    font-weight: 700;
+    font-size: 2.5rem;
+    color:#253D90;
+}
+.CAF_Button{
+    width:210px;
+    height:54px;
+    border-radius: 10px;
+    background-color: #FFC20E;
+    color:#1D1D1D;
+    font-weight: 700;
+    font-size: 1.363rem;
+}
+.subBox{
+    display: flex;
+    flex-direction: column;
+}
+.head_subBox{
+    display: flex;
+    justify-content: space-between;
+}
+.head_subBox > p{
+    font-weight: 700;
+    color: black;
+}
+table {
+    width: 1248px;
+height: 74px;
+border-radius: 6px
+
+}
+.heading_table{
+    background: #1111111A;
+    font-family: Inter;
+font-size: 20px;
+font-weight: 700;
+line-height: 24px;
+letter-spacing: 0em;
+color:#111111;
+}
+.row_table{
+    background: white;
+    font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+color: #111111;
+
+}
+.linehr{
+    background-color: black;
+    height: 1px; 
+    margin: 0;
+    border: none; 
+    position: relative;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pagination {
+    display: inline-block;
+    margin-left: 70%;
+    margin-top: 20%;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .pagination a.active {
+    background-color: #4CAF50;
+    color: black;
+  }
+  
+  .pagination a:hover {
+    background-color: black;
+  }
