@@ -70,7 +70,7 @@ const Projects=()=>{
              </div>
 {showCAF ? (
                 <>
-        <div>
+        <div className="upper_div">
     <div className="CAF">
       <span><img src={Book_img} alt="Book" /></span>
       <p>Create New Positions</p>
@@ -137,54 +137,62 @@ const Projects=()=>{
     <div className="filterProdiv">
         <div className="filters">
             <p className="filterhead">Filters</p>
-            <p className="headfilter">Department</p>
-           <input type="radio" id="any" name="dept" value="any" />
-            <label for="any">HTML</label><br />
-            <input type="radio" id="mtech"  name="dept" value="mtech" />
-            <label for="mtech">HTML</label><br />
-            <input type="radio" id="btech" name="dept" value="btech" />
-            <label for="btech">HTML</label><br />
-            <input type="radio" id="phd" name="dept" value="phd" />
-            <label for="phd">HTML</label><br />
-            <p className="headfilter">Date of posting</p>
-            <input type="radio" id="alltime" name="DOP" value="alltime" />
-            <label for="alltime">HTML</label><br />
-            <input type="radio" id="last24hrs" name="DOP" value="last24hrs" />
-            <label for="last24hrs">HTML</label><br />
-            <input type="radio" id="last3days" name="DOP" value="last3days" />
-            <label for="last3days">HTML</label><br />
-            <input type="radio" id="last7days" name="DOP" value="last7days" />
-            <label for="last7days">HTML</label><br />
-            <p className="headfilter">Work Experience</p>
+            <p className="headfilter">Institute</p>
+            <input type="checkbox" id="all" />
+           <label for="all">All</label><br/>
+           <input type="checkbox" id="iit" />
+           <label for="iit">IIT</label><br/>
+           <input type="checkbox" id="nit" />
+           <label for="nit">NIT</label><br/>
+           <input type="checkbox" id="iiit" />
+           <label for="iiit">IIIT</label><br/>
+        
+            <p className="headfilter">Discipline</p>
+            <input type="checkbox" id="Btech" />
+            <label for="Btech">Btech</label><br/>
+           <input type="checkbox" id="Mtech" />
+           <label for="Mtech">Mtech</label><br/>
+           <input type="checkbox" id="PHD" />
+           <label for="PHD">PHD</label><br/>
+
+            <p className="headfilter">Publications</p>
             <input type="radio" id="anyexp" name="experience"  value="anyexp" />
-            <label for="anyexp">Any experience</label><br />
+            <label for="anyexp">0-1</label><br />
             <input type="radio" id="one2three" name="experience" value="one2three" />
             <label for="one2three">1-3 years</label><br />
             <input type="radio" id="three2six" name="experience" value="three2six" />
-            <label for="three2six">3-6 years</label><br/>
-            <p className="headfilter">Skills</p>
-            <input type="checkbox" id="python" />
-           <label for="python">Python</label><br/>
-           <input type="checkbox" id="coding" />
-           <label for="coding">coding</label><br/>
-           <input type="checkbox" id="resh" />
-           <label for="resh">Rresearch</label><br/>
+            <label for="three2six">3&above</label><br/>
+          
            <p className="headfilter">CGPA</p>
            <input type="range" min="1" max="100" ></input>
         </div>
         {showAll &&  <div className="applicants">
-            <p className="noofapp">3177 Applicants</p>
-            <div>sort by</div>
+            <div className="div_under_App">
+            <p className="noofapp">All Applicants</p>
+            <input placeholder="Search"></input>
+            <form action="#">
+    <select name="sort" id="sort">
+        <option value="" disabled selected hidden>Sort by</option>
+        <option value="A-Z">A-Z</option>
+        <option value="Desc CGPA">Desc CGPA</option>
+        <option value="Asc CGPA">Asc CGPA</option>
+        <option value="Experience">Experience</option>
+    </select>
+</form>
+            </div>
+            <div className="the_two_buttons">
+                <button>Shortlist</button>
+                <button>Copy Link</button>
+                </div>
             <table className="table_2">
         <tr className="sub_heading_table">
           <th>SN</th>
           <th>Name</th>
           <th>Institute</th>
-          <th>Branch</th>
+          <th>Program</th>
           <th>CGPA</th>
-          <th>Experience</th>
+          <th>Publications</th>
           <th>Relecvancy</th>
-          <th>Status</th>
         </tr>
         <tr>
           {/* <td colSpan="8" className="linetwo"><hr className="linehrtwo" /></td> */}
@@ -196,37 +204,49 @@ const Projects=()=>{
           <td>28/04/2022</td>
           <td>5g</td>
           <td>Share</td>
-          <td style={{width: "80px"}}>^</td>
-          <td style={{width: "80px"}}>Shortlisted</td>
+          <td>^</td>
         </tr>
       </table>
         </div>}
         {showSelected && <div className="applicants">
-            <p className="noofapp">3177 Applicants</p>
-            <div>sort by</div>
+            <div className="div_under_App">
+            <p className="noofapp">All Applicants</p>
+            <input placeholder="Search"></input>
+            <form action="#">
+    <select name="sort" id="sort">
+        <option value="" disabled selected hidden>Sort by</option>
+        <option value="A-Z">A-Z</option>
+        <option value="Desc CGPA">Desc CGPA</option>
+        <option value="Asc CGPA">Asc CGPA</option>
+        <option value="Experience">Experience</option>
+    </select>
+</form>
+            </div>
+            <div className="the_two_buttons">
+                <button>Remove</button>
+                </div>
             <table className="table_2">
         <tr className="sub_heading_table">
-          <th>SN</th>
+        <th>Select</th>
           <th>Name</th>
           <th>Institute</th>
-          <th>Branch</th>
+          <th>Program</th>
           <th>CGPA</th>
-          <th>Experience</th>
+          <th>Publications</th>
           <th>Relecvancy</th>
-          <th>Status</th>
         </tr>
         <tr>
           {/* <td colSpan="8" className="linetwo"><hr className="linehrtwo" /></td> */}
         </tr>
         <tr className="sub_heading_row_table">
-          <td>shortlisted</td>
-          <td>shortlisted</td>
-          <td>shortlisted</td>
-          <td>shortlisted</td>
-          <td>se;ected</td>
+        <td>srf</td>
+          <td>Real time dynamic risk</td>
+          <td>22/04/2022</td>
+          <td>28/04/2022</td>
+          <td>5g</td>
           <td>Share</td>
-          <td style={{width: "80px"}}>^</td>
-          <td style={{width: "80px"}}>Shortlisted</td>
+          <td>^</td>
+          <td><button>?</button></td>
         </tr>
       </table >
         </div>

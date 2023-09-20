@@ -12,9 +12,6 @@ const Create_form=()=>{
               const closeModal = () => {setIsModalOpen(false); };
             
               const handleSubmit = () => {openModal();};
-             
-             
-
               const handleReset = () => {formRef.current.reset();};
             
     return(

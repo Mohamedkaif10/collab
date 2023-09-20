@@ -40,10 +40,15 @@
     color:#FFC20E;
     border-color: black;
   }
+  .upper_div{
+    display: flex;
+    flex-direction:column;
+justify-content: center;
+align-items: center; }
 .CAF{
     background-color: #E3EDF9;
     border-radius: 10px;
-    width:100%;
+    width:93%;
     height:203px;
     display: flex;
     flex-direction: row;
@@ -75,6 +80,7 @@
 .subBox{
     display: flex;
     flex-direction: column;
+    width: 90%;
 }
 .head_subBox{
     display: flex;
@@ -153,8 +159,9 @@ color: #111111;
   .App_button_div{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap:2%;
+    justify-content: space-around;
+    border-color: black;
+    border-style:dotted
   }
   .App_button_div > button{
     width: 437.2px;
@@ -167,14 +174,15 @@ color: black;
   .filterProdiv{
     display: flex;
     flex-direction: row;
-    gap:1%;
+    justify-content: space-around;
+    margin-top: 20px;
   }
   .filters{
     border: 1px solid #1414140D;
 background-color: #FFFFFF;
 border-style: dotted;
 border-color:black;
-width:15vw;
+
 
   }
   .filterhead{
@@ -195,15 +203,13 @@ color:black;
   .applicants{
     border-style: dotted;
     border-color:black;
-    width:87vw;
+    width:80vw;
     background-color: whitesmoke;
   }
   .noofapp{
     font-family: Inter;
 font-size: 32px;
 font-weight: 700;
-line-height: 48px;
-letter-spacing: 0em;
 text-align: left;
 color:#141414;
 border-style: dotted;
@@ -246,12 +252,50 @@ background: #FFFFFF;
     border-radius: 50%; /* Make it circular */
     background-color: white;
     border-color: black; /* Set the background color to white */
+    color:black;
   }
   
   /* Change the background color of the radio button when checked */
   input[type="radio"]:checked {
-    background-color: #fff; /* Set the background color to white when checked */
+    background-color: black; /* Set the background color to white when checked */
   }
   .table_2{
     width:100%
   }
+
+
+  .the_two_buttons{
+    display: flex;
+    gap:2%;
+    
+  }
+  .the_two_buttons > button{
+    width: max-content;
+height: 54px;
+
+border-radius: 10px;
+background: #FFC20E;
+color:black;
+text-align: center;
+font-size: 25px;
+font-weight: 700;
+align-items: center;
+}
+.div_under_App{
+    display: flex;
+    color:black;
+    border-style: dotted;
+    border-color: red;
+    justify-content: center;
+}
+.div_under_App > input{
+    width: 240px;
+height: 48px;
+
+border-radius: 4px;
+border: 1px;
+background: white
+
+
+
+}
