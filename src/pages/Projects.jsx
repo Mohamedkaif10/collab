@@ -6,8 +6,8 @@ const Projects=()=>{
     const [activeButton, setActiveButton] = useState(null);
     const [showCAF, setShowCAF] = useState(true); 
     const[activeButton2,setActiveButton2]=useState(null);
-    const [showSelected, setShowSelected] = useState(true);
-    const [showSaved, setShowSaved] = useState(true);
+    const [showSelected, setShowSelected] = useState(false);
+    const [showSaved, setShowSaved] = useState(false);
     const [showAll, setShowAll] = useState(true);
   // Function to handle button click and change the active button
   const handleButtonClick = (buttonName) => {
