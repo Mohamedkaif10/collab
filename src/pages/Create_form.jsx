@@ -1,6 +1,22 @@
 import "../styles/Create_form.css"
 import Book_img from "../assets/Book.png"
+import { useState ,useRef} from "react";
+import Modal from "../components/Modal";
 const Create_form=()=>{
+       const [isModalOpen, setIsModalOpen] = useState(false);
+       const formRef = useRef(null);
+              
+              const openModal = () => {setIsModalOpen(true); };
+            
+              
+              const closeModal = () => {setIsModalOpen(false); };
+            
+              const handleSubmit = () => {openModal();};
+             
+             
+
+              const handleReset = () => {formRef.current.reset();};
+            
     return(
         <>
         <div className="create_form">
@@ -10,7 +26,7 @@ const Create_form=()=>{
           <div className="details_1">
                 <p>Personal Details</p>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
@@ -18,29 +34,29 @@ const Create_form=()=>{
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
                 </div>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="add or drop">
                         </input>
                        </div>
@@ -49,73 +65,73 @@ const Create_form=()=>{
           <div className="details_1">
                 <p>Educational Details</p>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="pg Institute">
                         </input>
                        </div>
-                       <div classname="Year of Passing">
+                       <div className="Year of Passing">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="Specilisation">
+                       <div className="Specilisation">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="pg_percentage">
+                       <div className="pg_percentage">
                         <input placeholder="name">
                         </input>
                        </div>
                 </div>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Ug_institute">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Year of Passing">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="add or drop">
                         </input>
                        </div>
                 </div>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Ug_institute">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Year of Passing">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="add or drop">
                         </input>
                        </div>
                 </div>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Ug_institute">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Year of Passing">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="add or drop">
                         </input>
                        </div>
@@ -124,37 +140,37 @@ const Create_form=()=>{
           <div className="details_1">
                 <p>Work Experience</p>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="pg Institute">
                         </input>
                        </div>
-                       <div classname="Year of Passing">
+                       <div className="Year of Passing">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="Specilisation">
+                       <div className="Specilisation">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="pg_percentage">
+                       <div className="pg_percentage">
                         <input placeholder="name">
                         </input>
                        </div>
                 </div>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Ug_institute">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="Year of Passing">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="add or drop">
                         </input>
                        </div>
@@ -163,29 +179,31 @@ const Create_form=()=>{
           <div className="details_1">
                 <p>Work Experience</p>
                 <div className="details_1_box">
-                       <div classname="inner_box_1">
+                       <div className="inner_box_1">
                         <input placeholder="pg Institute">
                         </input>
                        </div>
-                       <div classname="Year of Passing">
+                       <div className="Year of Passing">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="Specilisation">
+                       <div className="Specilisation">
                         <input placeholder="name">
                         </input>
                        </div>
-                       <div classname="pg_percentage">
+                       <div className="pg_percentage">
                         <input placeholder="name">
                         </input>
                        </div>
                 </div>
           </div>
           <div className="Buttons_flex">
-            <button className="Reset_button">Reset</button>
-            <button className="Submit_button">Submit</button>
+            <button className="Reset_button" onClick={handleReset}>Reset</button>
+            <button className="Submit_button" onClick={handleSubmit}>Submit</button>
           </div>
+          {isModalOpen && <Modal closeModal={closeModal} />}
           </div>
+          
         </>
     )
 }

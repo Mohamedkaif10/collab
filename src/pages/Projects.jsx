@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Book_img from "../assets/Book.png"
 import "../styles/projects.css"
+import { useNavigate } from "react-router-dom";
 const Projects=()=>{
     const [activeButton, setActiveButton] = useState(null);
     const [showCAF, setShowCAF] = useState(true); 
@@ -36,6 +37,12 @@ const Projects=()=>{
       }
 
   };
+  const navigate = useNavigate();
+
+  const handleButtonClickNavigate = () => {
+    // Use the navigate function to navigate to the desired route
+    navigate("/");
+  };
   
     return(
         <>
@@ -67,7 +74,7 @@ const Projects=()=>{
     <div className="CAF">
       <span><img src={Book_img} alt="Book" /></span>
       <p>Create New Positions</p>
-      <button className="CAF_Button">Create a form</button>
+      <button className="CAF_Button" onClick={handleButtonClickNavigate}>Create a form</button>
     </div>
     <div className="subBox">
       <div className="head_subBox">
@@ -76,7 +83,7 @@ const Projects=()=>{
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <table>
+      <table className="table_1">
         <tr className="heading_table">
           <th>Position</th>
           <th>Project Title</th>
@@ -168,7 +175,7 @@ const Projects=()=>{
         {showAll &&  <div className="applicants">
             <p className="noofapp">3177 Applicants</p>
             <div>sort by</div>
-            <table>
+            <table className="table_2">
         <tr className="sub_heading_table">
           <th>SN</th>
           <th>Name</th>
@@ -197,7 +204,7 @@ const Projects=()=>{
         {showSelected && <div className="applicants">
             <p className="noofapp">3177 Applicants</p>
             <div>sort by</div>
-            <table>
+            <table className="table_2">
         <tr className="sub_heading_table">
           <th>SN</th>
           <th>Name</th>
@@ -221,12 +228,12 @@ const Projects=()=>{
           <td style={{width: "80px"}}>^</td>
           <td style={{width: "80px"}}>Shortlisted</td>
         </tr>
-      </table>
+      </table >
         </div>
         } {showSaved && <div className="applicants">
             <p className="noofapp">3177 Applicants</p>
             <div>sort by</div>
-            <table>
+            <table className="table_2">
         <tr className="sub_heading_table">
           <th>SN</th>
           <th>Name</th>

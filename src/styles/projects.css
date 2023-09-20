@@ -43,7 +43,7 @@
 .CAF{
     background-color: #E3EDF9;
     border-radius: 10px;
-    width:1322px;
+    width:100%;
     height:203px;
     display: flex;
     flex-direction: row;
@@ -84,8 +84,8 @@
     font-weight: 700;
     color: black;
 }
-table {
-    width: 1248px;
+.table_1 {
+    width: 100%;
 height: 74px;
 border-radius: 6px
 
@@ -251,4 +251,7 @@ background: #FFFFFF;
   /* Change the background color of the radio button when checked */
   input[type="radio"]:checked {
     background-color: #fff; /* Set the background color to white when checked */
+  }
+  .table_2{
+    width:100%
   }

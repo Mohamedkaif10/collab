@@ -1,0 +1,52 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure the modal is on top of other elements */
+  
+  }
+  .box_modal{
+    width: 725px;
+height: 431px;
+top: 180px;
+left: 350px;
+border-radius: 24px;
+background: #FFFFFF;
+position: relative;
+ }
+ .clse_btn{
+    width: 268px;
+height: 70.63px;
+top: 165px;
+left: 16px;
+border-radius: 14px;
+border: 1px;
+border: 1px solid #B4B7BD;
+background-color: white;
+position: relative;
+font-size: 25px;
+font-weight: 700;
+line-height: 30px;
+letter-spacing: 0em;
+text-align: center;
+color:black
+ }
+ .write{
+font-size: 30px;
+font-weight: 700;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+position: relative;
+    top:8%;
+
+ }
+ img{
+    position: relative;
+    top:20%;
+ }
