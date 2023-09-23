@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Book_img from "../assets/Book.png"
 import "../styles/projects.css"
 import { useNavigate } from "react-router-dom";
+import Modal_2 from "../components/Modal_2"
+import {useLocation} from "react-router-dom"
 const Projects=()=>{
     const [activeButton, setActiveButton] = useState(null);
     const [showCAF, setShowCAF] = useState(true); 
@@ -9,6 +11,34 @@ const Projects=()=>{
     const [showSelected, setShowSelected] = useState(false);
     const [showSaved, setShowSaved] = useState(false);
     const [showAll, setShowAll] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+   
+    // Extract query parameters and set them in the component's state
+    const [position, setPosition] = useState(queryParams.get("position") || "");
+    const [projectTitle, setProjectTitle] = useState(queryParams.get("projectTitle") || "");
+    const [startDate, setStartDate] = useState(queryParams.get("startDate") || "");
+    const [endDate, setEndDate] = useState(queryParams.get("endDate") || "");
+    const [vacancy, setVacancy] = useState(queryParams.get("vacancy") || "");
+    const [formDataArray, setFormDataArray] = useState([]);
+    const openModal = () => {setIsModalOpen(true); };
+    const closeModal = () => {setIsModalOpen(false); };
+    const handleSubmit = () => {openModal();};
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        console.log("started")
+        setPosition(queryParams.get("position") || "");
+        setProjectTitle(queryParams.get("projectTitle") || "");
+        setStartDate(queryParams.get("startDate") || "");
+        setEndDate(queryParams.get("endDate") || "");
+        setVacancy(queryParams.get("vacancy") || "");
+      }, [location.search]);
+      const addFormData = (formData) => {
+        // Append the new form data to the existing array
+        setFormDataArray([...formDataArray, formData]);
+      };
+    
   // Function to handle button click and change the active button
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -37,13 +67,10 @@ const Projects=()=>{
       }
 
   };
-  const navigate = useNavigate();
-
-  const handleButtonClickNavigate = () => {
-    // Use the navigate function to navigate to the desired route
-    navigate("/");
-  };
-  
+ 
+  useEffect(() => {
+    console.log("FormDataArray updated:", formDataArray);
+  }, [formDataArray]);
     return(
         <>
         <div className="main_div">
@@ -70,11 +97,13 @@ const Projects=()=>{
              </div>
 {showCAF ? (
                 <>
+                
         <div className="upper_div">
     <div className="CAF">
       <span><img src={Book_img} alt="Book" /></span>
       <p>Create New Positions</p>
-      <button className="CAF_Button" onClick={handleButtonClickNavigate}>Create a form</button>
+      <button className="CAF_Button" onClick={handleSubmit}>Create a form</button>
+      {isModalOpen && <Modal_2 closeModal={closeModal} addFormData={addFormData} />}
     </div>
     <div className="subBox">
       <div className="head_subBox">
@@ -96,15 +125,17 @@ const Projects=()=>{
         <tr>
           <td colSpan="7" className="line"><hr className="linehr" /></td>
         </tr>
-        <tr className="row_table">
-          <td>srf</td>
-          <td>Real time dynamic risk</td>
-          <td>22/04/2022</td>
-          <td>28/04/2022</td>
-          <td>5g</td>
-          <td>Share</td>
-          <td>^</td>
-        </tr>
+        {formDataArray.map((formData, index) => (
+                  <tr key={index}>
+                    <td>{formData.position}</td>
+                    <td>{formData.projectTitle}</td>
+                    <td>{formData.startDate}</td>
+                    <td>{formData.endDate}</td>
+                    <td>{formData.vacancy}</td>
+                    <td>Share</td>
+                    <td>^</td>
+                  </tr>
+                ))}
       </table>
     </div>
   </div>
@@ -118,7 +149,10 @@ const Projects=()=>{
    <a href="#">6</a>
    <a href="#">&raquo;</a>
 </div>
+{/* <Modal_2  closeModal={closeModal} addFormData={addFormData} /> */}
+
 </>
+
 ) : (
     <>
   <div className="App_div">
@@ -298,7 +332,7 @@ const Projects=()=>{
              
             </div>
              
-           
+            
         </>
     )
 }

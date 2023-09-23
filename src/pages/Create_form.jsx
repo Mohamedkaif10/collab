@@ -4,7 +4,6 @@ import { useState ,useRef} from "react";
 import Modal from "../components/Modal";
 const Create_form=()=>{
        const [isModalOpen, setIsModalOpen] = useState(false);
-       const formRef = useRef(null);
               
               const openModal = () => {setIsModalOpen(true); };
             
@@ -12,10 +11,9 @@ const Create_form=()=>{
               const closeModal = () => {setIsModalOpen(false); };
             
               const handleSubmit = () => {openModal();};
-              const handleReset = () => {formRef.current.reset();};
             
     return(
-        <>
+        <form>
         <div className="create_form">
             
             <p className="Heading_CF"> <span><img src={Book_img}/></span>Create Form</p>
@@ -195,13 +193,13 @@ const Create_form=()=>{
                 </div>
           </div>
           <div className="Buttons_flex">
-            <button className="Reset_button" onClick={handleReset}>Reset</button>
+            <button className="Reset_button">Reset</button>
             <button className="Submit_button" onClick={handleSubmit}>Submit</button>
           </div>
           {isModalOpen && <Modal closeModal={closeModal} />}
           </div>
           
-        </>
+        </form>
     )
 }
 export default Create_form
