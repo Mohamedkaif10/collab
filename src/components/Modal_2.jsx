@@ -16,15 +16,15 @@ const Modal_2 = ({ addFormData, closeModal }) => {
   };
 
   const handleFormSubmit = () => {
-    // Create a new form data object
+   
     const newFormData = {
       ...formData,
     };
 
-    // Call the addFormData function from the parent component
+   
     addFormData(newFormData);
 
-    // Clear the form
+    
     setFormData({
       position: "",
       projectTitle: "",
@@ -33,7 +33,7 @@ const Modal_2 = ({ addFormData, closeModal }) => {
       vacancy: "",
     });
 
-    // Close the modal
+   
     closeModal();
   };
 

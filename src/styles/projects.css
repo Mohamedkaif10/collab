@@ -243,21 +243,21 @@ background: #FFFFFF;
     border-color: black;
   }
   input[type="radio"] {
-    -webkit-appearance: none; /* Remove default styles on Webkit browsers */
-    -moz-appearance: none; /* Remove default styles on Mozilla Firefox */
-    appearance: none; /* Remove default styles on other browsers */
-    width: 16px; /* Set the desired width of the radio button */
-    height: 16px; /* Set the desired height of the radio button */
-    border: 2px solid #fff; /* Set border properties (white border) */
-    border-radius: 50%; /* Make it circular */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
+    width: 16px; 
+    height: 16px; 
+    border: 2px solid #fff; 
+    border-radius: 50%; 
     background-color: white;
-    border-color: black; /* Set the background color to white */
+    border-color: black; 
     color:black;
   }
   
-  /* Change the background color of the radio button when checked */
+ 
   input[type="radio"]:checked {
-    background-color: black; /* Set the background color to white when checked */
+    background-color: black;
   }
   .table_2{
     width:100%

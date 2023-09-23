@@ -15,7 +15,6 @@ const Projects=()=>{
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
    
-    // Extract query parameters and set them in the component's state
     const [position, setPosition] = useState(queryParams.get("position") || "");
     const [projectTitle, setProjectTitle] = useState(queryParams.get("projectTitle") || "");
     const [startDate, setStartDate] = useState(queryParams.get("startDate") || "");
@@ -35,15 +34,12 @@ const Projects=()=>{
         setVacancy(queryParams.get("vacancy") || "");
       }, [location.search]);
       const addFormData = (formData) => {
-        // Append the new form data to the existing array
         setFormDataArray([...formDataArray, formData]);
       };
     
-  // Function to handle button click and change the active button
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
 
-    // Check if the 'AP' button was clicked and hide/show CAF accordingly
     if (buttonName === "AP") {
         setShowCAF(false);
       } else {
