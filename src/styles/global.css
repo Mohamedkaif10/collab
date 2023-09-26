@@ -1,0 +1,524 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.right-side{
+  background-color: rgba(37, 61, 144, 1);
+  height: 100vh;
+}
+.procollabpic{
+  width: 28vw;
+  padding-left: 5rem;
+}
+.text1{
+  color: rgba(37, 61, 144, 1);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.7rem;
+  padding-top: 5rem;
+  padding-left: 5rem;
+  font-weight:500;
+  padding-right: 2rem;
+}
+.text2{
+  padding-left: 5rem;
+  font-family: 'Inter', sans-serif;
+  padding-top: 2.7rem;
+  font-size: 1.3rem;
+}
+.text3{
+  padding-left: 5rem;
+  font-family: 'Inter', sans-serif;
+  padding-top: 2.7rem;
+  font-size: 3vw;
+  padding-right: 16rem;
+}
+
+.b1{
+  background-color: rgba(37, 61, 144, 1);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+}
+
+.b2{
+  background-color: rgba(37, 61, 144, 1);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+}
+
+.sideimg{
+  padding-top: 32vh;
+  padding-left: 3vw;
+}
+
+/* second */
+
+.logintext{
+  color:rgba(37, 61, 144, 1) ;
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  padding-top: 8vh;
+  font-weight: 700;
+}
+
+.checkboxdiv{
+}
+
+.checkbox{
+
+}
+
+.googleimg{
+  padding-left: 24vw;
+}
+
+.or{
+  color: rgba(180, 183, 189, 1);
+  font-size: 1.2vw;
+  padding-left: 25vw;
+  padding-top: 3vh;
+}
+
+.remember{
+  color: rgba(143, 143, 143, 1);
+  font-size: 1rem;
+  padding-left: 1vw;
+}
+
+.signindiv{
+  padding-top: 4vh;
+}
+
+.signinbtn{
+  font-family:'Inter', sans-serif;
+  padding-left: 18vw;
+  padding-right: 18vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  color: white;
+  background-color: black;
+  border: 1px solid rgba(37, 61, 144, 1);
+  border-radius: 4px;
+}
+
+.div1{
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.reset{
+  color: rgba(37, 61, 144, 1) ;
+  font-weight: 700;
+  font-size: 1rem;
+  padding-right: 5vw;
+  padding-left: 20vw;
+}
+
+.emailtext{
+  color:rgba(37, 61, 144, 1) ;
+  padding-top: 2rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.emaildiv{
+  padding-top: 0.5rem;
+}
+.emailbtn{
+  /* padding-left: 15vw;
+  padding-bottom: 0.7rem;
+  padding-top: 0.7rem;
+  padding-right: 15vw; */
+  width: 40vw;
+  height: 5vh;
+  padding-left: 1vw;
+  border: 2px solid rgba(180, 183, 189, 1);
+  border-radius: 0.5rem;
+}
+
+@media(max-width: 1000px){
+  .procollabpic{
+    width: 40vw;
+  }
+
+  .text3{
+    font-size: 4vw;
+    padding-right: 5rem;
+  }
+
+  .b1{
+    padding-inline: 3rem;
+  }
+  .b2{
+    padding-inline: 3rem;
+  }
+}
+
+@media(max-width: 800px){
+  .procollabpic{
+    width: 60vw;
+  }
+
+  .text3{
+    font-size: 5vw;
+    padding-right: 5rem;
+  }
+
+  .b1{
+    padding-inline: 2rem;
+  }
+  .b2{
+    padding-inline: 2rem;
+  }
+}
+
+@media(max-width:650px){
+  .b1{
+    padding-inline: 1rem;
+  }
+  .b2{
+    padding-inline: 1rem;
+  }
+
+  .sideimg{
+    padding-top: 40vh;
+    padding-left: 3vw;
+  }
+}
+
+/* Forgot Password Page */
+
+.forgot_password_title{
+  color: rgba(37, 61, 144, 1);
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding-top: 25vh;
+}
+
+.text4{
+  color: rgba(130, 130, 130, 1);
+  font-size: 1.1rem;
+  padding-top: 1vh;
+  padding-right: 1rem;
+}
+
+.continuediv{
+  padding-top: 1.7rem;
+  padding-right: 3rem;
+}
+
+.continue{
+  background-color: rgba(255, 194, 14, 1);
+  padding-left: 17.5vw;
+  padding-right: 17.5vw;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media(max-width:700px) {
+  .continue{
+    padding-left: 15vw;
+    padding-right: 15vw;
+  }
+}
+
+/* new password */
+
+.newpassword{
+  color: rgba(37, 61, 144, 1);
+  font-size: 1.7rem;
+  font-weight: 700;
+  padding-left: 5rem;
+  padding-top: 10vh;
+}
+
+.text5{
+  color: rgba(130, 130, 130, 1);
+  padding-left: 5rem;
+  font-size: 1.1rem;
+  padding-top: 1vh;
+}
+
+.enterpasstitle{
+  color: rgba(37, 61, 144, 1);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-left: 5rem;
+  padding-top: 6vh;
+}
+
+.textboxdiv{
+  padding-left: 5rem;
+  padding-top: 1rem;
+}
+
+.enterpasstitle2{
+  color: rgba(37, 61, 144, 1);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-left: 5rem;
+  padding-top: 3vh;
+}
+
+.enterpasstextbox{
+  border: solid rgba(180, 183, 189, 1) 2px;
+  color: rgba(130, 130, 130, 1);
+  padding-left: 2vw;
+  padding-right: 25vw;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.updatediv{
+  padding-left: 5rem;
+  padding-top: 2rem;
+  padding-right: 3rem;
+}
+
+.update{
+  background-color: rgba(255, 194, 14, 1);
+  padding-left: 5rem;
+  padding-right: 15vw;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+
+@media(max-width:800px) {
+  .update{
+    padding-left: 12vw;
+    padding-right: 12vw;
+  }
+
+  .enterpasstextbox{
+    padding-right: 17vw;
+  }
+
+  .updatediv{
+    padding-left: 3rem;
+  }
+
+  .textboxdiv{
+    padding-left: 3rem;
+  }
+
+  .text5{
+    padding-left: 3rem;
+  }
+  .enterpasstitle{
+    padding-left: 3rem;
+  }
+  .enterpasstitle2{
+    padding-left: 3rem;
+  }
+  .newpassword{
+    padding-left: 3rem;
+  }
+}
+
+/* reset page */
+
+.pin_digits{
+  border: solid rgba(180, 183, 189, 1) 1px;
+  width: 5vw;
+  height: 5vw;
+  margin-right: 3vw;
+  font-size: 2vw;
+  /* display: flex;
+  justify-content: center; */
+  padding-left: 1.8vw;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  /* Add additional vendor prefixes if needed */
+  appearance: none; /* For other browsers */
+}
+.pin_span{
+  padding-top: 2vw;
+  display: flex;
+}
+
+.didnt_recieve_code{
+  color: rgba(180, 183, 189, 1);
+  display: flex;
+  justify-content: center;
+  width: 35vw;
+  padding-top: 2vh;
+  font-size: 0.9rem;
+}
+
+.resend{
+  color: rgba(240, 68, 101, 1);
+  padding-left: 0.5vw;
+  font-size: 0.9rem;
+}
+.main_div{
+  padding-left: 5rem;
+}
+
+@media(max-width:800px){
+  .main_div{
+    padding-left: 3rem;
+  }
+}
+
+/* successful pass reset */
+
+.uploadimg{
+  width: 10vw;
+}
+
+.uploadimgdiv{
+  padding-top: 20vh;
+  display: flex;
+  justify-content: center;
+}
+.Successfully{
+  color: rgba(37, 61, 144, 1);
+  font-weight: 400;
+  font-size: 3vw;
+}
+.main_div2{
+  padding-right: 5rem;
+}
+
+.text-6{
+  color: rgba(130, 130, 130, 1);
+  padding-top: 2vh;
+}
+
+@media(max-width:900px){
+  .main_div2{
+    padding-right: 1rem;
+  }
+}
+
+@media(max-width:700px){
+ .uploadimg{
+  width: 15vw;
+ }
+ .Successfully{
+  font-size: 4vw;
+ }
+}
+
+/* registerprof1 */
+.lefty{
+  background-color: rgba(37, 61, 144, 1);
+  height: 100vh;
+}
+
+.collab_plat{
+  color: white;
+  font-weight: 600;
+  font-size: 3.2rem;
+  padding-top: 30vh;
+  padding-bottom: 2vh;
+}
+.main_div3{
+  padding-left: 5rem;
+}
+.whiteline{
+  width: 9vw;
+  border: solid white 7px;
+  border-radius: 1rem;
+}
+
+.text-7{
+  color: white;
+  font-size: 2rem;
+  font-weight: 200;
+  padding-top: 2vw;
+}
+
+.maindiv1{
+  padding-left: 6vw;
+}
+.wel_pro{
+  color: rgba(37, 61, 144, 1);
+  font-size: 2.7rem;
+  font-weight: 600;
+  padding-top: 7vh;
+}
+
+.regacc{
+  color: rgba(150, 150, 150, 1);
+  font-size: 1.7vw;
+  padding-top: 2vh;
+  padding-bottom: 2.5vw;
+}
+
+.title{
+  color: rgba(37, 61, 144, 1);
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding-bottom: 0.5vh;
+}
+
+.textbox1{
+  border: solid rgba(180, 183, 189, 1) 2px;
+  width: 23vw;
+  height: 6vh;
+}
+
+.checkbox1{
+  width: 1rem;
+}
+
+.bluetext{
+  color: rgba(37, 61, 144, 1);
+}
+.greytext{
+  color: rgba(143, 143, 143, 1);
+}
+
+.createaccdiv{
+  padding-top: 3vh;
+}
+.createacc{
+  background-color: rgba(255, 194, 14, 1);
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* welcomeprofpage */
+.textbox2{
+  border: solid rgba(180, 183, 189, 1) 2px;
+  width: 40vw;
+  height: 6vh;
+}
