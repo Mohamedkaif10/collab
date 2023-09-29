@@ -1,3 +1,11 @@
-nav{
-    background: black;
+.nav_div_main{
+    display: flex;
+    height: 70px;
+    border: solid 2px black;
+    width: 100vw;
+}
+
+.nav_img{
+    width: 140px;
+    height: 27px;
 }

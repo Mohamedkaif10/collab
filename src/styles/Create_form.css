@@ -29,7 +29,27 @@
     width: 307px;
     height:54px;
     border-radius: 9px;
+    border: none;
 }
+.input_stuff{
+    padding-left: 1rem;
+}
+
+.inner_box_1{
+    display:flex;
+    align-items: center;
+    position: relative;
+}
+.removeicon{
+    position: absolute;
+    padding-left: 230px;
+}
+.remove_text{
+    position: absolute;
+    padding-left: 270px;
+    font-size: 0.7rem;
+}
+
 .Heading_CF{
     font-size: 2.5rem;
     font-weight: 400;
