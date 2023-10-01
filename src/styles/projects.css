@@ -4,7 +4,7 @@
     justify-content: space-between;
     border-style:dotted;
     border-color:black;
-    margin-left: -90px;
+    margin-left: -100px;
     width:99vw
 }
 .main_div >p{
@@ -161,7 +161,8 @@ color: #111111;
     flex-direction: row;
     justify-content: space-around;
     border-color: black;
-    border-style:dotted
+    border-style:dotted;
+    margin-top: 2%;
   }
   .App_button_div > button{
     width: 437.2px;
@@ -205,6 +206,7 @@ color:black;
     border-color:black;
     width:80vw;
     background-color: whitesmoke;
+
   }
   .noofapp{
     font-family: Inter;
@@ -267,10 +269,11 @@ background: #FFFFFF;
   .the_two_buttons{
     display: flex;
     gap:2%;
+    margin-top: 1%;
     
   }
   .the_two_buttons > button{
-    width: max-content;
+    width: 10vw;
 height: 54px;
 
 border-radius: 10px;
@@ -291,11 +294,30 @@ align-items: center;
 .div_under_App > input{
     width: 240px;
 height: 48px;
-
 border-radius: 4px;
 border: 1px;
-background: white
+background: white;
+}
+.right_eelements{
+  margin-left: 670px;
+  display: flex; /* Display the elements horizontally */
+  align-items: center;
+  gap:2%;
+}
+/* Add this CSS to your stylesheets */
+table.table_2 {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+table.table_2 td {
+  border-bottom: 1px solid #ccc; /* Add a border-bottom to each td */
+  padding: 8px;
+  text-align: center;
+}
 
-
+table.table_2 th {
+  border-bottom: 2px solid #000; /* Add a thicker border to table headers */
+  padding: 8px;
+  text-align: center;
 }

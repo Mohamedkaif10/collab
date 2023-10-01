@@ -2,13 +2,11 @@ import "../styles/Modaltwo.css";
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import Projects from "../pages/Projects";
+import { useNavigate } from 'react-router-dom'; 
 import Calender from "./calender";
 
-const Modal_2 = ({ addFormData, closeModal }) => {
-  const closeIcon = ()=>{
-    closeModal();
-  }
-
+const Modal_2 = ({closeModal,onModalData}) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     position: "",
     projectTitle: "",
@@ -16,22 +14,14 @@ const Modal_2 = ({ addFormData, closeModal }) => {
     endDate: "",
     vacancy: "",
   });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleFormSubmit = () => {
-   
-    const newFormData = {
-      ...formData,
-    };
-
-   
-    addFormData(newFormData);
-
-    
+    event.preventDefault()
+      onModalData(formData)
     setFormData({
       position: "",
       projectTitle: "",
@@ -47,21 +37,18 @@ const Modal_2 = ({ addFormData, closeModal }) => {
   const cancelDate = (event) => {
     event.preventDefault();
     console.log(formData.startDate)
-  
-    // Create a new object with cleared startDate and endDate
+
     const updatedFormData = {
-      ...formData, // Copy the existing formData
+      ...formData,
       startDate: "",
       endDate: "",
     };
-  
-    // Update the state with the new object
     setFormData(updatedFormData);
   };
 
   return (
     <>
-      <form className="formmodal">
+      <form className="formmodal" onSubmit={handleFormSubmit}>
         <div className="main_modal">
           <div className="first_div">
           <p className="create_new_form">Create New Form</p>
@@ -128,7 +115,7 @@ const Modal_2 = ({ addFormData, closeModal }) => {
             </div>
           </div>
           <div className="buttondiv1">
-          <button className="somebutton" onClick={handleFormSubmit}>
+          <button className="somebutton"  type="submit">
             Submit
           </button>
           </div>

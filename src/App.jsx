@@ -16,7 +16,7 @@ import First from './pages/first';
 function App() {
   const router = createBrowserRouter([
 
-    {path:"/home",element:<First/>},
+    {index:true,element:<First/>},
     {path:"/register",element:<Registerprof1/>},
     {path: "/second", element : <Second/> },
     {path:"/forgotPass",element:<Forgot_pass/>},
@@ -24,10 +24,10 @@ function App() {
     {path:"/resetPage",element:<Reset_page/>},
     {path:"/welcome",element:<Welcomeprofpage/>},
     {path:"/successPass",element:<Successful_pass_reset/>},
+    {path:"projects",element:<Projects/>},
     {path:"/",element:<Root/>,children:[
-      {index:true,element:<Create_form/>},
-      {path:"/projects",element:<Projects/>},
-      {path:"/stdntForm",element:<StdntProject/>}
+      {path:"create_form",element:<Create_form/>},
+      {path:"stdntForm",element:<StdntProject/>}
     ]}
   
   ])

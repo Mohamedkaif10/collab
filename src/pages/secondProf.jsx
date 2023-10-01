@@ -35,17 +35,22 @@ const handleInputChange=(e)=>{
       },
       body: JSON.stringify(requestData),
     })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 401) {
+        alert('Invalid Credentials');
+        return;
+      } else if (response.status === 200) {
+        return response.json();
+      } else {
+        console.error('Error:', response.status, response.statusText);
+      }
+    })
       .then((data) => {
         console.log("Response:", data);
         
-        if (data.status === 422 || data.status === 401) {
-          alert('Invalid Credentials')
-          return ;
-        }
-       else {
-          navigate("/projects");
-        }
+     if(data){
+      navigate("/projects");
+     }
   
          setFormData({
           email:"",

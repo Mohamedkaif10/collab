@@ -3,7 +3,14 @@ import "../styles/global.css"
 import 'tailwindcss/tailwind.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 const Welcomeprofpage = () => {
+  const { search } = useLocation()
+  const queryParams = new URLSearchParams(search);
+  const full_name=queryParams.get('full_name')
+  console.log(full_name)
+  const queryParamss =new URLSearchParams({full_name:full_name}).toString()
+
     const navigate=useNavigate()
 const [formData,setFormData]=useState({
     prof_dept:"",
@@ -41,7 +48,7 @@ const handleSubmit =(event) => {
             prof_Specilisation: "",
             prof_RIA:""
             });
-            navigate("/projects")
+            navigate(`/projects?${queryParamss}`)
       })
       
    
@@ -61,7 +68,7 @@ const handleSubmit =(event) => {
       </span>
       <span className="w-3/5">
         <div className="maindiv1 pt-10">
-          <div className="wel_pro">Welcome Prof.</div>
+          <div className="wel_pro">Welcome Prof {queryParams.get('full_name')}</div>
           <div className="regacc">Complete your Profile</div>
           <div className="flex pb-5">
             <span className="pr-5">

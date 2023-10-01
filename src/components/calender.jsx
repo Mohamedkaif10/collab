@@ -25,12 +25,12 @@ const Calender = ({startDate=null, endDate=null}) => {
     
       return (
         <div>
-          <p>
-            Selected Date Range:{' '}
-            {dateRange.start && dateRange.end
-              ? `${dateRange.start.toDateString()} - ${dateRange.end.toDateString()}`
-              : 'Select a date range'}
-          </p>
+        <p>
+  Selected Date Range:{' '}
+       {dateRange.start instanceof Date && dateRange.end instanceof Date
+    ? `${dateRange.start.toDateString()} - ${dateRange.end.toDateString()}`
+    : 'Select a date range'}
+</p>
           <Calendar
             onChange={handleDateChange}
             selectRange

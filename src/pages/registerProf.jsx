@@ -67,12 +67,13 @@ const Registerprof1 = () => {
                 phone_number:"",
                 hashed_password:"",
             });
-            navigate("/welcome")
+            navigate(`/welcome?${queryParams}`)
       })
       
     }
    
   };
+  const queryParams =new URLSearchParams({full_name:formData.full_name}).toString()
  
   return (
     <form onSubmit={handleSubmit}>
