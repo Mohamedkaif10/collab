@@ -4,16 +4,24 @@ import { useState ,useRef} from "react";
 import Modal from "../components/Modal";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Navbar from "../components/Navbar";
-
+import { useNavigate } from "react-router-dom";
 const Create_form=()=>{
+       
        const [isModalOpen, setIsModalOpen] = useState(false);
+       const navigate=useNavigate()
               
               const openModal = () => {setIsModalOpen(true); };
             
               
-              const closeModal = () => {setIsModalOpen(false); };
+              const closeModal = () => {
+                     setIsModalOpen(false)
+                     navigate("/projects") 
+              };
             
-              const handleSubmit = () => {openModal();};
+              const handleSubmit = (event) => {
+                     event.preventDefault();
+                     openModal();
+              };
             
     return(
            <>      

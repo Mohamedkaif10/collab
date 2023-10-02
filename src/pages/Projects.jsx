@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Modal_2 from "../components/Modal_2"
 import {useLocation} from "react-router-dom"
 import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 const Projects=()=>{
   const {search} = useLocation()
   const queryParams = new URLSearchParams(search);
@@ -13,7 +14,8 @@ const Projects=()=>{
   console.log(full_name,queryParams.get('full_name'))
   console.log("hello")
   const searchParams = new URLSearchParams(location.search);
-  const formData = {};  
+  const formData = {}; 
+  const navigate=useNavigate() 
 
    const sonme=searchParams.get('full_name')
    console.log(sonme)
@@ -60,8 +62,7 @@ const Projects=()=>{
         iiit: false,
       },
       discipline: {
-        all: true,
-        Btech: false,
+        Btech: true,
         Mtech: false,
         PHD: false,
       },
@@ -115,11 +116,39 @@ const Projects=()=>{
   console.log('Data received from Modal_2:', modalData && modalData. position);
   console.log(entries);
 
+  useEffect(() => {
+    const jsonString = localStorage.getItem("entries");
+    if (jsonString) {
+      const savedEntries = JSON.parse(jsonString);
+      setEntries(savedEntries);
+    }
+  }, []);
 
+  // Save the entries to localStorage whenever it changes
+  useEffect(() => {
+    const jsonString = JSON.stringify(entries);
+    localStorage.setItem("entries", jsonString);
+  }, [entries]);
 
+  const applyFilters = () => {
+    const filtered = applicantsData.filter((applicant) => {
+      const { institute, discipline, publications, cgpa } = filters;
+      
+      // Check if the applicant matches the selected filters
+      return (
+        (institute.all || (institute.iit && applicant.institute === "IIT") || (institute.nit && applicant.institute === "NIT")) &&
+        (discipline.all || (discipline.Btech && applicant.discipline === "Btech") || (discipline.Mtech && applicant.discipline === "Mtech")) &&
+        (publications.all || (publications.anyexp && applicant.experience >= 0 && applicant.experience <= 1) || (publications.one2three && applicant.experience >= 1 && applicant.experience <= 3)) &&
+        applicant.cgpa >= cgpa
+      );
+    });
+  
+    setFilteredApplicants(filtered);
+  };
 
 
   const handleFilterChange = (filterCategory, filterName) => {
+    console.log("Before filter change:", filters);
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterCategory]: {
@@ -127,11 +156,26 @@ const Projects=()=>{
         [filterName]: !prevFilters[filterCategory][filterName],
       },
     }));
-    
-    // Apply filters after each change
-    applyFilters();
   };
+  console.log("after filter change:", filters);
+  // Apply filters whenever the filters state changes
+  useEffect(() => {
+    const filtered = applicantsData.filter((applicant) => {
+      const { institute, discipline, publications, cgpa } = filters;
   
+      return (
+        (institute.all || (institute.iit && applicant.institute === "IIT") || (institute.nit && applicant.institute === "NIT")) &&
+        (discipline.all || (discipline.Btech && applicant.discipline === "Btech") || (discipline.Mtech && applicant.discipline === "Mtech")) &&
+        (publications.all || (publications.anyexp && applicant.experience >= 0 && applicant.experience <= 1) || (publications.one2three && applicant.experience >= 1 && applicant.experience <= 3)) &&
+        applicant.cgpa >= cgpa
+      );
+    });
+  
+    setFilteredApplicants(filtered);
+  }, [filters]);
+
+
+
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
   
@@ -164,24 +208,12 @@ const Projects=()=>{
     setFilteredApplicants(sortedApplicants);
   };
   
+const navigatePage=()=>{
+  navigate("/create_form")
+}
 
 
 
-  const applyFilters = () => {
-    const filtered = applicantsData.filter((applicant) => {
-      const { institute, discipline, publications, cgpa } = filters;
-      
-      // Check if the applicant matches the selected filters
-      return (
-        (institute.all || (institute.iit && applicant.institute === "IIT") || (institute.nit && applicant.institute === "NIT")) &&
-        (discipline.all || (discipline.Btech && applicant.discipline === "Btech") || (discipline.Mtech && applicant.discipline === "Mtech")) &&
-        (publications.all || (publications.anyexp && applicant.experience >= 0 && applicant.experience <= 1) || (publications.one2three && applicant.experience >= 1 && applicant.experience <= 3)) &&
-        applicant.cgpa >= cgpa
-      );
-    });
-  
-    setFilteredApplicants(filtered);
-  };
 console.log("the filters are",filteredApplicants)
     return(
         <>
@@ -246,7 +278,7 @@ console.log("the filters are",filteredApplicants)
                 <td>{entry.endDate}</td>
                 <td>{entry.vacancy}</td>
                 <td>Share</td>
-                <td>^</td>
+                <td >^</td>
               </tr>
                 ))}
       </table>
@@ -440,7 +472,7 @@ console.log("the filters are",filteredApplicants)
           <td>28/04/2022</td>
           <td>5g</td>
           <td>Share</td>
-          <td style={{width: "80px"}}>^</td>
+          <td style={{width: "80px", cursor:"pointer"}} >^</td>
           <td style={{width: "80px"}}>Shortlisted</td>
         </tr>
       </table>

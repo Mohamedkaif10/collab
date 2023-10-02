@@ -19,7 +19,7 @@ const Modal_2 = ({closeModal,onModalData}) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (event) => {
     event.preventDefault()
       onModalData(formData)
     setFormData({
@@ -29,7 +29,8 @@ const Modal_2 = ({closeModal,onModalData}) => {
       endDate: "",
       vacancy: "",
     });
-
+    navigate("/create_form")
+    
    
     closeModal();
   };
