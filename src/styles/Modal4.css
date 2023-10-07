@@ -1,0 +1,46 @@
+.modal4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+}
+.main_modal_4{
+    width: 495px;
+height: 576px;
+
+border-radius: 24px;
+background-color: white;
+margin-left:32%;
+margin-top:9%
+}
+.schedule_button{
+    background: #FFC20E;
+    width: 210px;
+    height: 54px;
+    border-radius: 14px;
+    font-weight: 700;
+   /* margin-top: 2%; */
+    margin-left:30%;
+}
+
+.link_input{
+    width: 213px;
+height: 72px;
+background-color: #E3EDF9;
+border-radius: 5px;
+/* margin-top: 70%; */
+margin-left:55%;
+}
+.input_div > p{
+    margin-top: 70%;
+    margin-left: 70%;
+}
+.close_btn_modal{
+    margin-left:75%
+}
+.time_input{
+    margin-left: 75%;
+}

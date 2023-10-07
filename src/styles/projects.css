@@ -321,3 +321,8 @@ table.table_2 th {
   padding: 8px;
   text-align: center;
 }
+.scheduleMeet{
+  display: flex;
+  gap:10%;
+
+}

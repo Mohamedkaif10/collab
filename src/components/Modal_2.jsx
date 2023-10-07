@@ -21,18 +21,41 @@ const Modal_2 = ({closeModal,onModalData}) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-      onModalData(formData)
-    setFormData({
-      position: "",
-      projectTitle: "",
-      startDate: "",
-      endDate: "",
-      vacancy: "",
-    });
-    navigate("/create_form")
-    
-   
-    closeModal();
+
+    const requestData = {
+       
+      position: formData.  position,
+      projectTitle: formData.projectTitle,
+      startDate: formData. startDate,
+      endDate: formData. endDate,
+      vacancy: formData.  vacancy,
+ 
+};
+fetch("http://127.0.0.1:8000/prof/project_info", {
+method: "POST",
+headers: {
+  "Content-Type": "application/json",
+},
+body: JSON.stringify(requestData),
+})
+.then((response) => response.json())
+.then((data) => {
+  console.log("Response:", data);
+  setFormData({
+    position: "",
+    projectTitle: "",
+    startDate: "",
+    endDate: "",
+    vacancy: "",
+  });
+  navigate("/create_form")
+  
+  })
+
+
+  
+    // onModalData(formData)
+    // closeModal();
   };
 
   const cancelDate = (event) => {
@@ -73,8 +96,6 @@ const Modal_2 = ({closeModal,onModalData}) => {
                 value={formData.vacancy}
                 onChange={handleInputChange}
               ></input>
-              <p>PI</p>
-              <input className="left" type="text"></input>
               <p>Project Title</p>
               <input
                 className="left"

@@ -1,18 +1,24 @@
 import { useState,useEffect } from "react";
 import Book_img from "../assets/Book.png"
 import "../styles/projects.css"
+import React from "react";
+import Modal3 from "../components/Modal3";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Modal_2 from "../components/Modal_2"
+import Modal5 from "../components/Modal5";
+import Modal4 from "../components/Modal4";
 import {useLocation} from "react-router-dom"
+import axios from "axios"
 import { useSearchParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 const Projects=()=>{
   const {search} = useLocation()
   const queryParams = new URLSearchParams(search);
+  const [openRows, setOpenRows] = useState({});
   const full_name=queryParams.get('full_name')
-  console.log(full_name,queryParams.get('full_name'))
-  console.log("hello")
+  // console.log(full_name,queryParams.get('full_name'))
+  // console.log("hello")
   const searchParams = new URLSearchParams(location.search);
   const formData = {}; 
   const navigate=useNavigate() 
@@ -28,7 +34,7 @@ const Projects=()=>{
     const [showAll, setShowAll] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedSortOption, setSelectedSortOption] = useState('');
-    // const [formDataArray, setFormDataArray] = useState([]);
+    const [project,setProject]=useState([])
     const [applicantsData, setApplicantsData] = useState([
       { name: "Applicant 1", institute: "IIT", discipline: "Btech", experience: 2, cgpa: 8 },
       { name: "Applicant 2", institute: "NIT", discipline: "Mtech", experience: 1, cgpa: 7 },
@@ -36,24 +42,61 @@ const Projects=()=>{
     ]);
     const [filteredApplicants, setFilteredApplicants] = useState([...applicantsData]);
     const [entries, setEntries] = useState([]); 
+    const [isModalOpen3, setIsModalOpen3] = useState(false);
+    const [isModalOpen4, setIsModalOpen4] = useState(false);
+    const [isModalOpen5, setIsModalOpen5] = useState(false);
+   
+           
+           const openModal3 = () => {setIsModalOpen3(true); };
+         
+           
+           const closeModal3 = () => {
+                  setIsModalOpen3(false) 
+           };
+         
+           const handleSubmit3 = (event) => {
+                  event.preventDefault();
+                  openModal3();
+           };
+          
+         
+           const openModal4 = () => {setIsModalOpen4(true); };
+           const closeModal4 = () => {
+                  setIsModalOpen4(false) 
+           };
+         
+           const handleSubmit4 = (event) => {
+                  event.preventDefault();
+                  openModal4();
+           };
+
+
+           const openModal5 = () => {setIsModalOpen5(true); };
+           const closeModal5 = () => {
+                  setIsModalOpen5(false) 
+           };
+         
+           const handleSubmit5 = (event) => {
+                  event.preventDefault();
+                  openModal5();
+           };
     const openModal = () => {setIsModalOpen(true); };
     const closeModal = () => {setIsModalOpen(false); };
     const handleSubmit = () => {openModal();};
-    // const applyFilters = () => {
-    //   const filtered = applicantsData.filter((applicant) => {
-    //     const { institute, discipline, publications, cgpa } = filters;
-  
-       
-    //     return (
-    //       (institute.all || (institute.iit && applicant.institute === "IIT") || (institute.nit && applicant.institute === "NIT")) &&
-    //       (discipline.all || (discipline.Btech && applicant.discipline === "Btech") || (discipline.Mtech && applicant.discipline === "Mtech")) &&
-    //       (publications.all || (publications.anyexp && applicant.experience >= 0 && applicant.experience <= 1) || (publications.one2three && applicant.experience >= 1 && applicant.experience <= 3)) &&
-    //       applicant.cgpa >= cgpa
-    //     );
-    //   });
-  
-    //   setFilteredApplicants(filtered);
-    // };
+
+    useEffect(() => {
+      axios
+         .get('http://127.0.0.1:8000/prof/getProjectDetails')
+         .then((response) => {
+          const responseData=response.data.result
+          setProject(responseData);
+          console.log("something",project); 
+         })
+         .catch((err) => {
+            console.log(err);
+         });
+    }, []);
+console.log(project)
     const [filters, setFilters] = useState({
       institute: {
         all: true,
@@ -74,13 +117,7 @@ const Projects=()=>{
       },
       cgpa: 5, 
     });
-    // for (const [key, value] of searchParams.entries()) {
-    //   formData[key] = value;
-    // }  
-    //   const addFormData = (formData) => {
-    //     setFormDataArray([...formDataArray, formData]);
-    //   };
-    console.log("this is ",applicantsData)
+    // console.log("this is ",applicantsData)
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
 
@@ -112,9 +149,9 @@ const Projects=()=>{
     closeModal(); 
     setEntries([...entries,data])
   };
-  console.log('Data received from Modal_2:', modalData);
-  console.log('Data received from Modal_2:', modalData && modalData. position);
-  console.log(entries);
+  // console.log('Data received from Modal_2:', modalData);
+  // console.log('Data received from Modal_2:', modalData && modalData. position);
+  // console.log(entries);
 
   useEffect(() => {
     const jsonString = localStorage.getItem("entries");
@@ -148,7 +185,7 @@ const Projects=()=>{
 
 
   const handleFilterChange = (filterCategory, filterName) => {
-    console.log("Before filter change:", filters);
+    // console.log("Before filter change:", filters);
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterCategory]: {
@@ -157,7 +194,7 @@ const Projects=()=>{
       },
     }));
   };
-  console.log("after filter change:", filters);
+  // console.log("after filter change:", filters);
   // Apply filters whenever the filters state changes
   useEffect(() => {
     const filtered = applicantsData.filter((applicant) => {
@@ -200,11 +237,11 @@ const Projects=()=>{
         sortedApplicants.sort((a, b) => b.experience - a.experience);
         break;
       default:
-        // Default to the original order
+       
         break;
     }
   
-    // Update the state with the sorted applicants
+  
     setFilteredApplicants(sortedApplicants);
   };
   
@@ -212,9 +249,21 @@ const navigatePage=()=>{
   navigate("/create_form")
 }
 
+const toggleRow = (index) => {
+  setOpenRows((prevState) => ({
+    ...prevState,
+    [index]: !prevState[index], // Toggle the state of the row
+  }));
+};
+const toggleRow2= (index) => {
+  setOpenRows((prevState) => ({
+    ...prevState,
+    [index]: !prevState[index], // Toggle the state of the row
+  }));
+};
 
 
-console.log("the filters are",filteredApplicants)
+// console.log("the filters are",filteredApplicants)
     return(
         <>
         <Navbar/>
@@ -264,23 +313,37 @@ console.log("the filters are",filteredApplicants)
           <th>Start Date</th>
           <th>End date</th>
           <th>Vacancy</th>
-          <th>Share</th>
+          <th>Copy</th>
           <th>Action</th>
         </tr>
         <tr>
           <td colSpan="7" className="line"><hr className="linehr" /></td>
         </tr>
-        {entries.map((entry, index) => (
+        {project.map((entry, index) => (
+            <React.Fragment key={index}>
               <tr key={index}>
                 <td>{entry.position}</td>
                 <td>{entry.projectTitle}</td>
                 <td>{entry.startDate}</td>
                 <td>{entry.endDate}</td>
                 <td>{entry.vacancy}</td>
-                <td>Share</td>
-                <td >^</td>
+                <td style={{cursor:'pointer'}} onClick={handleSubmit3}>Copy Link</td>
+                <td style={{cursor:'pointer'}} onClick={() => toggleRow(index)} >^</td>
               </tr>
-                ))}
+              {openRows[index] && (
+                
+                <tr style={{backgroundColor:'black',color:'white'}}>
+                 
+                   <td>principal invigilator</td>
+                   <td>selected applicants</td>
+                   <td>waiting list</td>
+                   <td>applications</td>
+          
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+                
       </table>
     </div>
   </div>
@@ -295,7 +358,7 @@ console.log("the filters are",filteredApplicants)
    <a href="#">&raquo;</a>
 </div>
 {/* <Modal_2  closeModal={closeModal} addFormData={addFormData} /> */}
-
+{isModalOpen3 && <Modal3 closeModal3={closeModal3} />}
 </>
 
 ) : (
@@ -374,7 +437,7 @@ console.log("the filters are",filteredApplicants)
             </div>
             <div className="the_two_buttons">
                 <button>Shortlist</button>
-                <button>Copy Link</button>
+                <button >Copy Link</button>
                 </div>
             <table className="table_2">
             <thead>
@@ -387,10 +450,12 @@ console.log("the filters are",filteredApplicants)
           <th>CGPA</th>
           <th>Publications</th>
           <th>Relecvancy %</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
         {filteredApplicants.map((applicant, index) => (
+          <React.Fragment key={index}>
            <tr key={index}>
               <td>{index + 1}</td>
               <td>{applicant.name}</td>
@@ -399,7 +464,23 @@ console.log("the filters are",filteredApplicants)
               <td>{applicant.experience}</td>
               <td>{applicant.cgpa}</td>
               <td>83%</td>
+              <td style={{cursor:"pointer"}} onClick={() => toggleRow2(index)}>^</td>
              </tr>
+
+                {openRows[index] && (
+                
+            <tr >
+   
+          <div className='scheduleMeet'>
+            <button onClick={handleSubmit4}>Schedule Meeting</button>
+            <button onClick={handleSubmit5}>Share</button>
+          </div>
+
+  </tr>
+)}
+</React.Fragment>
+
+ 
            
           ))}
          </tbody>
@@ -477,7 +558,8 @@ console.log("the filters are",filteredApplicants)
         </tr>
       </table>
         </div>}
-        
+        {isModalOpen4 && <Modal4 closeModal4={closeModal4} />}
+        {isModalOpen5 && <Modal5 closeModal5={closeModal5} />}
        
     </div>
   </div>
