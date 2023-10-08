@@ -5,9 +5,11 @@ import Modal from "../components/Modal";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import Modal6 from "../components/Modal6";
 const Create_form=()=>{
        
        const [isModalOpen, setIsModalOpen] = useState(false);
+       const [isModalOpen6, setIsModalOpen6] = useState(false);
        const navigate=useNavigate()
               
               const openModal = () => {setIsModalOpen(true); };
@@ -22,18 +24,25 @@ const Create_form=()=>{
                      event.preventDefault();
                      openModal();
               };
-              // Get all the remove buttons by class name
+
+              const openModal6 = () => {setIsModalOpen6(true); };
+            
+              
+              const closeModal6 = () => {
+                     setIsModalOpen6(false)
+                    
+              };
+            
+              const handleSubmit6 = (event) => {
+                     event.preventDefault();
+                     openModal6();
+              };
+             
 const removeButtons = document.querySelectorAll('.remove-button');
 
-// Add a click event listener to each remove button
-removeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    // Get the parent div (container) of the clicked button
-    const container = button.parentElement.parentElement;
+removeButtons.forEach((container) => {
+     container.remove();
 
-    // Remove the container from the DOM
-    container.remove();
-  });
 });
 
             
@@ -53,48 +62,44 @@ removeButtons.forEach((button) => {
                           <button className="remove-button">Remove</button>
                        </div>
                        <div classname="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Date of Birth">
                         </input>
                          <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Martial Status">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
                          <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Gender">
                         </input>
-                       
                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
                        <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Address">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Email Id">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="name">
+                        <input className="input_stuff" placeholder="Contact">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
                         <button className="remove-button">Remove</button>
                        </div>
-                       <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="add or drop">
-                        </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                        <button className="remove-button">Remove</button>
-                       </div>
+                       <button onClick={handleSubmit6} className="add_remove_button">
+                        + Add More
+                       </button>
                 </div>
           </div>
           <div className="details_1">
@@ -251,12 +256,9 @@ removeButtons.forEach((button) => {
                         <RemoveCircleOutlineIcon className="removeicon"/>
                          <button className="remove-button">Remove</button>
                        </div>
-                       <div className="inner_box_1">
-                        <input className="input_stuff" placeholder="add or drop">
-                        </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                         <button className="remove-button">Remove</button>
-                       </div>
+                       <button onClick={handleSubmit6} className="add_remove_button">
+                        + Add More
+                       </button>
                 </div>
           </div>
           <div className="details_1">
@@ -274,25 +276,17 @@ removeButtons.forEach((button) => {
                         <RemoveCircleOutlineIcon className="removeicon"/>
                          <button className="remove-button">Remove</button>
                        </div>
-                       <div className="Specilisation">
-                        <input className="input_stuff" placeholder="name">
-                        </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                         <button className="remove-button">Remove</button>
+                       <button onClick={handleSubmit6} className="add_remove_button">
+                        + Add More
+                       </button>
                        </div>
-                       <div className="pg_percentage">
-                        <input className="input_stuff" placeholder="name">
-                        </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                         <button className="remove-button">Remove</button>
-                       </div>
-                </div>
           </div>
           <div className="Buttons_flex">
             <button className="Reset_button">Reset</button>
             <button className="Submit_button" onClick={handleSubmit}>Submit</button>
           </div>
           {isModalOpen && <Modal closeModal={closeModal} />}
+          {isModalOpen6 && <Modal6 closeModal6={closeModal6} />}
           </div>
           
         </form>

@@ -38,6 +38,15 @@
     border-radius: 9px;
     border: none;
 }
+.add_remove_button{
+    background:white;
+    width: 297px;
+    height:44px;
+    border-radius: 9px;
+    border-style: solid;
+    border-color:black;
+    border-width: 1px;
+}
 .input_stuff{
     padding-left: 1rem;
 }
