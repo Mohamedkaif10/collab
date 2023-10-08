@@ -76,7 +76,7 @@ const Registerprof1 = () => {
   const queryParams =new URLSearchParams({full_name:formData.full_name}).toString()
  
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
     <div className="flex">
       <span className="w-2/5 lefty">
         <div className="main_div3">
@@ -186,7 +186,7 @@ const Registerprof1 = () => {
           </div>
           <div>
             <div className="createaccdiv">
-              <button type="submit">Create Account</button>
+              <button onClick={handleSubmit}>Create Account</button>
             </div>
           </div>
           <div className="pt-5">

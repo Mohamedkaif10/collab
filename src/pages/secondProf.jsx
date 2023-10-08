@@ -87,8 +87,7 @@ const handleInputChange=(e)=>{
               name="hashed_password" 
               value={formData.hashed_password} 
               onChange={handleInputChange}>
-
-              </input>
+            </input>
             </div>
           </div>
           <div className="div1">
@@ -114,7 +113,7 @@ const handleInputChange=(e)=>{
       <span className="w-2/5 right-side">
         <img className="sideimg" src={firstLogo} alt="" />
       </span>
-      <p  onClick={ handleButtonClick} style={{color:"black"}}> join procollab today</p>
+      <p  onClick={handleButtonClick} style={{color:"black"}}> join procollab today</p>
     </div>
     </form>
   );

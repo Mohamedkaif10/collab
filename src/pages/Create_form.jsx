@@ -22,6 +22,20 @@ const Create_form=()=>{
                      event.preventDefault();
                      openModal();
               };
+              // Get all the remove buttons by class name
+const removeButtons = document.querySelectorAll('.remove-button');
+
+// Add a click event listener to each remove button
+removeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // Get the parent div (container) of the clicked button
+    const container = button.parentElement.parentElement;
+
+    // Remove the container from the DOM
+    container.remove();
+  });
+});
+
             
     return(
            <>      
@@ -36,26 +50,24 @@ const Create_form=()=>{
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                          <button className="remove-button">Remove</button>
                        </div>
                        <div classname="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
-                        <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                       
+                        <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
@@ -63,25 +75,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                        <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                        <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                        <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="add or drop">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                        <button className="remove-button">Remove</button>
                        </div>
                 </div>
           </div>
@@ -92,25 +104,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="pg Institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Year of Passing">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Specilisation">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="pg_percentage">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
@@ -118,25 +130,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="Ug_institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="Year of Passing">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="add or drop">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
@@ -144,25 +156,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="Ug_institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="Year of Passing">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="add or drop">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
@@ -170,25 +182,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="Ug_institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="Year of Passing">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="add or drop">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
           </div>
@@ -199,25 +211,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="pg Institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Year of Passing">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Specilisation">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="pg_percentage">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
                 <div className="details_1_box">
@@ -225,25 +237,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="Ug_institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="Year of Passing">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="inner_box_1">
                         <input className="input_stuff" placeholder="add or drop">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
           </div>
@@ -254,25 +266,25 @@ const Create_form=()=>{
                         <input className="input_stuff" placeholder="pg Institute">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Year of Passing">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="Specilisation">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                        <div className="pg_percentage">
                         <input className="input_stuff" placeholder="name">
                         </input>
                         <RemoveCircleOutlineIcon className="removeicon"/>
-                        <div className="remove_text">Remove</div>
+                         <button className="remove-button">Remove</button>
                        </div>
                 </div>
           </div>
