@@ -1,0 +1,59 @@
+.job_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dotted black;
+    margin: 2%;
+  }
+  
+  .post_job_header {
+    display: flex;
+    border: 2px dotted black;
+    gap: 2%;
+  }
+  
+  .post_job_header > div {
+    width: 380px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px dotted black;
+  }
+  
+  .container_post_job {
+    display: flex;
+    flex-direction:row;
+    gap: 10px; /* Adjust the vertical space */
+    margin: 2%;
+  }
+  
+  .item_post_job {
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    border: 2px dotted black;
+  }
+  
+  .item_post_job input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .item_post_job p {
+    margin-bottom: 5px;
+  }
+
+  .item_post_job_desc{
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    border: 2px dotted black;
+  }
+  .item_post_job_desc input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .item_post_job_desc p {
+    margin-bottom: 5px;
+  }
+  

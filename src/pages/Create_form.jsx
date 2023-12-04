@@ -6,10 +6,15 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Modal6 from "../components/Modal6";
+import Modal7 from "../components/Modal7";
+import Modal8 from "../components/Modal8";
 const Create_form=()=>{
        
        const [isModalOpen, setIsModalOpen] = useState(false);
        const [isModalOpen6, setIsModalOpen6] = useState(false);
+       const [isModalOpen7, setIsModalOpen7] = useState(false);
+       const [isModalOpen8, setIsModalOpen8] = useState(false);
+       const [divCount, setDivCount] = useState(1);
        const navigate=useNavigate()
               
               const openModal = () => {setIsModalOpen(true); };
@@ -38,6 +43,36 @@ const Create_form=()=>{
                      openModal6();
               };
              
+              const openModal7 = () => {setIsModalOpen7(true); };
+            
+              
+              const closeModal7 = () => {
+                     setIsModalOpen7(false)
+                    
+              };
+            
+              const handleSubmit7 = (event) => {
+                     event.preventDefault();
+                     openModal7();
+              };
+             
+
+              const openModal8 = () => {setIsModalOpen8(true); };
+            
+              
+              const closeModal8 = () => {
+                     setIsModalOpen8(false)
+                    
+              };
+            
+              const handleSubmit8 = (event) => {
+                     event.preventDefault();
+                     openModal8();
+              };
+              const addMoreDiv = () => {
+                     setDivCount((prevCount) => prevCount + 1); 
+                   };
+             
 const removeButtons = document.querySelectorAll('.remove-button');
 
 removeButtons.forEach((container) => {
@@ -51,7 +86,7 @@ removeButtons.forEach((container) => {
         <form>
         <div className="create_form">
             
-            <p className="Heading_CF"> <span><img src={Book_img}/></span>Create Form</p>
+            <p className="Heading_CF">Create Form</p>
             <p className="SbHeading_CF">Add or remove required fields belowto create a project form</p>
           <div className="details_1">
                 <p>Personal Details</p>
@@ -256,7 +291,7 @@ removeButtons.forEach((container) => {
                         <RemoveCircleOutlineIcon className="removeicon"/>
                          <button className="remove-button">Remove</button>
                        </div>
-                       <button onClick={handleSubmit6} className="add_remove_button">
+                       <button onClick={handleSubmit7} className="add_remove_button">
                         + Add More
                        </button>
                 </div>
@@ -276,7 +311,7 @@ removeButtons.forEach((container) => {
                         <RemoveCircleOutlineIcon className="removeicon"/>
                          <button className="remove-button">Remove</button>
                        </div>
-                       <button onClick={handleSubmit6} className="add_remove_button">
+                       <button onClick={handleSubmit8} className="add_remove_button">
                         + Add More
                        </button>
                        </div>
@@ -287,10 +322,12 @@ removeButtons.forEach((container) => {
           </div>
           {isModalOpen && <Modal closeModal={closeModal} />}
           {isModalOpen6 && <Modal6 closeModal6={closeModal6} />}
+          {isModalOpen7 && <Modal7 closeModal7={closeModal7} />}
+          {isModalOpen8 && <Modal8 closeModal8={closeModal8} />}
           </div>
           
         </form>
         </>
     )
 }
-export default Create_form
+export default Create_form;

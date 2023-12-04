@@ -1,0 +1,62 @@
+/* post_job_2.css */
+
+.job_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .post_job_header {
+    grid-column: span 3;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .grid_container {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .grid_container input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .grid_item {
+    display: flex;
+    flex-direction: column;
+  }
+  .grid_item input {
+    border:2px solid #A6A5A5;
+    border-radius: 6px;
+  }
+  .grid_item p {
+    margin-bottom: 5px; /* Adjust spacing between <p> and <input> */
+  }
+  
+  .item_post_job_desc {
+    grid-column: span 3; /* span the full width of the grid */
+    display: flex;
+    flex-direction: column;
+    justify-self: center; /* center horizontally */
+    align-self: center; /* center vertically */
+    max-width: 400px;
+    margin-top: 10px;
+  }
+  
+  .item_post_job_desc input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+  
+  .buttons_container {
+    grid-column: span 3;
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
