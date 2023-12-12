@@ -9,7 +9,7 @@ const Second = () => {
     const navigate = useNavigate();
 const[formData,setFormData]=useState({
   email:"",
-  hashed_password:""
+ password:""
 })
 const handleInputChange=(e)=>{
   const { name, value } = e.target;
@@ -24,10 +24,10 @@ const handleInputChange=(e)=>{
     const requestData = {
        
             email: formData.email,
-            hashed_password: formData.hashed_password
+            password: formData.password
        
       };
-      fetch("http://127.0.0.1:8000/prof/prof/login", {
+      fetch("http://127.0.0.1:8002/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +35,7 @@ const handleInputChange=(e)=>{
       body: JSON.stringify(requestData),
     })
     .then((response) => {
+      console.log("Response Status:", response.status);
       if (response.status === 401) {
         alert('Invalid Credentials');
         return;
@@ -43,17 +44,23 @@ const handleInputChange=(e)=>{
       } else {
         console.error('Error:', response.status, response.statusText);
       }
-    })
+   })
+   .catch((error) => {
+    console.error('Fetch Error:', error);
+ })
       .then((data) => {
         console.log("Response:", data);
         
-     if(data){
-      navigate("/projects");
-     }
+     if(data && data.token){
+      localStorage.setItem('authToken', data.token);
+      navigate("/");
+     }else {
+      console.error('Token not found in the response data');
+    }
   
          setFormData({
           email:"",
-          hashed_password:""
+          password:""
             });
            
       })
@@ -83,8 +90,8 @@ const handleInputChange=(e)=>{
             <div className="emaildiv">
               <input className="emailbtn"
                type="text" 
-              name="hashed_password" 
-              value={formData.hashed_password} 
+              name="password" 
+              value={formData.password} 
               onChange={handleInputChange}>
             </input>
             </div>

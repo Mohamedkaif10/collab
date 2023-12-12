@@ -4,6 +4,8 @@ import "../styles/post_job_2.css";
 
 const PostJob2 = () => {
     const inputLabels = [
+        "Job title",
+        "Department Name",
         "Stipend Amount",
         "Last Day to Apply",
         "Vacancies",
