@@ -3,3 +3,8 @@
     padding: 10px;
     margin: 10px 0;
   }
+  .job_title{
+    font-size: 2rem;
+    color:#253D90;
+    font-weight: 700;
+  }

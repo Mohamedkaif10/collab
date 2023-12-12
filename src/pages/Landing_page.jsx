@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, TextField,Box} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import "../styles/landing_page.css"
 const LandingPage = () => {
   const [postings, setPostings] = useState([]);
   const [filters, setFilters] = useState({
@@ -126,7 +126,7 @@ const LandingPage = () => {
          <Button onClick={handlePostClick}>Post a job</Button>
       <h1>Search for science jobs on ProCollab</h1>
       {postings && (
-      <div >
+      <div>
         {/* Render job postings */}
         {postings.map(posting => (
          <Box
@@ -138,24 +138,44 @@ const LandingPage = () => {
            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
            padding: '16px',
            marginBottom: '16px',
+           textAlign: 'left',
+           display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
            '& p': {
              marginBottom: '8px',
            },
            '& Button': {
-             marginTop: '16px',
+             marginTop: '16px'
            },
          }}
        >
-            <p> {posting.job_title}</p>
-            <p>Department: {posting.department_name}</p>
-            <p>Stipend Amount: {posting.stipend_amount}</p>
-            <p>Last Date: {new Date(posting.last_date).toLocaleDateString()}</p>
-            <p>Vacancies: {posting.vacancies}</p>
-            <p>Location: {posting.location}</p>
+            <p className='job_title'> {posting.job_title}</p>
+
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <p>Created at {new Date(posting.created_at).toLocaleDateString()}</p>
+            <span style={{ margin: '5px' }}>|</span>
+            <p>{posting.vacancies} vacancies</p>
+           <span style={{ margin: '5px' }}>|</span>
+          <p>Apply Before: {new Date(posting.last_date).toLocaleDateString()}</p>
+          </div>
+           
+          <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
+  <li>Location: {posting.location}</li>
+  <li>Stipend Amount: {posting.stipend_amount}</li>
+  <li>Department: {posting.department_name}</li>
+</ul>
+           
             <p>Scholar Link: {posting.scholar_link}</p>
-            <p>Duration: {posting.duration} months</p>
-            <p>Description: {posting.description}</p>
-            <Button onClick={handleJoinClick}  variant="contained">Apply</Button>
+            <p>{posting.description}</p>
+            {/* <p>Duration: {posting.duration} months</p> */}
+
+            
+        <hr></hr>
+       
+            <Button onClick={handleJoinClick} variant="contained" style={{ alignSelf: 'flex-end' ,backgroundColor: '#FFC20E',color: '#253D90', }}>
+    Apply
+  </Button>
           </Box>
         ))}
       </div>
