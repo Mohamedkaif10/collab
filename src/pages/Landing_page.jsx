@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button,Box,Select,MenuItem, FormControl,InputLabel} from '@mui/material';
+import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import "../styles/landing_page.css"
 import Footer from '../components/Footer';
@@ -14,27 +14,50 @@ const LandingPage = () => {
     job_title: '',
     // Add more filters as needed
   });
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pageSize: 5,
+    pageCount: 1,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchJobPostings = async () => {
-      try {
-        const response = await axios.get('http://localhost:8002/api/get_job');
-        const { success, postings } = response.data;
-
-        if (success) {
-          setPostings(postings);
-        } else {
-          console.error('Failed to fetch job postings');
-        }
-      } catch (error) {
-        console.error('Error fetching job postings', error);
-      }
-    };
-
     fetchJobPostings();
-  }, []);
+  }, [pagination.page, filters]);
+  
 
+  const fetchJobPostings = async () => {
+    try {
+      const endpoint = filters.location
+        ? '/filtered-job-details'
+        : '/get_job';
+
+      const response = await axios.get(
+        `http://localhost:8002/api${endpoint}`,
+        {
+          params: {
+            ...filters,
+            page: pagination.page,
+            pageSize: pagination.pageSize,
+          },
+        }
+      );
+
+      const { success, jobDetails } = response.data;
+
+      if (success) {
+        setPostings(jobDetails);
+        setPagination((prevPagination) => ({
+          ...prevPagination,
+          pageCount: Math.ceil(jobDetails.length / pagination.pageSize),
+        }));
+      } else {
+        console.error('Failed to fetch job postings');
+      }
+    } catch (error) {
+      console.error('Error fetching job postings', error);
+    }
+  };
   const isLoggedIn = !!localStorage.getItem('authToken');
 
   const handleJoinClick = () => {
@@ -113,6 +136,7 @@ const LandingPage = () => {
       <MenuItem value={'hyderabad'}>Hyderabad</MenuItem>
     </Select>
     </FormControl>
+
     <FormControl fullWidth>
     <InputLabel id="stipend">Stipend amount</InputLabel>
     <Select
@@ -123,12 +147,13 @@ const LandingPage = () => {
       onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
       sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
     >
-      <MenuItem value={80000}>80000</MenuItem>
-      <MenuItem value={90000}>90000</MenuItem>
-      <MenuItem value={34223}>34223</MenuItem>
-      <MenuItem value={9000}>9000</MenuItem>
+      <MenuItem value={'80000'}>80000</MenuItem>
+      <MenuItem value={'90000'}>90000</MenuItem>
+      <MenuItem value={'34223'}>34223</MenuItem>
+      <MenuItem value={'9000'}>9000</MenuItem>
     </Select>
     </FormControl>
+
     <FormControl fullWidth>
     <InputLabel id="department_name">Discipline</InputLabel>
     <Select
@@ -145,6 +170,7 @@ const LandingPage = () => {
       <MenuItem value={'somethuingas'}>somethuingas</MenuItem>
     </Select>
     </FormControl>
+
     <FormControl fullWidth>
     <InputLabel id="job_title">Job Title</InputLabel>
     <Select
@@ -170,30 +196,15 @@ const LandingPage = () => {
         sx={{
           flex: '1',
           padding: '16px',
+          
         }}
       >
          <Button onClick={handlePostClick}>Post a job</Button>
       <h1>Search for science jobs on ProCollab</h1>
-
-      <Box
-    sx={{
-      maxHeight: '400px', // Set a maximum height for the box
-      overflowY: 'auto', // Enable vertical scrolling when content exceeds the height
-      '&::-webkit-scrollbar': {
-        width: '8px',
-      },
-      '&::-webkit-scrollbar-thumb': {
-        background: '#888', // Customize scrollbar thumb color
-        borderRadius: '4px',
-      },
-      '& p': {
-        marginBottom: '8px',
-      },
-      '& Button': {
-        marginTop: '16px',
-      },
-    }}
-  >
+      <Container sx={{
+         maxHeight: '90vh',
+         overflowY: 'auto',
+      }}>
       {postings && (
       <div>
         
@@ -247,12 +258,28 @@ const LandingPage = () => {
         ))}
       </div>
     )}
-      </Box>
-     
+    </Container>
       </Box>
      
     </Box>
-     <Footer />
+    <Pagination
+    count={10}
+    page={pagination.page}
+    onChange={(event, value) =>
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        page: value,
+      }))
+    }
+    variant="outlined"
+    shape="rounded"
+    sx={{
+      alignSelf: 'flex-start',
+      marginTop: '16px', // Add margin at the top
+      marginBottom: '16px', // Add margin at the bottom
+    }}
+  />
+      <Footer  />
      </>
     
   );
