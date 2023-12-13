@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, TextField,Box} from '@mui/material';
+import { Button,Box,Select,MenuItem, FormControl,InputLabel} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import "../styles/landing_page.css"
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 const LandingPage = () => {
   const [postings, setPostings] = useState([]);
   const [filters, setFilters] = useState({
@@ -77,6 +79,8 @@ const LandingPage = () => {
  
 
   return (
+    <>
+    <Navbar/>
     <Box
     sx={{
       display: 'flex',
@@ -85,34 +89,79 @@ const LandingPage = () => {
     }}
   >
         <Box
-        sx={{
-          flex: '0 0 30%', // Adjust the width as needed
-          backgroundColor: '#f0f0f0',
-          padding: '16px',
-          marginTop: '6%',
-        }}
-      >
-        {/* Filter input fields */}
-        <TextField
-          label="Location"
-          value={filters.location}
-          onChange={(e) => handleFilterChange('location', e.target.value)}
-        />
-        <TextField
-          label="Stipend Amount"
-          value={filters.stipend_amount}
-          onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
-        />
-        <TextField
-          label="Department Name"
-          value={filters.department_name}
-          onChange={(e) => handleFilterChange('department_name', e.target.value)}
-        />
-        <TextField
-          label="Job Title"
-          value={filters.job_title}
-          onChange={(e) => handleFilterChange('job_title', e.target.value)}
-        />
+    sx={{
+      flex: '0 0 30%', 
+      backgroundColor: '#f0f0f0',
+      padding: '16px',
+      marginTop: '6%',
+      display: 'flex',
+      flexDirection: 'column', 
+    }}
+  >
+    <FormControl fullWidth>
+    <InputLabel id="location">Location</InputLabel>
+    <Select
+      labelId="location-label"
+      id="location-select"
+      value={filters.location}
+      label="Location"
+      onChange={(e) => handleFilterChange('location', e.target.value)}
+      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+    >
+      <MenuItem value={'Hyderabad'}>Hyderabad</MenuItem>
+      <MenuItem value={'jammu and kashmir'}>Jammu and Kashmir</MenuItem>
+      <MenuItem value={'hyderabad'}>Hyderabad</MenuItem>
+    </Select>
+    </FormControl>
+    <FormControl fullWidth>
+    <InputLabel id="stipend">Stipend amount</InputLabel>
+    <Select
+      labelId="stipend-label"
+      id="stipend-select"
+      value={filters.stipend_amount}
+      label="Stipend Amount"
+      onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
+      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+    >
+      <MenuItem value={80000}>80000</MenuItem>
+      <MenuItem value={90000}>90000</MenuItem>
+      <MenuItem value={34223}>34223</MenuItem>
+      <MenuItem value={9000}>9000</MenuItem>
+    </Select>
+    </FormControl>
+    <FormControl fullWidth>
+    <InputLabel id="department_name">Discipline</InputLabel>
+    <Select
+      labelId="department-label"
+      id="department-select"
+      value={filters.department_name}
+      label="Department"
+      onChange={(e) => handleFilterChange('department_name', e.target.value)}
+      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+    >
+      <MenuItem value={'something'}>Something</MenuItem>
+      <MenuItem value={'kaif'}>Kaif</MenuItem>
+      <MenuItem value={'kf'}>KF</MenuItem>
+      <MenuItem value={'somethuingas'}>somethuingas</MenuItem>
+    </Select>
+    </FormControl>
+    <FormControl fullWidth>
+    <InputLabel id="job_title">Job Title</InputLabel>
+    <Select
+      labelId="job-title-label"
+      id="job-title-select"
+      value={filters.job_title}
+      label="Job Title"
+      onChange={(e) => handleFilterChange('job_title', e.target.value)}
+      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+    >
+      <MenuItem value={'sfhlsdfuasdlauhtile'}>sfhlsdfuasdlauhtile</MenuItem>
+      <MenuItem value={'sometitile'}>sometitile</MenuItem>
+      <MenuItem value={'somsfd'}>somsfd</MenuItem>
+      <MenuItem value={'sometitile'}>sometitile</MenuItem>
+    </Select>    
+    </FormControl>    
+    
         {/* Add more filter inputs as needed */}
         <Button onClick={handleApplyFilters}>Apply Filters</Button>
       </Box>
@@ -125,9 +174,29 @@ const LandingPage = () => {
       >
          <Button onClick={handlePostClick}>Post a job</Button>
       <h1>Search for science jobs on ProCollab</h1>
+
+      <Box
+    sx={{
+      maxHeight: '400px', // Set a maximum height for the box
+      overflowY: 'auto', // Enable vertical scrolling when content exceeds the height
+      '&::-webkit-scrollbar': {
+        width: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: '#888', // Customize scrollbar thumb color
+        borderRadius: '4px',
+      },
+      '& p': {
+        marginBottom: '8px',
+      },
+      '& Button': {
+        marginTop: '16px',
+      },
+    }}
+  >
       {postings && (
       <div>
-        {/* Render job postings */}
+        
         {postings.map(posting => (
          <Box
          key={posting.job_id}
@@ -173,15 +242,19 @@ const LandingPage = () => {
             
         <hr></hr>
        
-            <Button onClick={handleJoinClick} variant="contained" style={{ alignSelf: 'flex-end' ,backgroundColor: '#FFC20E',color: '#253D90', }}>
-    Apply
-  </Button>
+            <Button onClick={handleJoinClick} variant="contained" style={{ alignSelf: 'flex-end' ,backgroundColor: '#FFC20E',color: '#253D90', }}>Apply</Button>
           </Box>
         ))}
       </div>
     )}
       </Box>
+     
+      </Box>
+     
     </Box>
+     <Footer />
+     </>
+    
   );
 };
 
