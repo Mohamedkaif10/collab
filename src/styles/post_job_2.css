@@ -62,3 +62,7 @@
   .header_jbdetails{
     border:2px solid black
   }
+  .item_post_job_desc{
+    border:black;
+    border-style: dashed;
+  }
