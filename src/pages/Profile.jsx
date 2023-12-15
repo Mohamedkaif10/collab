@@ -7,25 +7,19 @@ const Profile=()=>{
     const userId = 13;
     useEffect(() => {
         const fetchBookmarks = async () => {
-          try {
-            const response = await axios.get(`http://localhost:8002/api/bookmarks`
-            // ,{
-            //   headers: {
-            //     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            //   },
-            // }
-            );
-            const { success, bookmarks } = response.data;
-    
-            if (success) {
-              setBookmarks(bookmarks);
-            } else {
-              console.error("Failed to fetch bookmarks");
-            }
-          } catch (error) {
-            console.error("Error fetching bookmarks", error);
-          }
-        };
+            try {
+                const response = await axios.get(`http://localhost:8002/api/bookmarks`);
+                const { success, bookmarks } = response.data;
+            
+                if (success) {
+                  setBookmarks(bookmarks);
+                } else {
+                  console.error("Failed to fetch bookmarks");
+                }
+              } catch (error) {
+                console.error("Error fetching bookmarks", error);
+              }
+            };
     
         if (userId) {
           fetchBookmarks();
