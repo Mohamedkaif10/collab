@@ -70,14 +70,6 @@ const LandingPage = () => {
     }
   };
 
-  const handlePostClick = () => {
-    if (!isLoggedIn) {
-      navigate('/second');
-    } else {
-      navigate('/job1');
-    }
-  };
-
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -147,7 +139,7 @@ const LandingPage = () => {
       value={filters.location}
       label="Location"
       onChange={(e) => handleFilterChange('location', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
     >
       <MenuItem value={'Hyderabad'}>Hyderabad</MenuItem>
       <MenuItem value={'jammu and kashmir'}>Jammu and Kashmir</MenuItem>
@@ -163,7 +155,7 @@ const LandingPage = () => {
       value={filters.stipend_amount}
       label="Stipend Amount"
       onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
     >
       <MenuItem value={'80000'}>80000</MenuItem>
       <MenuItem value={'90000'}>90000</MenuItem>
@@ -180,7 +172,7 @@ const LandingPage = () => {
       value={filters.department_name}
       label="Department"
       onChange={(e) => handleFilterChange('department_name', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
     >
       <MenuItem value={'something'}>Something</MenuItem>
       <MenuItem value={'kaif'}>Kaif</MenuItem>
@@ -197,7 +189,7 @@ const LandingPage = () => {
       value={filters.job_title}
       label="Job Title"
       onChange={(e) => handleFilterChange('job_title', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9',color:'white' }} // Add styles for spacing and width
     >
       <MenuItem value={'sfhlsdfuasdlauhtile'}>sfhlsdfuasdlauhtile</MenuItem>
       <MenuItem value={'sometitile'}>sometitile</MenuItem>
@@ -217,7 +209,6 @@ const LandingPage = () => {
           
         }}
       >
-         <Button onClick={handlePostClick}>Post a job</Button>
       <h1>Search for science jobs on ProCollab</h1>
       <Container sx={{
          maxHeight: '90vh',
@@ -308,7 +299,11 @@ const LandingPage = () => {
     sx={{
       alignSelf: 'flex-start',
       marginTop: '16px', // Add margin at the top
-      marginBottom: '16px', // Add margin at the bottom
+      marginBottom: '16px',
+      '& .Mui-selected': {
+        backgroundColor: '#253D90', // Add your desired background color for the selected button
+        color: 'white',
+       } // Add margin at the bottom
     }}
   />
      </>

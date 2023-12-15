@@ -63,7 +63,7 @@ const Navbar = () => {
 
         {/* Additional Buttons at the End */}
         <Box sx={{ marginLeft: 'auto' }}>
-          <Button color="inherit" sx={{ color: '#111111' ,marginRight: 2 ,border:'2px solid #253D90' }} component={NavLink} to="/additional1">
+          <Button color="inherit" sx={{ color: '#111111' ,marginRight: 2 ,border:'2px solid #253D90' }} component={NavLink} to="/job1">
             Post a Job
           </Button>
           <Button variant="outlined" color="inherit" sx={{ color: '#FFFFFF',backgroundColor:'#253D90' }} component={NavLink} to="/additional2">
