@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import{ useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button,Box} from '@mui/material';
+import { Button,Box,Grid,Container} from '@mui/material';
 import BlogModal from '../components/Blog_modal';
 const BlogPage=()=>{
     const [ideas, setIdeas] = useState([]);
@@ -57,9 +57,47 @@ const BlogPage=()=>{
       console.error('Error refreshing ideas:', error);
     }
   };
-    return(
-        <Fragment>
+  return (
+    <Fragment>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+        <Box sx={{ width: '60%', margin: '0 auto' }}>
+  {filteredIdeas.map((idea) => (
+    <Box
+      key={idea.id}
+      sx={{
+        marginBottom: '20px',
+        padding: '16px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#FFFFFF',
+        marginTop:'10px'
+      }}
+    >
+      <h3 style={{ color: '#253D90', marginBottom: '8px' }}>{idea.title}</h3>
+      <p style={{ marginBottom: '8px' }}>{idea.content}</p>
+      <p style={{ color: '#888', marginBottom: '8px' }}>Stream: {idea.stream}</p>
+      <p style={{ color: '#888', marginBottom: '8px' }}>Posted At: {new Date(idea.created_at).toLocaleString()}</p>
+      {/* Add more styling as needed */}
+    </Box>
+  ))}
+</Box>
+        </Grid>
+        <Grid item xs={4}>
+          <div>
             <Button onClick={handleModalOpen}>Post your Ideas</Button>
+            <h2>Ideas</h2>
+            <Container>
+              {/* Add filter buttons */}
+              <Button onClick={() => handleFilterByStream(null)}>All</Button>
+              <Button onClick={() => handleFilterByStream('eng physics')}>Eng Physics</Button>
+              <Button onClick={() => handleFilterByStream('Physics')}>Physics</Button>
+              {/* Add more buttons for other streams as needed */}
+            </Container>
+          </div>
+        </Grid>
+      </Grid>
+
       {/* Render the BlogModal component conditionally */}
       {isModalOpen && (
         <BlogModal
@@ -69,26 +107,7 @@ const BlogPage=()=>{
           }}
         />
       )}
-<div >
-        <h2>Ideas</h2>
-        <div>
-          {/* Add filter buttons */}
-          <Button onClick={() => handleFilterByStream(null)}>All</Button>
-          <Button onClick={() => handleFilterByStream('eng physics')}>Eng Physics</Button>
-          <Button onClick={() => handleFilterByStream('Physics')}>Physics</Button>
-          {/* Add more buttons for other streams as needed */}</div>
-        <Box sx={{ width: '70%', margin: '0 auto',backgroundColor: '#f0f0f0' }}>
-        {filteredIdeas.map((idea) => (
-            <div key={idea.id} style={{ marginBottom: '20px' }}>
-              <h3>{idea.title}</h3>
-              <p>{idea.content}</p>
-              <p>Stream: {idea.stream}</p>
-              <p>Posted At: {new Date(idea.created_at).toLocaleString()}</p>
-            </div>
-          ))}
-        </Box>
-      </div>
-        </Fragment>
-    )
-}
+    </Fragment>
+  );
+};
 export default BlogPage
