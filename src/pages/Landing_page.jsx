@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import "../styles/landing_page.css"
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 const LandingPage = () => {
   const [postings, setPostings] = useState([]);
   const [filters, setFilters] = useState({
@@ -19,6 +19,7 @@ const LandingPage = () => {
     pageSize: 5,
     pageCount: 1,
   });
+  const [bookmarkedJobs, setBookmarkedJobs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,11 +100,27 @@ const LandingPage = () => {
       console.error('Error fetching filtered job details', error);
     }
   };
+  const handleBookmarkClick = async (jobId) => {
+    try {
+      const response = await axios.post(`http://localhost:8002/api/bookmark/${jobId}`);
+      const { success, message } = response.data;
+
+      if (success) {
+        console.log(message); // Log success message
+        // Update the bookmarked jobs state to include the newly bookmarked job
+        setBookmarkedJobs(prevBookmarkedJobs => [...prevBookmarkedJobs, jobId]);
+      } else {
+        console.error('Failed to bookmark job');
+      }
+    } catch (error) {
+      console.error('Error bookmarking job', error);
+    }
+  };
  
 
   return (
     <>
-    <Navbar/>
+   
     <Box
     sx={{
       display: 'flex',
@@ -230,7 +247,23 @@ const LandingPage = () => {
            },
          }}
        >
-            <p className='job_title'> {posting.job_title}</p>
+             <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between', // Add this to space items horizontally
+      }}
+    >
+      <p className='job_title'> {posting.job_title}</p>
+      {bookmarkedJobs.includes(posting.job_id) ? (
+                  <BookmarkAddedIcon sx={{ fontSize: '1.5rem', cursor: 'pointer' }} />
+                ) : (
+                  <BookmarkAddIcon
+                    sx={{ fontSize: '1.5rem', cursor: 'pointer' }}
+                    onClick={() => handleBookmarkClick(posting.job_id)}
+                  />
+                )}
+    </Box>
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
             <p>Created at {new Date(posting.created_at).toLocaleDateString()}</p>
@@ -279,7 +312,6 @@ const LandingPage = () => {
       marginBottom: '16px', // Add margin at the bottom
     }}
   />
-      <Footer  />
      </>
     
   );

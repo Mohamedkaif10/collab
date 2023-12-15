@@ -4,7 +4,7 @@ import "./pages/Create_form"
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // import Projects from './pages/Projects';
 // import StdntProject from './pages/Project_visit';
-// import Root from './components/Root_layout';
+import Root from './components/Root_layout';
 import Second from './pages/secondProf';
 // import Welcomeprofpage from './pages/wellCome';
 // import Successful_pass_reset from './pages/success';
@@ -14,19 +14,24 @@ import Second from './pages/secondProf';
 // import Forgot_pass from './pages/forgotPassword';
 // import First from './pages/first';
 import PostJob from './pages/post_job';
-import PostJob2 from './pages/post_job_2';
+// import PostJob2 from './pages/post_job_2';
 import LandingPage from './pages/Landing_page';
 import  Product from "./pages/payment_page";
 import BlogPage from './pages/Blog';
+import Pageone from './pages/pageone';
+import Profile from './pages/Profile';
 function App() {
   const router = createBrowserRouter([
-
-    { index: true, element: <LandingPage /> },
+  {path:'/',element:<Root/>,children:[
+    {index:true,element:<Pageone/>},
+    { path:'jobs', element: <LandingPage /> },
     {path:'/job1',element:<PostJob/>},
-    {path:"/job2",element:<PostJob2/>},
     {path:"/second",element:<Second/>},
     {path:"/product",element:<Product/>},
-    {path:'/blogPage',element:<BlogPage/>}
+    {path:'/blogPage',element:<BlogPage/>},
+    {path:'/profile',element:<Profile/>}
+  ]},
+    
     // { path: "/register", element: <Registerprof1 /> },
     // { path: "/second", element: <Second /> },
     // { path: "/forgotPass", element: <Forgot_pass /> },

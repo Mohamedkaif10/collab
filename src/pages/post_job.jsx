@@ -87,8 +87,8 @@ const PostJob = () => {
 
         <form>
         {/* Grid */}
-        <div className="grid_container">
-        <div className="grid_item">
+        {/* <div className="grid_container"> */}
+        {/* <div className="grid_item">
         <Typography variant="body1" sx={{ marginRight: "80%" }}>Job Title</Typography>
             <TextField
               type="text"
@@ -189,7 +189,7 @@ const PostJob = () => {
             />
           </div>
 
-        </div>
+        </div> */}
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={4}>
               <Typography sx={{color:'#253D90'}}>Job Title</Typography>
