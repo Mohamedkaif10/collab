@@ -9,7 +9,7 @@ import Second from './pages/secondProf';
 // import Welcomeprofpage from './pages/wellCome';
 // import Successful_pass_reset from './pages/success';
 // import Reset_page from './pages/resetPassword';
-// import Registerprof1 from './pages/registerProf';
+import Registerprof1 from './pages/registerProf';
 // import New_password from './pages/newPassword';
 // import Forgot_pass from './pages/forgotPassword';
 // import First from './pages/first';
@@ -26,13 +26,13 @@ function App() {
     {index:true,element:<Pageone/>},
     { path:'jobs', element: <LandingPage /> },
     {path:'/job1',element:<PostJob/>},
-    {path:"/second",element:<Second/>},
+   
     {path:"/product",element:<Product/>},
     {path:'/blogPage',element:<BlogPage/>},
     {path:'/profile',element:<Profile/>}
   ]},
-    
-    // { path: "/register", element: <Registerprof1 /> },
+  {path:"/second",element:<Second/>},
+    { path: "/register", element: <Registerprof1 /> },
     // { path: "/second", element: <Second /> },
     // { path: "/forgotPass", element: <Forgot_pass /> },
     // { path: "/newPass", element: <New_password /> },
