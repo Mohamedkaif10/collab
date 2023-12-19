@@ -20,6 +20,9 @@ import  Product from "./pages/payment_page";
 import BlogPage from './pages/Blog';
 import Pageone from './pages/pageone';
 import Profile from './pages/Profile';
+import ForgotPass from "./pages/reset_passwrd"
+import VerifyOTPForm from "./pages/reset_pswrd2"
+import UpdatePasswordForm from "./pages/pswrdchange"
 function App() {
   const router = createBrowserRouter([
   {path:'/',element:<Root/>,children:[
@@ -33,6 +36,9 @@ function App() {
   ]},
   {path:"/second",element:<Second/>},
     { path: "/register", element: <Registerprof1 /> },
+    {path:'/forgot-pswrd',element:<ForgotPass/>},
+    {path:"/verify-otp",element:<VerifyOTPForm/>},
+    {path:"/update-password",element:<UpdatePasswordForm/>}
     // { path: "/second", element: <Second /> },
     // { path: "/forgotPass", element: <Forgot_pass /> },
     // { path: "/newPass", element: <New_password /> },

@@ -3,6 +3,7 @@ import 'tailwindcss/tailwind.css';
 import googlePic from "../assets/search.png"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Second = () => {
     const navigate = useNavigate();
 const[formData,setFormData]=useState({
@@ -94,7 +95,7 @@ const handleInputChange=(e)=>{
           />
         </div>
   
-          <p className="cursor-pointer">Reset Password?</p>
+          <Link to ="/forgot-pswrd" className="cursor-pointer">Reset Password?</Link>
   
         <div className="signindiv">
           <button className="signinbtn" type="submit">
