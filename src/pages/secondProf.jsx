@@ -1,9 +1,10 @@
 import "../styles/global.css"
 import 'tailwindcss/tailwind.css';
 import googlePic from "../assets/search.png"
-import { useState } from "react";
+import { useState,useEffect,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Second = () => {
     const navigate = useNavigate();
 const[formData,setFormData]=useState({
@@ -66,6 +67,33 @@ const handleInputChange=(e)=>{
       
    
 }
+
+const fetchGoogleData = useCallback(async () => {
+  try {
+    // Make a request to the /auth/google/callback endpoint on your backend
+    const response = await axios.get('http://localhost:8002/auth/google/callback');
+
+    // Extract the Google ID from the response
+    const googleId = response.data.googleId;
+
+    // Store the Google ID in localStorage
+    console.log("the id is ", googleId);
+    localStorage.setItem('googleId', googleId);
+
+    // Optionally, you can redirect the user to another page after storing the Google ID
+    // window.location.href = '/dashboard';
+  } catch (error) {
+    console.error('Error fetching Google data:', error);
+  }
+}, []);
+useEffect(() => {
+  // Call the function when the component mounts
+  fetchGoogleData();
+}, [fetchGoogleData]);
+const handleGoogleSignIn = () => {
+  // Call the same function when the image is clicked
+  fetchGoogleData();
+};
   return (
     <div className="flex flex-col items-center min-h-screen-90">
     <form onSubmit={handleSubmit} >
@@ -105,7 +133,7 @@ const handleInputChange=(e)=>{
   
         <p className="or">or</p>
 
-          <img className="googleimg" src={googlePic} alt="" />
+          <img className="cursor-pointer" src={googlePic} alt="Google Sign In" onClick={handleGoogleSignIn} />
       </div>
     </form>
   

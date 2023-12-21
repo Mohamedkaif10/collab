@@ -23,13 +23,14 @@ import Profile from './pages/Profile';
 import ForgotPass from "./pages/reset_passwrd"
 import VerifyOTPForm from "./pages/reset_pswrd2"
 import UpdatePasswordForm from "./pages/pswrdchange"
+import TempPayment from "./pages/TempPayment"
 function App() {
   const router = createBrowserRouter([
   {path:'/',element:<Root/>,children:[
     {index:true,element:<Pageone/>},
     { path:'jobs', element: <LandingPage /> },
     {path:'/job1',element:<PostJob/>},
-   
+   {path:'temp-payment',element:<TempPayment/>},
     {path:"/product",element:<Product/>},
     {path:'/blogPage',element:<BlogPage/>},
     {path:'/profile',element:<Profile/>}
