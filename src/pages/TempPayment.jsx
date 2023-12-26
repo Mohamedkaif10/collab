@@ -1,11 +1,16 @@
 import { Fragment } from "react"
 import { useState } from 'react';
-import { Button, Container, CircularProgress,  } from '@mui/material';
+import { Button, Container, CircularProgress, Typography } from '@mui/material';
+import UploadIcon from '@mui/icons-material/Upload';
 import qrcode from "../assets/Qrcode.jpeg"
+import {  IconButton } from '@mui/material';
+import { AttachFile } from '@mui/icons-material';
+import SuccessModal from "../components/payment_success"
 const TempPayment=()=>{
     const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -16,42 +21,57 @@ const TempPayment=()=>{
       const formData = new FormData();
       formData.append('image', file);
 
-      const response = await fetch('http://localhost:8002/api/screenshot', {
+      const response = await fetch('https://for-sky-backend.vercel.app/api/screenshot', {
         method: 'POST',
         body: formData,
       });
 
       const data = await response.json();
       setResponse(data);
+      console.log(response)
+      if (data.success) {
+        setIsModalOpen(true);
+      }
     } catch (error) {
       console.error('Error uploading file:', error);
     }finally {
         setLoading(false);
       }
   };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  console.log(response)
     return(
         <Fragment>
-          
- <Container>
- <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
   <img
     src={qrcode}
     alt="QR Code"
-    style={{ maxWidth: '100%', height: '600px', width: '600px', marginBottom: '16px' }}
+    style={{ maxWidth: '100%', height: '600px', width: '600px', marginBottom: '16px',marginTop:'20px' }}
   />
 </div>
-      <input type="file" onChange={handleFileChange} />
-      <Button variant="contained" onClick={handleUpload}>
-        Upload
-      </Button>
-      {loading && <CircularProgress />}
-      {response && (
-        <div>
-          <p>Response from Server:</p>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
-      )}
-    </Container>
+<Container style={{ border: '1px dashed black', padding: '16px' ,display:'flex',flexDirection:'column',alignItems:'center'}}>
+  <Typography>Upload screenShot</Typography>
+  <input
+    type="file"
+    id="fileInput"
+    onChange={handleFileChange}
+    style={{ display: 'none' }}
+  />
+  <label htmlFor="fileInput">
+    <UploadIcon position="end" fontSize="large">
+      <IconButton component="span">
+        <AttachFile />
+      </IconButton>
+    </UploadIcon>
+  </label>
+  <Button variant="contained" onClick={handleUpload}>
+    Upload
+  </Button>
+  {loading && <CircularProgress />}
+</Container>
+{isModalOpen && <SuccessModal onClose={handleCloseModal} />}
         </Fragment>
     )
 }

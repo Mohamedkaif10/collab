@@ -7,26 +7,39 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import {  IconButton } from '@mui/material';
+import { AttachFile } from '@mui/icons-material';
+import UploadIcon from '@mui/icons-material/Upload';
+import { useNavigate } from "react-router-dom";
 const PostJob = () => {
   const [formData, setFormData] = useState({
     // Your form fields here
    job_title: '',
     dept_name: '',
     stipend_amount:'',
-    last_date:'',
+    last_date: null,
     vacancies:'',
     location:'',
     scholar_link:'',
     duration:'',
     description:'',
     pdf: null,
+    institute:''
     // Add other fields as needed
   });
+  const navigate= useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+  const handleDateChange = (date) => {
+    console.log('Selected Date:', date); 
+    setFormData((prevData) => ({
+      ...prevData,
+      last_date: date || null,
     }));
   };
   const handlePdfUpload = (e) => {
@@ -57,16 +70,17 @@ const PostJob = () => {
       formDataObject.append('duration', formData.duration);
       formDataObject.append('description', formData.description);
       formDataObject.append('pdf', formData.pdf);
-      const response = await fetch('http://localhost:8002/api/job-details', {
+      formDataObject.append('institute', formData.institute);
+      const response = await fetch('https://for-sky-backend.vercel.app/api/job-details', {
         method: 'POST',
-        headers: { Authorization: token },
+        // headers: { Authorization: token },
         body: formDataObject,
       });
   
       if (!response.ok) {
         throw new Error('Failed to submit the form. Please try again.');
       }
-  
+     navigate('/temp-payment')
       // If the response is okay, you can proceed with the next steps or redirect to another page
     } catch (error) {
       console.error('Error submitting the form:', error);
@@ -80,11 +94,6 @@ const PostJob = () => {
         <Typography sx={{color:'#636161',}}>Follow these simple steps to post your job and connect with top talent</Typography>
 
         {/* Header */}
-        <div className="post_job_header">
-          <div className="header_jbdetails">Job Details</div>
-          <div className="header_jbdetails">Confirmation</div>
-        </div>
-
         <form>
         {/* Grid */}
         {/* <div className="grid_container"> */}
@@ -231,7 +240,7 @@ const PostJob = () => {
       <DatePicker
         label="Basic date picker"
         value={formData.last_date}
-        onChange={handleChange}
+        onChange={handleDateChange}
         sx={{ width: '100%', marginTop: '8px' }} // Adjust the width and other styles as needed
       />
     </DemoContainer>
@@ -294,18 +303,38 @@ const PostJob = () => {
                 fullWidth
               />
             </Grid>
+            <Grid item xs={4}>
+              <Typography sx={{color:'#253D90'}}>Institute/Company name</Typography>
+              <TextField
+                type="text"
+                placeholder="Enter Institute"
+                name="institute"
+                value={formData.institute}
+                onChange={handleChange}
+                fullWidth
+              />
+            </Grid>
           </Grid>
          
-        
+        <div className="flex flex-col items-center">
           <div className="item_post_job_desc">
   <p>Advertisement Document (PDF)</p>
   <input
     type="file"
+    id="fileInput"
     accept=".pdf"
     name="pdf"
+    style={{ display: 'none' }} 
     onChange={handlePdfUpload}
-   // Adjust the width as needed
   />
+  <label htmlFor="fileInput">
+    <UploadIcon position="end" fontSize="large">
+      <IconButton component="span">
+        <AttachFile />
+      </IconButton>
+    </UploadIcon>
+  </label>
+</div>
 </div>
 
   

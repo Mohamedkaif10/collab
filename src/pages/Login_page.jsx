@@ -5,7 +5,7 @@ import { useState,useEffect,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const Second = () => {
+const LoginPage = () => {
     const navigate = useNavigate();
 const[formData,setFormData]=useState({
   email:"",
@@ -27,7 +27,7 @@ const handleInputChange=(e)=>{
             password: formData.password
        
       };
-      fetch("http://127.0.0.1:8002/api/login", {
+      fetch("https://for-sky-backend.vercel.app/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const handleInputChange=(e)=>{
         
      if(data && data.token){
       localStorage.setItem('authToken', data.token);
-      navigate("/");
+      navigate("/jobs");
      }else {
       console.error('Token not found in the response data');
     }
@@ -71,7 +71,7 @@ const handleInputChange=(e)=>{
 const fetchGoogleData = useCallback(async () => {
   try {
     // Make a request to the /auth/google/callback endpoint on your backend
-    const response = await axios.get('http://localhost:8002/auth/google/callback');
+    const response = await axios.get('https://for-sky-backend.vercel.app/auth/google/callback');
 
     // Extract the Google ID from the response
     const googleId = response.data.googleId;
@@ -146,4 +146,4 @@ const handleGoogleSignIn = () => {
   );
 };
 
-export default Second;
+export default LoginPage;

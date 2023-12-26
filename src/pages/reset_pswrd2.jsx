@@ -23,7 +23,7 @@ const VerifyOTPForm = () => {
 
   const handleVerifyOTP = async () => {
     try {
-      const response = await axios.post('http://localhost:8002/api/verify-otp', {email, otp });
+      const response = await axios.post('https://for-sky-backend.vercel.app/api/verify-otp', {email, otp });
       setMessage(response.data.message);
       setError('');
 

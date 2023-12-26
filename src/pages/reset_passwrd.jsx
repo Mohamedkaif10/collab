@@ -11,7 +11,7 @@ const ForgotPass=()=>{
   
   const handleSendOTP = async () => {
     try {
-      const response = await axios.post('http://localhost:8002/api/send-otp', {email});
+      const response = await axios.post('https://for-sky-backend.vercel.app/api/send-otp', {email});
       setMessage(response.data.message);
       setError('');
       navigate(`/verify-otp?email=${encodeURIComponent(email)}`);

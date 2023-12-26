@@ -1,7 +1,9 @@
 import { Fragment, useState } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types'; 
-import "../styles/Blog.css"
+import "../styles/Blog.css";
+import { Button,Box,Typography} from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 const BlogModal = ({onClose}) => {
   const [title, setTitle] = useState("");
   const [stream, setStream] = useState("");
@@ -12,7 +14,7 @@ const BlogModal = ({onClose}) => {
 
     try {
       // Make a POST request to your backend endpoint
-      const response = await axios.post("http://localhost:8002/api/ideas", {
+      const response = await axios.post("https://for-sky-backend.vercel.app/api/ideas", {
         title,
         stream,
         content,
@@ -33,10 +35,10 @@ const BlogModal = ({onClose}) => {
   return (
     <Fragment>
         <div className="overlay"></div>
-        <div className="modal"> 
+        <Box className="modal"> 
       <form onSubmit={handleFormSubmit}>
         <label>
-          Title:
+          Title
           <input
             type="text"
             value={title}
@@ -45,7 +47,7 @@ const BlogModal = ({onClose}) => {
         </label>
         <br />
         <label>
-          Stream:
+          Stream
           <input
             type="text"
             value={stream}
@@ -54,17 +56,20 @@ const BlogModal = ({onClose}) => {
         </label>
         <br />
         <label>
-          Content:
+          Content
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
-        <button onClick={onClose}>Close</button>
+        <div className="buttons">
+     <Button onClick={onClose}>Close</Button>
+    <Button type="submit" variant="contained" endIcon={<SendIcon />}>Share</Button>
+  </div>
       </form>
-      </div>
+      <Typography sx={{color:'#6576B1'}}> It will increase your chance to get noticed</Typography>
+      </Box>
     </Fragment>
   );
   

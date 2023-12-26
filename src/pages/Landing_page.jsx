@@ -35,7 +35,7 @@ const LandingPage = () => {
         : '/get_job';
 
       const response = await axios.get(
-        `http://localhost:8002/api${endpoint}`,
+        `https://for-sky-backend.vercel.app/api${endpoint}`,
         {
           params: {
             ...filters,
@@ -80,7 +80,7 @@ const LandingPage = () => {
   const handleApplyFilters = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8002/api/filtered-job-details?location=${filters.location}&stipend_amount=${filters.stipend_amount}&department_name=${filters.department_name}&job_title=${filters.job_title}`
+        `https://for-sky-backend.vercel.app/api/filtered-job-details?location=${filters.location}&stipend_amount=${filters.stipend_amount}&department_name=${filters.department_name}&job_title=${filters.job_title}`
       );
       const { success, jobDetails } = response.data;
 
@@ -98,11 +98,11 @@ const LandingPage = () => {
     try {
       if (isJobBookmarked(jobId)) {
         // If the job is already bookmarked, remove the bookmark
-        await axios.delete(`http://localhost:8002/api/bookmark/${jobId}`);
+        await axios.delete(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`);
         removeBookmark(jobId);
       } else {
         // If the job is not bookmarked, add the bookmark
-        await axios.post(`http://localhost:8002/api/bookmark/${jobId}`);
+        await axios.post(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`);
         addBookmark(jobId);
       }
     } catch (error) {

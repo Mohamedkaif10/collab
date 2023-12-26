@@ -20,7 +20,7 @@ const UpdatePasswordForm = () => {
 
   const handleUpdatePassword = async () => {
     try {
-      const response = await axios.put('http://localhost:8002/api/update-password', { email,newPassword });
+      const response = await axios.put('https://for-sky-backend.vercel.app/api/update-password', { email,newPassword });
       setMessage(response.data.message);
       setError('');
 

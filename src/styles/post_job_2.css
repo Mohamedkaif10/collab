@@ -43,12 +43,14 @@
     flex-direction: column;
     justify-self: center; /* center horizontally */
     align-self: center; /* center vertically */
-    max-width: 400px;
     margin-top: 10px;
+    border:black;
+    border-style: dashed;
+    width:80vw;
+    height:20vh;
   }
   
   .item_post_job_desc input {
-    width: 100%;
     box-sizing: border-box;
     margin-top: 5px;
   }
@@ -62,7 +64,4 @@
   .header_jbdetails{
     border:2px solid black
   }
-  .item_post_job_desc{
-    border:black;
-    border-style: dashed;
-  }
+ 
