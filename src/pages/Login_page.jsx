@@ -1,4 +1,3 @@
-import "../styles/global.css"
 import googlePic from "../assets/search.png"
 import { useState,useEffect,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
