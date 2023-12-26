@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 const SavedJobs=()=>{
     const [bookmarks, setBookmarks] = useState([]);
-    const userId = 13;
     useEffect(() => {
         const fetchBookmarks = async () => {
             try {
-                const response = await axios.get(`https://for-sky-backend.vercel.app/api/bookmarks`);
-                const { success, bookmarks } = response.data;
+              const token = localStorage.getItem('authToken');
+              
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/bookmarks', {
+          headers: { Authorization: token },
+        });
+
+        const { success, bookmarks } = response.data;
             
                 if (success) {
                   setBookmarks(bookmarks);
@@ -21,10 +25,10 @@ const SavedJobs=()=>{
               }
             };
     
-        if (userId) {
+       
           fetchBookmarks();
-        }
-      }, [userId]);
+       
+      }, []);
     
     return (
       <Fragment>

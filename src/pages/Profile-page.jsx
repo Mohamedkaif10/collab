@@ -25,6 +25,7 @@ const CreateProfileForm = () => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem('authToken');
       const formDataToSend = new FormData();
       formDataToSend.append('full_name', formData.full_name);
       formDataToSend.append('email', formData.email);
@@ -34,8 +35,9 @@ const CreateProfileForm = () => {
       formDataToSend.append('description', formData.description);
       formDataToSend.append('image', formData.image);
 
-      const response = await axios.post('https://for-sky-backend.vercel.app/api/create-profile', formDataToSend);
-
+      const response = await axios.post('https://for-sky-backend.vercel.app/api/create-profile', formDataToSend, {
+        headers: { Authorization: token },
+  });
       console.log(response.data);
     } catch (error) {
       console.error('Error creating user profile:', error.response.data.error);

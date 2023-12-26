@@ -9,7 +9,10 @@ const GetIdeaPage = () => {
   useEffect(() => {
     const fetchIdeaById = async () => {
       try {
-        const response = await axios.get(`https://for-sky-backend.vercel.app/api/get-ideas/${id}`);
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`https://for-sky-backend.vercel.app/api/get-ideas/${id}`, {
+          headers: { Authorization: token },
+      });
         setIdea(response.data.idea);
       } catch (error) {
         console.error('Error fetching idea by ID:', error);

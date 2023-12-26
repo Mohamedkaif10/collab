@@ -5,7 +5,10 @@ import { Typography, Paper, CircularProgress } from '@mui/material';
 // Function to fetch user profile
 const fetchUserProfile = async () => {
   try {
-    const response = await fetch('https://for-sky-backend.vercel.app/api/user-profile'); // Adjust the endpoint based on your server setup
+    const token = localStorage.getItem('authToken');
+    const response = await fetch('https://for-sky-backend.vercel.app/api/user-profile' , {
+      headers: { Authorization: token },
+  }); // Adjust the endpoint based on your server setup
     const data = await response.json();
 
     if (response.ok) {

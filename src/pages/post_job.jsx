@@ -73,7 +73,7 @@ const PostJob = () => {
       formDataObject.append('institute', formData.institute);
       const response = await fetch('https://for-sky-backend.vercel.app/api/job-details', {
         method: 'POST',
-        // headers: { Authorization: token },
+        headers: { Authorization: token },
         body: formDataObject,
       });
   

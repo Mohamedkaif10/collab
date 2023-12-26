@@ -13,12 +13,20 @@ const BlogModal = ({onClose}) => {
     e.preventDefault();
 
     try {
-      // Make a POST request to your backend endpoint
-      const response = await axios.post("https://for-sky-backend.vercel.app/api/ideas", {
-        title,
-        stream,
-        content,
-      });
+      const token = localStorage.getItem('authToken');
+      
+      const response = await axios.post(
+        "https://for-sky-backend.vercel.app/api/ideas",
+        {
+          title,
+          stream,
+          content,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
+  
 
       console.log("Idea added successfully:", response.data);
 

@@ -18,12 +18,14 @@ const TempPayment=()=>{
   const handleUpload = async () => {
     try {
         setLoading(true);
+        const token = localStorage.getItem('authToken');
       const formData = new FormData();
       formData.append('image', file);
 
       const response = await fetch('https://for-sky-backend.vercel.app/api/screenshot', {
         method: 'POST',
         body: formData,
+        headers: { Authorization: token },
       });
 
       const data = await response.json();

@@ -8,8 +8,11 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfileStatus = async () => {
       try {
+        const token = localStorage.getItem('authToken');
         // Make a request to check if the user has completed the profile
-        const response = await axios.get('https://for-sky-backend.vercel.app/api/check-profile'); // Adjust the endpoint as per your server route
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/check-profile' , {
+          headers: { Authorization: token },
+      }); // Adjust the endpoint as per your server route
 
         // Update the state based on the response
         setIsProfileCompleted(response.data.profile_completed);
