@@ -20,6 +20,7 @@
     text-align: center; /* Center the content horizontally */
     width:600px;
     height:420px;
+    z-index: 2;
   }
  
   .modal form {

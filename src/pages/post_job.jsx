@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Button } from "@mui/material";
 import "../styles/post_job_2.css";
-import { TextField, Typography ,Grid} from "@mui/material";
+import {  CircularProgress,TextField, Typography ,Grid} from "@mui/material";
 import { useState } from "react";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -27,6 +27,7 @@ const PostJob = () => {
     institute:''
     // Add other fields as needed
   });
+  const [loading, setLoading] = useState(false);
   const navigate= useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +44,7 @@ const PostJob = () => {
     }));
   };
   const handlePdfUpload = (e) => {
-    // Handle PDF upload logic if needed
+    
     const pdfFile = e.target.files[0];
     // Add logic to handle the uploaded PDF file, e.g., send to server or store in state
     setFormData((prevData) => ({
@@ -85,6 +86,8 @@ const PostJob = () => {
     } catch (error) {
       console.error('Error submitting the form:', error);
       // Display an error message to the user or perform other error handling actions
+    } finally {
+      setLoading(false); // Set loading to false when the form submission is complete (whether successful or not)
     }
   };
   return (
@@ -92,113 +95,7 @@ const PostJob = () => {
       <div className="job_div">
         <Typography sx={{color:'#253D90',fontSize:'2rem',fontWeight:'600'}}>Post a Job</Typography>
         <Typography sx={{color:'#636161',}}>Follow these simple steps to post your job and connect with top talent</Typography>
-
-        {/* Header */}
         <form>
-        {/* Grid */}
-        {/* <div className="grid_container"> */}
-        {/* <div className="grid_item">
-        <Typography variant="body1" sx={{ marginRight: "80%" }}>Job Title</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Job Title"
-              name="job_title"
-              value={formData.job_title}
-              onChange={handleChange}
-              sx={{ margin: "0 120px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Department Name</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Department Name"
-              name="dept_name"
-              value={formData.dept_name}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Stipend Amount</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Stipend Amount"
-              name="stipend_amount"
-              value={formData.stipend_amount}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Last date</Typography>
-            <TextField
-              type="text"
-              placeholder="enter last date"
-              name="last_date"
-              value={formData.last_date}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>vacancies</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter vacancies"
-              name="vacancies"
-              value={formData.vacancies}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Location</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Location"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Scholar link</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Scholar Link"
-              name="scholar_link"
-              value={formData.scholar_link}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Duration</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Duration"
-              name="duration"
-              value={formData.duration}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 10px 0", width: "300px"}}
-            />
-          </div>
-          <div className="grid_item">
-            <Typography sx={{color:'#253D90'}}>Description</Typography>
-            <TextField
-              type="text"
-              placeholder="Enter Description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              sx={{ margin: "0 20px 100px 0", width: "300px"}}
-            />
-          </div>
-
-        </div> */}
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={4}>
               <Typography sx={{color:'#253D90'}}>Job Title</Typography>
@@ -340,7 +237,9 @@ const PostJob = () => {
   
         <div className="buttons_container">
           <Button>Clear</Button>
-          <Button variant="contained" onClick={handleSubmit} sx={{background:'#FFC20E',color:'#253D90',width:'10%'}}>Next</Button>
+          <Button variant="contained" onClick={handleSubmit} sx={{ background: '#FFC20E', color: '#253D90', width: '10%' }}>
+              {loading ? <CircularProgress size={20} /> : 'Next'}
+            </Button>
         </div>
         </form>
       </div>

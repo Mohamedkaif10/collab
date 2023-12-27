@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Box, Typography, IconButton,Button } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PropTypes from 'prop-types';
+import "../styles/successPop.css"
 import { useNavigate } from 'react-router-dom';
 const SuccessModal = ({ onClose }) => {
     const navigate = useNavigate()
