@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { useState } from 'react';
-import { Button, Container, CircularProgress, Typography } from '@mui/material';
+import { Button, Container, CircularProgress, Typography,Backdrop } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 import qrcode from "../assets/Qrcode.jpeg"
 import {  IconButton } from '@mui/material';
@@ -71,7 +71,9 @@ const TempPayment=()=>{
   <Button variant="contained" onClick={handleUpload}>
     Upload
   </Button>
-  {loading && <CircularProgress />}
+  <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
 </Container>
 {isModalOpen && <SuccessModal onClose={handleCloseModal} />}
         </Fragment>

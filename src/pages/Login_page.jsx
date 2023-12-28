@@ -1,24 +1,24 @@
-import googlePic from "../assets/search.png"
+import GoogleIcon from "../assets/search.png"
 import { useState,useEffect,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Grid,TextField,Button,Typography,Paper,CircularProgress,Backdrop  } from "@mui/material";
 const LoginPage = () => {
     const navigate = useNavigate();
 const[formData,setFormData]=useState({
   email:"",
  password:""
 })
+const [loading, setLoading] = useState(false);
 const handleInputChange=(e)=>{
   const { name, value } = e.target;
   setFormData({ ...formData, [name]: value});
 
 }
-  const handleButtonClick = () => {
-       navigate('/register');
-  };
   const handleSubmit =(event) => {
     event.preventDefault();
+    setLoading(true);
     const requestData = {
        
             email: formData.email,
@@ -48,7 +48,7 @@ const handleInputChange=(e)=>{
  })
       .then((data) => {
         console.log("Response:", data);
-        
+        setLoading(false);
      if(data && data.token){
       localStorage.setItem('authToken', data.token);
       navigate("/jobs");
@@ -77,71 +77,73 @@ const fetchGoogleData = useCallback(async () => {
     // Store the Google ID in localStorage
     console.log("the id is ", googleId);
     localStorage.setItem('googleId', googleId);
-
-    // Optionally, you can redirect the user to another page after storing the Google ID
-    // window.location.href = '/dashboard';
   } catch (error) {
     console.error('Error fetching Google data:', error);
   }
 }, []);
 useEffect(() => {
-  // Call the function when the component mounts
   fetchGoogleData();
 }, [fetchGoogleData]);
 const handleGoogleSignIn = () => {
-  // Call the same function when the image is clicked
   fetchGoogleData();
 };
   return (
-    <div className="flex flex-col items-center min-h-screen-90">
-    <form onSubmit={handleSubmit} >
-    <div className="text-blue-600 font-inter font-bold text-4xl pt-8">Login</div>
-      <div className=" text-left">
-        
-  
-        <p className="emailtext">E-mail Address</p>
-        <div className="emaildiv">
-          <input
-            className="emailbtn"
-            type="text"
+    <Grid container component="main" justifyContent="center" alignItems="center" sx={{ height: '100vh' }}>
+    <Grid item xs={12} sm={8} md={6} lg={5} component={Paper} elevation={6} square sx={{ padding: 4 }}>
+      <Grid container justifyContent="center" alignItems="center" direction="column">
+        <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+          Login
+        </Typography>
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          <TextField
+            margin="normal"
+            fullWidth
+            label="E-mail Address"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            required
+            sx={{ mb: 2 }}
           />
-        </div>
-  
-        <p className="emailtext">Password</p>
-        <div className="emaildiv">
-          <input
-            className="emailbtn"
-            type="text"
+          <TextField
+            margin="normal"
+            fullWidth
+            label="Password"
             name="password"
+            type="password"
             value={formData.password}
             onChange={handleInputChange}
+            required
+            sx={{ mb: 3 }}
           />
-        </div>
-  
-          <Link to ="/forgot-pswrd" className="cursor-pointer">Reset Password?</Link>
-  
-        <div className="signindiv">
-          <button className="signinbtn" type="submit">
-            Sign In
-          </button>
-        </div>
-  
-        <p className="or">or</p>
-
-          <img className="cursor-pointer" src={googlePic} alt="Google Sign In" onClick={handleGoogleSignIn} />
-      </div>
-    </form>
-  
-    <div style={{ marginTop: 'auto', marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-      <p style={{ marginRight: '5px' }}>Don&apos;t have an account yet?</p>
-      <p onClick={handleButtonClick} className="cursor-pointer text-blue-800 font-bold" >Join Forsync today</p>
-    </div>
-  </div>
-  
+          <Link to="/forgot-pswrd" style={{ textDecoration: 'none', color: 'blue', marginRight: '8px' }}>
+            Reset Password?
+          </Link>
+          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              {/* {loading && <CircularProgress size={24} sx={{ color: 'white' }} />} */}
+              Sign In
+            </Button>
+          <Typography variant="body2" color="textSecondary" sx={{ mt: 2 }}>
+            or
+          </Typography>
+          <img src={GoogleIcon} alt="Google Sign In" style={{ cursor: 'pointer', mt: 2 }} onClick={handleGoogleSignIn} />
+        </form>
+      </Grid>
+      <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 3 }}>
+        <Typography variant="body2" color="textSecondary" align="center">
+          Don&rsquo;t have an account yet?{' '}
+          <Link to="/register" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }}>
+            Join Forsync today
+          </Link>
+        </Typography>
+      </Grid>
+      <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+    </Grid>
+  </Grid>
   );
 };
+  
 
 export default LoginPage;

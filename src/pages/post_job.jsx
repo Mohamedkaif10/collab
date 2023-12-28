@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Button } from "@mui/material";
 import "../styles/post_job_2.css";
-import {  CircularProgress,TextField, Typography ,Grid} from "@mui/material";
+import {  CircularProgress,TextField, Typography ,Grid,Backdrop} from "@mui/material";
 import { useState } from "react";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -56,7 +56,7 @@ const PostJob = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
+    setLoading(true);
     try {
       const token = localStorage.getItem('authToken');
       console.log(token)
@@ -243,6 +243,9 @@ const PostJob = () => {
         </div>
         </form>
       </div>
+      <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
     </Fragment>
   );
 };

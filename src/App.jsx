@@ -21,7 +21,7 @@ function App() {
       path: '/', element: <Root />, children: [
         { index: true, element: <Pageone /> },
         { path: '/jobs', element: <LandingPage /> },
-        { path: '/job1', element: <PostJob /> },
+        { path: '/post-job', element: <PostJob /> },
         { path: '/temp-payment', element: <TempPayment /> },
         { path: "/product", element: <Product /> },
         { path: '/blogPage', element: <BlogPage /> },

@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid,IconButton } from '@mui/material';
+import { Grid,IconButton,CircularProgress } from '@mui/material';
 import { useState,useEffect } from 'react';
 import axios from "axios"
 import hyd from "../assets/hyderabad.png"
@@ -41,20 +41,24 @@ const Pageone = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [departments, setDepartments] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [loadingDepartments,setloadingDepartments]=useState(false)
   useEffect(() => {
     // Fetch all subjects
+    setLoading(true);
     axios.get('https://for-sky-backend.vercel.app/api/subjects')
       .then((response) => setSubjects(response.data))
-      .catch((error) => console.error('Error fetching subjects:', error));
+      .catch((error) => console.error('Error fetching subjects:', error))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleSubjectClick = (subjectId) => {
     // Fetch departments by subject ID
+    setloadingDepartments(true);
     axios.get(`https://for-sky-backend.vercel.app/api/departments/${subjectId}`)
       .then((response) => setDepartments(response.data))
-      .catch((error) => console.error('Error fetching departments:', error));
-
+      .catch((error) => console.error('Error fetching departments:', error))
+      .finally(() => setloadingDepartments(false));
     // Set the selected subject
     setSelectedSubject(subjectId);
   };
@@ -66,43 +70,49 @@ const Pageone = () => {
         Disciplines
       </Typography>
       
-      <div className="flex flex-wrap justify-center">
-  <div className="flex flex-wrap mb-4">
-    {subjects.slice(0, 6).map((subject) => (
-      <button
-        key={subject.id}
-        onClick={() => handleSubjectClick(subject.id)}
-        className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
-      >
-        {subject.name}
-      </button>
-    ))}
-  </div>
-  <div className="flex flex-wrap">
-    {subjects.slice(6).map((subject) => (
-      <button
-        key={subject.id}
-        onClick={() => handleSubjectClick(subject.id)}
-        className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
-      >
-        {subject.name}
-      </button>
-    ))}
-  </div>
-</div>
+      {loading && <CircularProgress />}
+      {!loading && (
+        <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap mb-4">
+            {subjects.slice(0, 6).map((subject) => (
+              <button
+                key={subject.id}
+                onClick={() => handleSubjectClick(subject.id)}
+                className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
+              >
+                {subject.name}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap">
+            {subjects.slice(6).map((subject) => (
+              <button
+                key={subject.id}
+                onClick={() => handleSubjectClick(subject.id)}
+                className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
+              >
+                {subject.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {selectedSubject && (
-  <div>
-    <h2>Departments under {subjects.find((s) => s.id === selectedSubject)?.name}</h2>
-    <div className={`grid grid-cols-${Math.ceil(departments.length / 6)} gap-10`}>
-      {departments.map((department) => (
-        <div key={department.id} className="p-4 border border-gray-300 rounded mb-5 bg-white">
-          {department.name}
+        <div>
+          <h2>Departments under {subjects.find((s) => s.id === selectedSubject)?.name}</h2>
+          {loadingDepartments && <CircularProgress />}
+          {!loadingDepartments && (
+            <div className={`grid grid-cols-${Math.ceil(departments.length / 6)} gap-10`}>
+              {departments.map((department) => (
+                <div key={department.id} className="p-4 border border-gray-300 rounded mb-5 bg-white">
+                  {department.name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ))}
-    </div>
-  </div>
-)}
+      )}
 
       <Typography variant="h6" gutterBottom style={{ marginTop: '16px',color:'#253D90',fontWeight:'700',fontSize:'2rem' }}>
       Discover Popular Roles

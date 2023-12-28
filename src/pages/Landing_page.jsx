@@ -209,7 +209,7 @@ const LandingPage = () => {
           
         }}
       >
-      <h1>Search for science jobs on ProCollab</h1>
+      <h1>Search for science jobs on Forsync</h1>
       <Container sx={{
          maxHeight: '90vh',
          overflowY: 'auto',

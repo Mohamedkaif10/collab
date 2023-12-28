@@ -15,20 +15,31 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import logo from '../assets/logoFor.png';
 import '../styles/Navbar.css';
-
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
-  const isUserLoggedIn = !!localStorage.getItem('authToken');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!localStorage.getItem('authToken'));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+const navigate=useNavigate()
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
+    setIsUserLoggedIn(false); // Update the user login state
     setIsDrawerOpen(false);
   };
+  const handlePostJob = () => {
+    const isUserLoggedIn = !!localStorage.getItem('authToken');
 
+    if (isUserLoggedIn) {
+      // Redirect to the "Post a Job" page or perform the necessary action
+      navigate("/post-job");
+    } else {
+      // Redirect to the login page if the user is not logged in
+      navigate('/login');
+    }
+  };
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: '#FDFDFD' }}>
@@ -92,10 +103,10 @@ const Navbar = () => {
           </Box>
           <Box sx={{ marginLeft: 'auto' ,display:'flex'}}>
             <Button
+              onClick={handlePostJob}
               color="inherit"
               sx={{ color: '#111111', marginRight: 2, border: '2px solid #253D90', display: { xs: 'none', sm: 'inherit' }, }}
               component={NavLink}
-              to="/job1"
             >
               Post a Job
             </Button>
@@ -103,8 +114,12 @@ const Navbar = () => {
               <Button
                 variant="outlined"
                 color="inherit"
-                sx={{ color: '#FFFFFF', backgroundColor: '#253D90' }}
+                sx={{ color: '#FFFFFF', backgroundColor: '#253D90','&:hover': {
+                  backgroundColor: '#001F5B', // Change this to the desired hover color
+                }, }}
                 onClick={handleSignOut}
+                to="/"
+                component={NavLink}
               >
                 Sign Out
               </Button>
@@ -112,7 +127,9 @@ const Navbar = () => {
               <Button
                 variant="outlined"
                 color="inherit"
-                sx={{ color: '#FFFFFF', backgroundColor: '#253D90' }}
+                sx={{ color: '#FFFFFF', backgroundColor: '#253D90','&:hover': {
+                  backgroundColor: '#001F5B', // Change this to the desired hover color
+                }, }}
                 component={NavLink}
                 to="/login"
               >
@@ -122,8 +139,6 @@ const Navbar = () => {
           </Box>
         </Toolbar>
       </AppBar>
-
-      {/* Drawer for small screens */}
       <Drawer
         anchor="left"
         open={isDrawerOpen}
@@ -150,7 +165,7 @@ const Navbar = () => {
           </List>
           <Box sx={{ flexGrow: 1 }} />
           <List>
-            <ListItem button component={NavLink} to="/job1" onClick={handleDrawerToggle}>
+            <ListItem button component={NavLink} to="/post-job" onClick={handleDrawerToggle}>
               <ListItemText primary="Post a Job" />
             </ListItem>
             {isUserLoggedIn ? (

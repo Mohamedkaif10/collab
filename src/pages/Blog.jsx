@@ -5,13 +5,13 @@ import { Button,Box,Grid,Container} from '@mui/material';
 import BlogModal from '../components/Blog_modal';
 import SendIcon from '@mui/icons-material/Send';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const BlogPage=()=>{
     const [ideas, setIdeas] = useState([]);
   const [filteredIdeas, setFilteredIdeas] = useState([]);
   const [selectedStream, setSelectedStream] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+const navigate= useNavigate()
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
@@ -48,9 +48,6 @@ const BlogPage=()=>{
   const handleFilterByStream = (stream) => {
     setSelectedStream(stream);
   };
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
   const refreshIdeas = async () => {
     try {
       const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
@@ -58,6 +55,16 @@ const BlogPage=()=>{
       setIdeas(response.data.ideas);
     } catch (error) {
       console.error('Error refreshing ideas:', error);
+    }
+  };
+  const handleModalOpen = () => {
+    const isUserLoggedIn = !!localStorage.getItem('authToken');
+
+    if (isUserLoggedIn) {
+      setIsModalOpen(true);
+    } else {
+      // Redirect to the login page if the user is not logged in
+      navigate('/login');
     }
   };
   return (
