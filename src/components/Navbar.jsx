@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import {
   AppBar,
   Toolbar,
@@ -19,24 +19,24 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!localStorage.getItem('authToken'));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-const navigate=useNavigate()
+const navigate =useNavigate();
+
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
-    setIsUserLoggedIn(false); // Update the user login state
+    setIsUserLoggedIn(false);
     setIsDrawerOpen(false);
   };
+  
   const handlePostJob = () => {
-    const isUserLoggedIn = !!localStorage.getItem('authToken');
-
     if (isUserLoggedIn) {
-      // Redirect to the "Post a Job" page or perform the necessary action
-      navigate("/post-job");
+      navigate('/post-job');
+      console.log('Navigating to /post-ssjob');
+     
     } else {
-      // Redirect to the login page if the user is not logged in
       navigate('/login');
     }
   };
@@ -61,42 +61,53 @@ const navigate=useNavigate()
               flexGrow: 1,
             }}
           >
-            <Button
-              color="inherit"
-              sx={{ color: '#111111' }}
-              component={NavLink}
-              to="/"
-              exact
-              activeStyle={{ backgroundColor: 'yellow' }}
-            >
-              Home
-            </Button>
+           <Button
+  color="inherit"
+  sx={{
+    color: '#111111',
+    '&.active': { // Set the color for the active state
+      borderBottom: '3px solid #FFC20E', // Set the yellow underline for the active state
+    },
+  }}
+  component={NavLink}
+  to="/"
+  exact
+>
+  Home
+</Button>
             <NavLink to="jobs">
               <Button
                 color="inherit"
-                sx={{ color: '#111111', marginLeft: 2, marginRight: 2 }}
+                sx={{ color: '#111111', marginLeft: 2, marginRight: 2 ,'&.active': { 
+                  borderBottom: '3px solid #FFC20E',
+                }}}
                 component={NavLink}
-                to="jobs"
+                to="/jobs"
                 activeStyle={{ backgroundColor: 'yellow' }}
               >
                 Search Job
               </Button>
             </NavLink>
             <Button
-              color="inherit"
-              sx={{ color: '#111111' }}
-              component={NavLink}
-              to="/blogPage"
-              activeStyle={{ backgroundColor: 'yellow' }}
-            >
-              Thoughts
-            </Button>
+  color="inherit"
+  sx={{
+    color: '#111111',
+    '&.active': {
+      borderBottom: '3px solid #FFC20E',
+    },
+  }}
+  component={NavLink}
+  to="/blogPage"
+  activeStyle={{ backgroundColor: 'yellow' }}
+>
+  Thoughts
+</Button>
             <Button
               color="inherit"
-              sx={{ color: '#111111' }}
+              sx={{ color: '#111111'  ,'&.active': { borderBottom: '3px solid #FFC20E'}}}
               component={NavLink}
               to="/profile"
-              activeStyle={{ backgroundColor: 'yellow' }}
+              activeStyle={{ backgroundColor: 'yellow'}}
             >
               Profile
             </Button>
@@ -106,7 +117,6 @@ const navigate=useNavigate()
               onClick={handlePostJob}
               color="inherit"
               sx={{ color: '#111111', marginRight: 2, border: '2px solid #253D90', display: { xs: 'none', sm: 'inherit' }, }}
-              component={NavLink}
             >
               Post a Job
             </Button>

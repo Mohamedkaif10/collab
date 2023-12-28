@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Button } from "@mui/material";
 import "../styles/post_job_2.css";
-import {  CircularProgress,TextField, Typography ,Grid,Backdrop} from "@mui/material";
+import { CircularProgress,TextField, Typography ,Grid, Backdrop} from "@mui/material";
 import { useState } from "react";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -233,7 +233,9 @@ const PostJob = () => {
   </label>
 </div>
 </div>
-
+<Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
   
         <div className="buttons_container">
           <Button>Clear</Button>
@@ -243,9 +245,7 @@ const PostJob = () => {
         </div>
         </form>
       </div>
-      <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
+     
     </Fragment>
   );
 };
