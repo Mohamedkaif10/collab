@@ -17,13 +17,7 @@ import kharagpur from "../assets/kharagpur.jpg"
 import gandhi from "../assets/gandhinagar.png"
 import roor from "../assets/roorkee.png"
 import logoMain from "../assets/logoForsync.png"
-const popularRoles = [
-    { name: 'JRF', openings: 10 },
-    { name: 'SRF', openings: 5 },
-    { name: 'Project Associate', openings: 8 },
-    { name: 'Project Manager', openings: 12 },
-    { name: 'View All openings', openings: 15 },
-  ];
+
   const topInstitutePostings = ['IIT Hyderabad', 'IIT Bombay', 'IIT Madras', 'IIT Kanpur', 'NIT Rourkela', 'NIT Tiruchirapalli', 'IIT Guwathi', 'IIT kharaghpur', 'IIT GandhiNagar', 'IIT Roorkee'];
   const instituteImages = {
     'IIT Hyderabad': hyd,
@@ -43,8 +37,11 @@ const Pageone = () => {
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingDepartments,setloadingDepartments]=useState(false)
+  const [jrfCount, setJrfCount] = useState(0);
+  const [srfCount, setSrfCount] = useState(0);
+  const [pa, setpa] = useState(0);
+  const [pm, setpm] = useState(0);
   useEffect(() => {
-    // Fetch all subjects
     setLoading(true);
     axios.get('https://for-sky-backend.vercel.app/api/subjects')
       .then((response) => setSubjects(response.data))
@@ -62,6 +59,76 @@ const Pageone = () => {
     // Set the selected subject
     setSelectedSubject(subjectId);
   };
+  useEffect(() => {
+    const fetchJrfCount = async () => {
+      try {
+        // Fetch the JRF count from the backend
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-jrf');
+        setJrfCount(response.data.jrfCount);
+        console.log("jrf",response.data)
+      } catch (error) {
+       console.log('Error fetching JRF count');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJrfCount();
+  }, []);
+  useEffect(() => {
+    const fetchSrfCount = async () => {
+      try {
+        // Fetch the JRF count from the backend
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-srf');
+        setSrfCount(response.data.srfCount);
+        console.log("srf",response.data)
+      } catch (error) {
+       console.log('Error fetching JRF count');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSrfCount();
+  }, []);
+  useEffect(() => {
+    const fetchProAssociate = async () => {
+      try {
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-project-associate');
+        console.log(response.data)
+        setpa(response.data.projectassociate);
+      } catch (error) {
+       console.log('Error fetching JRF count');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProAssociate();
+  }, []);
+  
+  useEffect(() => {
+    const fetchProManager = async () => {
+      try {
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-project-manager');
+        setpm(response.data.projectmanager);
+      } catch (error) {
+       console.log('Error fetching JRF count');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProManager();
+  }, []);
+
+  const popularRoles = [
+    { name: 'JRF', openings: jrfCount },
+    { name: 'SRF', openings: srfCount },
+    { name: 'Project Associate', openings:pa },
+    { name: 'Project Manager', openings: pm },
+    { name: 'View All openings', openings: 15 },
+  ];
 
   return (
     <>
@@ -98,21 +165,21 @@ const Pageone = () => {
         </div>
       )}
 
-      {selectedSubject && (
-        <div>
-          <h2>Departments under {subjects.find((s) => s.id === selectedSubject)?.name}</h2>
-          {loadingDepartments && <CircularProgress />}
-          {!loadingDepartments && (
-            <div className={`grid grid-cols-${Math.ceil(departments.length / 6)} gap-10`}>
-              {departments.map((department) => (
-                <div key={department.id} className="p-4 border border-gray-300 rounded mb-5 bg-white">
-                  {department.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+{selectedSubject && (
+  <div>
+    <h2>Departments under {subjects.find((s) => s.id === selectedSubject)?.name}</h2>
+    {loadingDepartments && <CircularProgress />}
+    {!loadingDepartments && (
+      <div className={`grid grid-cols-3 gap-10`}>
+        {departments.map((department) => (
+          <div key={department.id} className="p-4 border border-gray-300 rounded mb-5 bg-white">
+            {department.name}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 
       <Typography variant="h6" gutterBottom style={{ marginTop: '16px',color:'#253D90',fontWeight:'700',fontSize:'2rem' }}>
       Discover Popular Roles
