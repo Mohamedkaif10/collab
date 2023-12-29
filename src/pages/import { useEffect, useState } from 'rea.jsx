@@ -83,3 +83,36 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+
+
+// const handleFormSubmit = async (e) => {
+//     e.preventDefault();
+
+//     try {
+      
+      
+//       const response = await axios.post(
+//         "https://for-sky-backend.vercel.app/api/ideas",
+//         {
+//           title,
+//           stream,
+//           content,
+//         },
+//         {
+//           headers: { Authorization: token },
+//         }
+//       );
+  
+
+//       console.log("Idea added successfully:", response.data);
+
+//       // Clear the form after successful submission (optional)
+//       setTitle("");
+//       setStream("");
+//       setContent("");
+//       onClose();
+//     } catch (error) {
+//       console.error("Error adding idea:", error);
+//     }
+//   };
