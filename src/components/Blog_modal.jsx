@@ -5,40 +5,44 @@ import "../styles/Blog.css";
 import { Button,Box,Typography} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 const BlogModal = ({onClose}) => {
-  const [title, setTitle] = useState("");
-  const [stream, setStream] = useState("");
-  const [content, setContent] = useState("");
+  const [formData, setFormData] = useState({
+    title: '',
+    stream: 'some',
+    content: '',
+    image: null,
+  });
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleFormSubmit = async (e) => {
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });
+  };
+ const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    const { title, stream, content, image } = formData;
 
     try {
       const token = localStorage.getItem('authToken');
-      
-      const response = await axios.post(
-        "https://for-sky-backend.vercel.app/api/ideas",
-        {
-          title,
-          stream,
-          content,
-        },
-        {
-          headers: { Authorization: token },
-        }
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('stream', stream);
+      formData.append('content', content);
+      formData.append('image', image);
+
+      const response = await axios.post('https://for-sky-backend.vercel.app/api/ideas', formData,
+       {
+        headers: { Authorization: token },
+      }
       );
-  
-
-      console.log("Idea added successfully:", response.data);
-
-      // Clear the form after successful submission (optional)
-      setTitle("");
-      setStream("");
-      setContent("");
+      console.log(response.data);
       onClose();
     } catch (error) {
-      console.error("Error adding idea:", error);
+      console.error(error);
     }
   };
+
 
   return (
     <Fragment>
@@ -49,28 +53,26 @@ const BlogModal = ({onClose}) => {
           Title
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Stream
-          <input
-            type="text"
-            value={stream}
-            onChange={(e) => setStream(e.target.value)}
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
           />
         </label>
         <br />
         <label>
           Content
           <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+          name="content"
+           value={formData.content}
+           onChange={handleInputChange}
           />
         </label>
         <br />
+        <label>
+        Image:
+        <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
+      </label>
+      <br />
         <div className="buttons">
      <Button onClick={onClose}>Close</Button>
     <Button type="submit" variant="contained" endIcon={<SendIcon />}>Share</Button>

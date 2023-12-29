@@ -16,6 +16,7 @@ const navigate= useNavigate()
     const fetchIdeas = async () => {
       try {
         const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
+        console.log("the response is ",response.data)
         console.log("the responese are", response.data.ideas);
         setIdeas(response.data.ideas);
       } catch (error) {
@@ -51,6 +52,7 @@ const navigate= useNavigate()
   const refreshIdeas = async () => {
     try {
       const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
+      console.log("the response is ",response.data)
       console.log("the response is", response.data.ideas);
       setIdeas(response.data.ideas);
     } catch (error) {
@@ -87,6 +89,7 @@ const navigate= useNavigate()
       }}
     >
       <h3 style={{ color: '#253D90', marginBottom: '8px' }}>{idea.title}</h3>
+      <img src={idea.imageurl}/>
       <p style={{ marginBottom: '8px' }}>{idea.content}</p>
       <p style={{ color: '#888', marginBottom: '8px' }}>Stream: {idea.stream}</p>
       <p style={{ color: '#888', marginBottom: '8px' }}>Posted At: {new Date(idea.created_at).toLocaleString()}</p>
@@ -105,7 +108,6 @@ const navigate= useNavigate()
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1',color:'#6576B1'}} onClick={() => handleFilterByStream(null)}>All</Button>
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1'}} onClick={() => handleFilterByStream('eng physics')}>Eng Physics</Button>
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1'}} onClick={() => handleFilterByStream('Physics')}>Physics</Button>
-              {/* Add more buttons for other streams as needed */}
             </Container>
           </div>
           <Container  sx={{ marginTop: '15vh' }}>
