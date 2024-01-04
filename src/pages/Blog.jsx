@@ -46,9 +46,9 @@ const navigate= useNavigate()
     }
   }, [selectedStream, ideas]);
 
-  const handleFilterByStream = (stream) => {
-    setSelectedStream(stream);
-  };
+  // const handleFilterByStream = (stream) => {
+  //   setSelectedStream(stream);
+  // };
   const refreshIdeas = async () => {
     try {
       const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
@@ -100,16 +100,15 @@ const navigate= useNavigate()
 </Box>
         </Grid>
         <Grid item xs={4}>
-          <div>
+          {/* <div>
            
             <h2>Discover more of what matters to you</h2>
             <Container>
-              {/* Add filter buttons */}
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1',color:'#6576B1'}} onClick={() => handleFilterByStream(null)}>All</Button>
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1'}} onClick={() => handleFilterByStream('eng physics')}>Eng Physics</Button>
               <Button variant="outlined" sx={{backgroundColor:'#C5CCE1'}} onClick={() => handleFilterByStream('Physics')}>Physics</Button>
             </Container>
-          </div>
+          </div> */}
           <Container  sx={{ marginTop: '15vh' }}>
      <p> Your views on the recent research and theories.. </p>
      <Button onClick={handleModalOpen}  variant="contained" endIcon={<SendIcon />}>Post your Ideas</Button>
