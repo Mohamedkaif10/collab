@@ -15,6 +15,7 @@ const navigate= useNavigate()
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
+        // const response = await axios.get('http://localhost:8002/api/get-ideas');
         const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
         console.log("the response is ",response.data)
         console.log("the responese are", response.data.ideas);
@@ -69,6 +70,7 @@ const navigate= useNavigate()
       navigate('/login');
     }
   };
+  
   return (
     <Fragment>
       <Grid container spacing={2}>
