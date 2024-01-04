@@ -9,7 +9,12 @@ import {
   ListItem,
   ListItemText,
   IconButton,
+  Tooltip,
+  Menu,
+  MenuItem,
+  Avatar
 } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!localStorage.getItem('authToken'));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 const navigate =useNavigate();
 
   const handleDrawerToggle = () => {
@@ -27,6 +33,7 @@ const navigate =useNavigate();
 
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
+    navigate("/")
     setIsUserLoggedIn(false);
     setIsDrawerOpen(false);
   };
@@ -40,9 +47,16 @@ const navigate =useNavigate();
       navigate('/login');
     }
   };
+  const handleProfileClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: '#FDFDFD' }}>
+     <AppBar position="static" sx={{ backgroundColor: '#FDFDFD' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -61,26 +75,31 @@ const navigate =useNavigate();
               flexGrow: 1,
             }}
           >
-           <Button
-  color="inherit"
-  sx={{
-    color: '#111111',
-    '&.active': { // Set the color for the active state
-      borderBottom: '3px solid #FFC20E', // Set the yellow underline for the active state
-    },
-  }}
-  component={NavLink}
-  to="/"
-  exact
->
-  Home
-</Button>
+            <Button
+              color="inherit"
+              sx={{
+                color: '#111111',
+                '&.active': {
+                  borderBottom: '3px solid #FFC20E',
+                },
+              }}
+              component={NavLink}
+              to="/"
+              exact
+            >
+              Home
+            </Button>
             <NavLink to="jobs">
               <Button
                 color="inherit"
-                sx={{ color: '#111111', marginLeft: 2, marginRight: 2 ,'&.active': { 
-                  borderBottom: '3px solid #FFC20E',
-                }}}
+                sx={{
+                  color: '#111111',
+                  marginLeft: 2,
+                  marginRight: 2,
+                  '&.active': {
+                    borderBottom: '3px solid #FFC20E',
+                  },
+                }}
                 component={NavLink}
                 to="/jobs"
                 activeStyle={{ backgroundColor: 'yellow' }}
@@ -89,64 +108,66 @@ const navigate =useNavigate();
               </Button>
             </NavLink>
             <Button
-  color="inherit"
-  sx={{
-    color: '#111111',
-    '&.active': {
-      borderBottom: '3px solid #FFC20E',
-    },
-  }}
-  component={NavLink}
-  to="/blogPage"
-  activeStyle={{ backgroundColor: 'yellow' }}
->
-  Thoughts
-</Button>
-            <Button
               color="inherit"
-              sx={{ color: '#111111'  ,'&.active': { borderBottom: '3px solid #FFC20E'}}}
+              sx={{
+                color: '#111111',
+                '&.active': {
+                  borderBottom: '3px solid #FFC20E',
+                },
+              }}
               component={NavLink}
-              to="/profile"
-              activeStyle={{ backgroundColor: 'yellow'}}
+              to="/blogPage"
+              activeStyle={{ backgroundColor: 'yellow' }}
             >
-              Profile
+              Thoughts
             </Button>
           </Box>
-          <Box sx={{ marginLeft: 'auto' ,display:'flex'}}>
+          <Box sx={{ marginLeft: 'auto', display: 'flex' }}>
+        <Button
+          onClick={handlePostJob}
+          color="inherit"
+          sx={{
+            color: '#111111',
+            marginRight: 2,
+            border: '2px solid #253D90',
+            display: { xs: 'none', sm: 'inherit' },
+          }}
+        >
+          Post a Job
+        </Button>
+        {isUserLoggedIn ? (
+          <Tooltip title="Profile" arrow>
+           
             <Button
-              onClick={handlePostJob}
               color="inherit"
-              sx={{ color: '#111111', marginRight: 2, border: '2px solid #253D90', display: { xs: 'none', sm: 'inherit' }, }}
+              sx={{
+                color: '#111111',
+                '&.active': { borderBottom: '3px solid #FFC20E' },
+              }}
+              onClick={handleProfileClick}
             >
-              Post a Job
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+             <ArrowDropDownIcon />
             </Button>
-            {isUserLoggedIn ? (
-              <Button
-                variant="outlined"
-                color="inherit"
-                sx={{ color: '#FFFFFF', backgroundColor: '#253D90','&:hover': {
-                  backgroundColor: '#001F5B', // Change this to the desired hover color
-                }, }}
-                onClick={handleSignOut}
-                to="/"
-                component={NavLink}
-              >
-                Sign Out
-              </Button>
-            ) : (
-              <Button
-                variant="outlined"
-                color="inherit"
-                sx={{ color: '#FFFFFF', backgroundColor: '#253D90','&:hover': {
-                  backgroundColor: '#001F5B', // Change this to the desired hover color
-                }, }}
-                component={NavLink}
-                to="/login"
-              >
-                Sign In
-              </Button>
-            )}
-          </Box>
+          </Tooltip>
+        ) : (
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{
+              color: '#FFFFFF',
+              backgroundColor: '#253D90',
+              '&:hover': {
+                backgroundColor: '#001F5B',
+              },
+            }}
+            component={NavLink}
+            to="/login"
+          >
+            Sign In
+          </Button>
+        )}
+      </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -193,6 +214,19 @@ const navigate =useNavigate();
           </IconButton>
         </Box>
       </Drawer>
+      {isUserLoggedIn && (
+        <Menu
+          id="profile-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleProfileClose}
+        >
+          <MenuItem onClick={handleProfileClose} component={NavLink} to="/profile">
+            View Profile
+          </MenuItem>
+          <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+        </Menu>
+        )}
     </>
   );
 };
