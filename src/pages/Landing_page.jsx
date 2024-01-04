@@ -109,7 +109,15 @@ const LandingPage = () => {
       console.error('Error bookmarking job', error);
     }
   };
- 
+  const handleApplyClick = (pdfId) => {
+    // Assuming your PDFs are stored in the Google Drive folder
+    const folderUrl = 'https://drive.google.com/';
+  
+    const pdfUrl = `${folderUrl}/file/d/${pdfId}/view`;
+  
+    // Open the PDF in a new browser window or tab
+    window.open(pdfUrl, '_blank');
+  };
 
   return (
     <>
@@ -276,7 +284,8 @@ const LandingPage = () => {
             
         <hr></hr>
        
-            <Button onClick={handleJoinClick} variant="contained" style={{ alignSelf: 'flex-end' ,backgroundColor: '#FFC20E',color: '#253D90', }}>Apply</Button>
+           
+        <Button onClick={() => handleApplyClick(posting.pdf_id)} variant="contained" style={{ alignSelf: 'flex-end', backgroundColor: '#FFC20E', color: '#253D90', }}>Apply</Button>
           </Box>
         ))}
       </div>
