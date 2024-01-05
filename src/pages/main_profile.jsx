@@ -1,35 +1,40 @@
-import { useState } from 'react';
+import  { useState } from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import ProfilePage from './conditional'; // Import your Profile component
 import SavedJobs from './saved-jobs'; // Import your SavedJob component
+import MyJobs from './myJobs';
 
 const MainProfilePage = () => {
-  const [showProfile, setShowProfile] = useState(true);
+  const [selectedTab, setSelectedTab] = useState('profile');
 
-  const handleShowProfile = () => {
-    setShowProfile(true);
-  };
-
-  const handleShowSavedJob = () => {
-    setShowProfile(false);
+  const renderComponent = () => {
+    switch (selectedTab) {
+      case 'profile':
+        return <ProfilePage />;
+      case 'savedJobs':
+        return <SavedJobs />;
+      case 'postedJobs':
+        return <MyJobs />;
+      default:
+        return null;
+    }
   };
 
   return (
     <Container>
       <Grid container spacing={2} justifyContent="center" style={{ marginTop: '20px' }}>
         <Grid item>
-          <Button variant={showProfile ? 'contained' : 'outlined'} onClick={handleShowProfile}>
-            Profile
-          </Button>
+          <Button onClick={() => setSelectedTab('profile')}>Profile</Button>
         </Grid>
         <Grid item>
-          <Button variant={showProfile ? 'outlined' : 'contained'} onClick={handleShowSavedJob}>
-            Saved Jobs
-          </Button>
+          <Button onClick={() => setSelectedTab('savedJobs')}>Saved Jobs</Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={() => setSelectedTab('postedJobs')}>Posted Jobs</Button>
         </Grid>
       </Grid>
 
-      {showProfile ? <ProfilePage /> : <SavedJobs />}
+      {renderComponent()}
     </Container>
   );
 };

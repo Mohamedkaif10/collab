@@ -12,6 +12,7 @@ import { AttachFile } from '@mui/icons-material';
 import UploadIcon from '@mui/icons-material/Upload';
 import { useNavigate } from "react-router-dom";
 const PostJob = () => {
+  const [pdfPreview, setPdfPreview] = useState(null);
   const [formData, setFormData] = useState({
     // Your form fields here
    job_title: '',
@@ -51,6 +52,15 @@ const PostJob = () => {
       ...prevData,
       pdf: pdfFile,
     }));
+    if (pdfFile) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setPdfPreview(reader.result);
+      };
+
+      reader.readAsDataURL(pdfFile);
+    }
   };
 
 
@@ -96,8 +106,8 @@ const PostJob = () => {
         <Typography sx={{color:'#253D90',fontSize:'2rem',fontWeight:'600'}}>Post a Job</Typography>
         <Typography sx={{color:'#636161',}}>Follow these simple steps to post your job and connect with top talent</Typography>
         <form>
-        <Grid container spacing={2} alignItems="center">
-            <Grid item xs={4}>
+        <Grid container spacing={2} alignItems="center" sx={{ marginTop: '2%' }}>
+            <Grid item xs={4} >
               <Typography sx={{color:'#253D90'}}>Job Title</Typography>
               <TextField
                 type="text"
@@ -135,7 +145,7 @@ const PostJob = () => {
   <LocalizationProvider dateAdapter={AdapterDayjs}>
     <DemoContainer components={['DatePicker']}>
       <DatePicker
-        label="Basic date picker"
+        label="Last Date"
         value={formData.last_date}
         onChange={handleDateChange}
         sx={{ width: '100%', marginTop: '8px' }} // Adjust the width and other styles as needed
@@ -168,7 +178,7 @@ const PostJob = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <Typography sx={{color:'#253D90'}}>Scholar link</Typography>
+              <Typography sx={{color:'#253D90'}}>Scholar link (Optional)</Typography>
               <TextField
                 type="text"
                 placeholder="Enter Scholar Link"
@@ -190,17 +200,6 @@ const PostJob = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <Typography sx={{color:'#253D90'}}>Description</Typography>
-              <TextField
-                type="text"
-                placeholder="Enter Description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4}>
               <Typography sx={{color:'#253D90'}}>Institute/Company name</Typography>
               <TextField
                 type="text"
@@ -211,28 +210,54 @@ const PostJob = () => {
                 fullWidth
               />
             </Grid>
-          </Grid>
-         
-        <div className="flex flex-col items-center">
-          <div className="item_post_job_desc">
-  <p>Advertisement Document (PDF)</p>
-  <input
-    type="file"
-    id="fileInput"
-    accept=".pdf"
-    name="pdf"
-    style={{ display: 'none' }} 
-    onChange={handlePdfUpload}
+           </Grid>
+
+           <Grid sx={{marginTop:'2%'}}>
+  <Typography sx={{ color: '#253D90' }}>Description</Typography>
+  <TextField
+    multiline
+    rows={4}  // Adjust the number of rows as needed
+    placeholder="Enter Description"
+    name="description"
+    value={formData.description}
+    onChange={handleChange}
+    fullWidth
   />
-  <label htmlFor="fileInput">
-    <UploadIcon position="end" fontSize="large">
-      <IconButton component="span">
-        <AttachFile />
-      </IconButton>
-    </UploadIcon>
-  </label>
+</Grid>
+          <div className="flex flex-row items-center my-2">
+  <div className="item_post_job_desc">
+    <p>Advertisement Document (PDF)</p>
+    <input
+      type="file"
+      id="fileInput"
+      accept=".pdf"
+      name="pdf"
+      style={{ display: 'none' }}
+      onChange={handlePdfUpload}
+    />
+    <label htmlFor="fileInput">
+      <UploadIcon position="end" fontSize="large">
+        <IconButton component="span">
+          <AttachFile />
+        </IconButton>
+      </UploadIcon>
+    </label>
+  </div>
+  {pdfPreview && (
+    <div
+      style={{
+        maxWidth: '500px', // Set the maximum width as needed
+        width: '100%',
+        marginLeft: '20px', // Adjust the margin according to your layout
+      }}
+    >
+      <p>Your Uploaded Pdf:</p>
+      <embed src={pdfPreview} type="application/pdf" width="100%" height="200" />
+    </div>
+  )}
 </div>
-</div>
+
+
 <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 20, color: '#fff' }} open={loading}>
           <CircularProgress color="inherit" />
         </Backdrop>
