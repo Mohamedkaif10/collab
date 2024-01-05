@@ -20,7 +20,7 @@ const LandingPage = () => {
     pageSize: 5,
     pageCount: 1,
   });
-  
+  const token = localStorage.getItem('authToken');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,15 +60,15 @@ const LandingPage = () => {
       console.error('Error fetching job postings', error);
     }
   };
-  const isLoggedIn = !!localStorage.getItem('authToken');
+  // const isLoggedIn = !!localStorage.getItem('authToken');
 
-  const handleJoinClick = () => {
-    if (!isLoggedIn) {
-      navigate('/second');
-    } else {
-      console.log('User is already logged in. Implement additional logic here.');
-    }
-  };
+  // const handleJoinClick = () => {
+  //   if (!isLoggedIn) {
+  //     navigate('/second');
+  //   } else {
+  //     console.log('User is already logged in. Implement additional logic here.');
+  //   }
+  // };
 
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
@@ -98,11 +98,15 @@ const LandingPage = () => {
     try {
       if (isJobBookmarked(jobId)) {
         // If the job is already bookmarked, remove the bookmark
-        await axios.delete(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`);
+        await axios.delete(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`,{
+          headers: { Authorization: token },
+        });
         removeBookmark(jobId);
       } else {
-        // If the job is not bookmarked, add the bookmark
-        await axios.post(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`);
+        console.log(token)
+        await axios.post(`https://for-sky-backend.vercel.app/api/bookmark/${jobId}`,{
+          headers: { Authorization: token },
+        });
         addBookmark(jobId);
       }
     } catch (error) {
@@ -264,17 +268,17 @@ const LandingPage = () => {
               </Box>
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
-            <p>Created at {new Date(posting.created_at).toLocaleDateString()}</p>
-            <span style={{ margin: '5px' }}>|</span>
+            {/* <p>Created at {new Date(posting.created_at).toLocaleDateString()}</p>
+            <span style={{ margin: '5px' }}>|</span> */}
             <p>{posting.vacancies} vacancies</p>
            <span style={{ margin: '5px' }}>|</span>
           <p>Apply Before: {new Date(posting.last_date).toLocaleDateString()}</p>
           </div>
            
           <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
-  <li>Location: {posting.location}</li>
-  <li>Stipend Amount: {posting.stipend_amount}</li>
-  <li>Department: {posting.department_name}</li>
+  <li>{posting.location}</li>
+  <li>{posting.stipend_amount}</li>
+  <li>{posting.department_name}</li>
 </ul>
            
             <p>Scholar Link: {posting.scholar_link}</p>
