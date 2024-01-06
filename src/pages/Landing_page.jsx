@@ -117,7 +117,7 @@ const LandingPage = () => {
     // Assuming your PDFs are stored in the Google Drive folder
     const folderUrl = 'https://drive.google.com/';
   
-    const pdfUrl = `${folderUrl}/file/d/${pdfId}/view`;
+    const pdfUrl = `${folderUrl}/file/d/${pdfId}/preview`;
   
     // Open the PDF in a new browser window or tab
     window.open(pdfUrl, '_blank');

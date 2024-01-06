@@ -39,9 +39,10 @@ const PostJob = () => {
   };
   const handleDateChange = (date) => {
     console.log('Selected Date:', date); 
+    const formattedDate = date ? date.toISOString() : null;
     setFormData((prevData) => ({
       ...prevData,
-      last_date: date || null,
+      last_date: formattedDate,
     }));
   };
   const handlePdfUpload = (e) => {
@@ -146,6 +147,7 @@ const PostJob = () => {
     <DemoContainer components={['DatePicker']}>
       <DatePicker
         label="Last Date"
+        format="DD - MM - YYYY"
         value={formData.last_date}
         onChange={handleDateChange}
         sx={{ width: '100%', marginTop: '8px' }} // Adjust the width and other styles as needed
