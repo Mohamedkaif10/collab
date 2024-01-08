@@ -68,13 +68,13 @@ const handleInputChange=(e)=>{
 
 const fetchGoogleData = useCallback(async () => {
   try {
-    // Make a request to the /auth/google/callback endpoint on your backend
+   
     const response = await axios.get('https://for-sky-backend.vercel.app/auth/google/callback');
 
-    // Extract the Google ID from the response
+   
     const googleId = response.data.googleId;
 
-    // Store the Google ID in localStorage
+   
     console.log("the id is ", googleId);
     localStorage.setItem('googleId', googleId);
   } catch (error) {

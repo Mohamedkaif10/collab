@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const PostJob = () => {
   const [pdfPreview, setPdfPreview] = useState(null);
   const [formData, setFormData] = useState({
-    // Your form fields here
+   
    job_title: '',
     dept_name: '',
     stipend_amount:'',
@@ -26,7 +26,7 @@ const PostJob = () => {
     description:'',
     pdf: null,
     institute:''
-    // Add other fields as needed
+   
   });
   const [loading, setLoading] = useState(false);
   const navigate= useNavigate()
@@ -39,15 +39,15 @@ const PostJob = () => {
   };
   const handleDateChange = (date) => {
     console.log('Selected Date:', date); 
+    const formattedDate = date ? date.toISOString() : null;
     setFormData((prevData) => ({
       ...prevData,
-      last_date: date || null,
+      last_date: formattedDate,
     }));
   };
   const handlePdfUpload = (e) => {
     
     const pdfFile = e.target.files[0];
-    // Add logic to handle the uploaded PDF file, e.g., send to server or store in state
     setFormData((prevData) => ({
       ...prevData,
       pdf: pdfFile,
@@ -92,12 +92,11 @@ const PostJob = () => {
         throw new Error('Failed to submit the form. Please try again.');
       }
      navigate('/temp-payment')
-      // If the response is okay, you can proceed with the next steps or redirect to another page
     } catch (error) {
       console.error('Error submitting the form:', error);
-      // Display an error message to the user or perform other error handling actions
+     
     } finally {
-      setLoading(false); // Set loading to false when the form submission is complete (whether successful or not)
+      setLoading(false); 
     }
   };
   return (
@@ -146,9 +145,10 @@ const PostJob = () => {
     <DemoContainer components={['DatePicker']}>
       <DatePicker
         label="Last Date"
+        format="DD - MM - YYYY"
         value={formData.last_date}
         onChange={handleDateChange}
-        sx={{ width: '100%', marginTop: '8px' }} // Adjust the width and other styles as needed
+        sx={{ width: '100%', marginTop: '8px' }}
       />
     </DemoContainer>
   </LocalizationProvider>
@@ -216,7 +216,7 @@ const PostJob = () => {
   <Typography sx={{ color: '#253D90' }}>Description</Typography>
   <TextField
     multiline
-    rows={4}  // Adjust the number of rows as needed
+    rows={4}
     placeholder="Enter Description"
     name="description"
     value={formData.description}
@@ -246,9 +246,9 @@ const PostJob = () => {
   {pdfPreview && (
     <div
       style={{
-        maxWidth: '500px', // Set the maximum width as needed
+        maxWidth: '500px',
         width: '100%',
-        marginLeft: '20px', // Adjust the margin according to your layout
+        marginLeft: '20px',
       }}
     >
       <p>Your Uploaded Pdf:</p>

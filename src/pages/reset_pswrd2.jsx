@@ -11,8 +11,6 @@ const VerifyOTPForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-
-  // useEffect to get the email from query parameters when component mounts
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const emailFromParams = searchParams.get('email');
@@ -26,8 +24,6 @@ const VerifyOTPForm = () => {
       const response = await axios.post('https://for-sky-backend.vercel.app/api/verify-otp', {email, otp });
       setMessage(response.data.message);
       setError('');
-
-      // If OTP verified successfully, navigate to the next page (e.g., dashboard)
       navigate(`/update-password?email=${encodeURIComponent(email)}`);
     } catch (err) {
       setMessage('');

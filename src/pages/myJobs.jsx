@@ -29,7 +29,6 @@ const Myjobs =()=>{
       const handleDeleteClick = async (jobId) => {
         try {
           await axios.delete(`http://localhost:8002/api/job/${jobId}`);
-          // Refresh the job details after deletion
           fetchJobDetails();
         } catch (error) {
           console.error('Error deleting job', error);
