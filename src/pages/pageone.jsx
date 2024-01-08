@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid,IconButton,CircularProgress } from '@mui/material';
+import { Grid,CircularProgress } from '@mui/material';
 import { useState,useEffect } from 'react';
 import axios from "axios"
 import hyd from "../assets/hyderabad.png"
@@ -17,7 +17,8 @@ import kharagpur from "../assets/kharagpur.jpg"
 import gandhi from "../assets/gandhinagar.png"
 import roor from "../assets/roorkee.png"
 import logoMain from "../assets/logoForsync.png"
-
+import Icon from '@mui/material/Icon';
+import { createTheme } from '@mui/material/styles';
   const topInstitutePostings = ['IIT Hyderabad', 'IIT Bombay', 'IIT Madras', 'IIT Kanpur', 'NIT Rourkela', 'NIT Tiruchirapalli', 'IIT Guwathi', 'IIT kharaghpur', 'IIT GandhiNagar', 'IIT Roorkee'];
   const instituteImages = {
     'IIT Hyderabad': hyd,
@@ -50,19 +51,19 @@ const Pageone = () => {
   }, []);
 
   const handleSubjectClick = (subjectId) => {
-    // Fetch departments by subject ID
+   
     setloadingDepartments(true);
     axios.get(`https://for-sky-backend.vercel.app/api/departments/${subjectId}`)
       .then((response) => setDepartments(response.data))
       .catch((error) => console.error('Error fetching departments:', error))
       .finally(() => setloadingDepartments(false));
-    // Set the selected subject
+  
     setSelectedSubject(subjectId);
   };
   useEffect(() => {
     const fetchJrfCount = async () => {
       try {
-        // Fetch the JRF count from the backend
+       
         const response = await axios.get('https://for-sky-backend.vercel.app/api/count-jrf');
         setJrfCount(response.data.jrfCount);
         console.log("jrf",response.data)
@@ -78,7 +79,7 @@ const Pageone = () => {
   useEffect(() => {
     const fetchSrfCount = async () => {
       try {
-        // Fetch the JRF count from the backend
+       
         const response = await axios.get('https://for-sky-backend.vercel.app/api/count-srf');
         setSrfCount(response.data.srfCount);
         console.log("srf",response.data)
@@ -204,20 +205,34 @@ const Pageone = () => {
 <Grid container spacing={2} justifyContent="center">
   {topInstitutePostings.slice(0, 6).map((institute, index) => (
     <Grid key={index} item xs={6} sm={2}>
-      <IconButton style={{ width: '100%', flexDirection: 'column' }}>
-              <img src={instituteImages[institute]} alt={institute} style={{ width: '60px', height: '60px', marginBottom: '8px' }} />
+      <Button  startIcon={
+        <Icon style={{ display: 'block' }}>
+          <img
+            src={instituteImages[institute]}
+            alt={institute}
+            style={{ maxWidth: '100%', maxHeight: '100%', marginBottom: '8px' }}
+          />
+        </Icon>
+      }>
               <span>{institute}</span>
-            </IconButton>
+            </Button>
     </Grid>
   ))}
 </Grid>
 <Grid container spacing={2} justifyContent="center" style={{ marginBottom: '16px' }}>
     {topInstitutePostings.slice(6, 11).map((institute, index) => (
       <Grid key={index} item xs={6} sm={2}>
-       <IconButton style={{ width: '100%', flexDirection: 'column' }}>
-              <img src={instituteImages[institute]} alt={institute} style={{ width: '60px', height: '60px', marginBottom: '8px' }} />
+      <Button  startIcon={
+        <Icon style={{ display: 'block' }}>
+          <img
+            src={instituteImages[institute]}
+            alt={institute}
+            style={{ maxWidth: '100%', maxHeight: '100%', marginBottom: '8px' }}
+          />
+        </Icon>
+      }>
               <span>{institute}</span>
-            </IconButton>
+            </Button>
       </Grid>
     ))}
   </Grid>

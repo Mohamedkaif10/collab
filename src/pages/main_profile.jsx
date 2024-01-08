@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import { Button, Container, Grid } from '@mui/material';
-import ProfilePage from './conditional'; // Import your Profile component
-import SavedJobs from './saved-jobs'; // Import your SavedJob component
+import ProfilePage from './conditional';
+import SavedJobs from './saved-jobs';
 import MyJobs from './myJobs';
 
 const MainProfilePage = () => {

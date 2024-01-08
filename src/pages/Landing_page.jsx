@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container} from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import "../styles/landing_page.css"
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
@@ -13,7 +12,6 @@ const LandingPage = () => {
     stipend_amount: '',
     department_name: '',
     job_title: '',
-    // Add more filters as needed
   });
   const [pagination, setPagination] = useState({
     page: 1,
@@ -21,7 +19,6 @@ const LandingPage = () => {
     pageCount: 1,
   });
   const token = localStorage.getItem('authToken');
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchJobPostings();
@@ -36,6 +33,7 @@ const LandingPage = () => {
 
       const response = await axios.get(
         `https://for-sky-backend.vercel.app/api${endpoint}`,
+        // `http://localhost:8002/api${endpoint}`,
         {
           params: {
             ...filters,
@@ -113,14 +111,8 @@ const LandingPage = () => {
       console.error('Error bookmarking job', error);
     }
   };
-  const handleApplyClick = (pdfId) => {
-    // Assuming your PDFs are stored in the Google Drive folder
-    const folderUrl = 'https://drive.google.com/';
-  
-    const pdfUrl = `${folderUrl}/file/d/${pdfId}/preview`;
-  
-    // Open the PDF in a new browser window or tab
-    window.open(pdfUrl, '_blank');
+  const handleApplyClick = (institute) => {
+    window.open(institute, '_blank');
   };
 
   return (
@@ -151,7 +143,7 @@ const LandingPage = () => {
       value={filters.location}
       label="Location"
       onChange={(e) => handleFilterChange('location', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} 
     >
       <MenuItem value={'Hyderabad'}>Hyderabad</MenuItem>
       <MenuItem value={'jammu and kashmir'}>Jammu and Kashmir</MenuItem>
@@ -167,7 +159,7 @@ const LandingPage = () => {
       value={filters.stipend_amount}
       label="Stipend Amount"
       onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }}
     >
       <MenuItem value={'80000'}>80000</MenuItem>
       <MenuItem value={'90000'}>90000</MenuItem>
@@ -184,7 +176,7 @@ const LandingPage = () => {
       value={filters.department_name}
       label="Department"
       onChange={(e) => handleFilterChange('department_name', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} 
     >
       <MenuItem value={'something'}>Something</MenuItem>
       <MenuItem value={'kaif'}>Kaif</MenuItem>
@@ -201,7 +193,7 @@ const LandingPage = () => {
       value={filters.job_title}
       label="Job Title"
       onChange={(e) => handleFilterChange('job_title', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9',color:'white' }} // Add styles for spacing and width
+      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9',color:'white' }} 
     >
       <MenuItem value={'sfhlsdfuasdlauhtile'}>sfhlsdfuasdlauhtile</MenuItem>
       <MenuItem value={'sometitile'}>sometitile</MenuItem>
@@ -210,7 +202,7 @@ const LandingPage = () => {
     </Select>    
     </FormControl>    
     
-        {/* Add more filter inputs as needed */}
+       
         <Button onClick={handleApplyFilters}>Apply Filters</Button>
       </Box>
 
@@ -259,7 +251,6 @@ const LandingPage = () => {
                 }}
               >
                 <p className='job_title'> {posting.job_title}</p>
-                {/* Toggle between BookmarkAddIcon and BookmarkAddedIcon based on bookmarked status */}
                 {isJobBookmarked(posting.job_id) ? (
                   <BookmarkAddedIcon sx={{ fontSize: '1.5rem', cursor: 'pointer' }} onClick={() => handleBookmarkClick(posting.job_id)} />
                 ) : (
@@ -272,13 +263,14 @@ const LandingPage = () => {
             <span style={{ margin: '5px' }}>|</span> */}
             <p>{posting.vacancies} vacancies</p>
            <span style={{ margin: '5px' }}>|</span>
-          <p>Apply Before: {new Date(posting.last_date).toLocaleDateString()}</p>
+          <p>Apply Before: {(posting.last_date)}</p>
           </div>
            
           <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
   <li>{posting.location}</li>
   <li>{posting.stipend_amount}</li>
   <li>{posting.department_name}</li>
+  <li>{posting.link}</li>
 </ul>
            
             <p>Scholar Link: {posting.scholar_link}</p>
@@ -289,7 +281,7 @@ const LandingPage = () => {
         <hr></hr>
        
            
-        <Button onClick={() => handleApplyClick(posting.pdf_id)} variant="contained" style={{ alignSelf: 'flex-end', backgroundColor: '#FFC20E', color: '#253D90', }}>Apply</Button>
+        <Button onClick={() => handleApplyClick(posting.institute)} variant="contained" style={{ alignSelf: 'flex-end', backgroundColor: '#FFC20E', color: '#253D90', }}>Apply</Button>
           </Box>
         ))}
       </div>
@@ -311,12 +303,12 @@ const LandingPage = () => {
     shape="rounded"
     sx={{
       alignSelf: 'flex-start',
-      marginTop: '16px', // Add margin at the top
+      marginTop: '16px', 
       marginBottom: '16px',
       '& .Mui-selected': {
-        backgroundColor: '#253D90', // Add your desired background color for the selected button
+        backgroundColor: '#253D90', 
         color: 'white',
-       } // Add margin at the bottom
+       } 
     }}
   />
      </>

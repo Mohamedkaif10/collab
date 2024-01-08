@@ -23,8 +23,6 @@ const UpdatePasswordForm = () => {
       const response = await axios.put('https://for-sky-backend.vercel.app/api/update-password', { email,newPassword });
       setMessage(response.data.message);
       setError('');
-
-      // If password updated successfully, you can redirect to a success page or another route
       navigate('/second');
     } catch (err) {
       setMessage('');

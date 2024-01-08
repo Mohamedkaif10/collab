@@ -86,7 +86,7 @@ const BlogModal = ({onClose}) => {
   
   }
   BlogModal.propTypes = {
-    onClose: PropTypes.func.isRequired, // onClose should be a required function
+    onClose: PropTypes.func.isRequired, 
 }
 
 export default BlogModal;

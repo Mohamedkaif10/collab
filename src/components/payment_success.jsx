@@ -31,6 +31,6 @@ const SuccessModal = ({ onClose }) => {
   );
 };
 SuccessModal.propTypes = {
-    onClose: PropTypes.func.isRequired,  // Ensure onClose is a function and is required
+    onClose: PropTypes.func.isRequired,
   };
 export default SuccessModal;

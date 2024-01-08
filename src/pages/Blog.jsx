@@ -15,8 +15,8 @@ const navigate= useNavigate()
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const response = await axios.get('http://localhost:8002/api/get-ideas');
-        // const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
+        // const response = await axios.get('http://localhost:8002/api/get-ideas');
+        const response = await axios.get('https://for-sky-backend.vercel.app/api/get-ideas');
         console.log("the response is ",response.data)
         console.log("the responese are", response.data.ideas);
         setIdeas(response.data.ideas);
@@ -42,7 +42,6 @@ const navigate= useNavigate()
 
       fetchIdeasByStream();
     } else {
-      // If no stream is selected, show all ideas
       setFilteredIdeas(ideas);
     }
   }, [selectedStream, ideas]);
@@ -66,7 +65,6 @@ const navigate= useNavigate()
     if (isUserLoggedIn) {
       setIsModalOpen(true);
     } else {
-      // Redirect to the login page if the user is not logged in
       navigate('/login');
     }
   };
@@ -95,7 +93,6 @@ const navigate= useNavigate()
       <p style={{ marginBottom: '8px' }}>{idea.content}</p>
       <p style={{ color: '#888', marginBottom: '8px' }}>Stream: {idea.stream}</p>
       <p style={{ color: '#888', marginBottom: '8px' }}>Posted At: {new Date(idea.created_at).toLocaleString()}</p>
-      {/* Add more styling as needed */}
     </Box>
     </Link>
   ))}
