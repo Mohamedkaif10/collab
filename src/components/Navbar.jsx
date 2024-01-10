@@ -18,7 +18,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import logo from '../assets/logoFor.png';
+import logo from '../assets/some.png';
 import '../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
