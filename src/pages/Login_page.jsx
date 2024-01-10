@@ -25,13 +25,11 @@ const handleInputChange=(e)=>{
             password: formData.password
        
       };
-      fetch("https://for-sky-backend.vercel.app/api/login", {
-        // fetch("http://localhost:8002/api/login", {
-      method: "POST",
+       axios.post('https://for-sky-backend.vercel.app/api/login', requestData, {
+      // fetch("http://localhost:8002/api/login", {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestData),
     })
     .then((response) => {
       console.log("Response Status:", response.status);

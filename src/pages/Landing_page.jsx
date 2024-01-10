@@ -1,10 +1,54 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container} from '@mui/material';
+import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container,styled,Typography} from '@mui/material';
 import "../styles/landing_page.css"
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { useBookmarks } from "../Context/bookmarkContext"
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+
+const Filter_Button = styled(Button)`
+    height: 53.25px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #253D90;
+    text-transform: none;
+`
+
+const Button_Box = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px solid #253D90;
+  border-radius: 5px;
+  height: 40px;
+  width: 170px;
+  margin-bottom: 7px;
+  padding: 2px 2px;
+`
+
+const Jobs_Heading = styled(Typography)`
+    font-size: 40px;
+    color:#253D90;
+    font-weight: 700;
+    padding-top: 10px;
+    text-align: left;
+`
+
+const Heading_Box = styled(Box)`
+    justify-content: left;
+    padding: 10px 0 5px 5px;
+    background-color:#f0f0f0;
+`
+
+const Form_Elements = styled(FormControl)`
+    margin-bottom: 10px;
+    height:54px;
+    width: 300px;
+    background-color:#E3EDF9;
+    color:#253D90;
+    border-radius: 5px;
+`
 const LandingPage = () => {
   const [postings, setPostings] = useState([]);
   const [filters, setFilters] = useState({
@@ -32,8 +76,8 @@ const LandingPage = () => {
         : '/get_job';
 
       const response = await axios.get(
-        // `https://for-sky-backend.vercel.app/api${endpoint}`,
-        `http://localhost:8002/api${endpoint}`,
+        `https://for-sky-backend.vercel.app/api${endpoint}`,
+        // `http://localhost:8002/api${endpoint}`,
         {
           params: {
             ...filters,
@@ -108,7 +152,9 @@ const LandingPage = () => {
 
   return (
     <>
-   
+    <Heading_Box>
+      <Jobs_Heading sx={{ alignItems:'left'}}>Search for science jobs on <span style={{color:'#FFC20E'}}>For</span>sync</Jobs_Heading>
+   </Heading_Box>
     <Box
     sx={{
       display: 'flex',
@@ -127,72 +173,113 @@ const LandingPage = () => {
       height: '40vh'
     }}
   >
-    <FormControl fullWidth>
-    <InputLabel id="location">Location</InputLabel>
+      <Button_Box>
+      <Filter_Button onClick={handleApplyFilters}>Search Filters</Filter_Button>
+      <FilterAltIcon sx={{ color:'#253D90'}}/>
+    </Button_Box>
+    <Form_Elements fullWidth>
+    <InputLabel id="location" sx={{ color:'#253D90', fontWeight:"bold", }}>Location</InputLabel>
     <Select
       labelId="location-label"
       id="location-select"
       value={filters.location}
       label="Location"
       onChange={(e) => handleFilterChange('location', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} 
+      sx={{ color:'#253D90',fontWeight:"bold",'& .MuiSelect-icon': { color: '#253D90' }}}
     >
-      <MenuItem value={'Hyderabad'}>Hyderabad</MenuItem>
-      <MenuItem value={'jammu and kashmir'}>Jammu and Kashmir</MenuItem>
-      <MenuItem value={'hyderabad'}>Hyderabad</MenuItem>
-    </Select>
-    </FormControl>
+      <MenuItem id="job-menuitem" value={'Telangana'}>Telangana</MenuItem>
+      <MenuItem id="job-menuitem" value={'Maharashtra'}>Maharashtra</MenuItem>
+      <MenuItem id="job-menuitem" value={'Uttarakhand'}>Uttarakhand</MenuItem>
+      <MenuItem id="job-menuitem" value={'Punjab'}>Punjab</MenuItem>
+      <MenuItem id="job-menuitem" value={'Odisha'}>Odisha</MenuItem>
+      <MenuItem id="job-menuitem" value={'Karnataka'}>Karnataka</MenuItem>
+      <MenuItem id="job-menuitem" value={'Gujarat'}>Gujarat</MenuItem>
+      <MenuItem id="job-menuitem" value={'Andhra Pradesh'}>Andhra Pradesh</MenuItem>
+      <MenuItem id="job-menuitem" value={'West Bengal'}>West Bengal</MenuItem>
+      <MenuItem id="job-menuitem" value={'Kerala'}>Kerala</MenuItem>
+      <MenuItem id="job-menuitem" value={'More..'}>More..</MenuItem>
 
-    <FormControl fullWidth>
-    <InputLabel id="stipend">Stipend amount</InputLabel>
+    </Select>
+    </Form_Elements>
+
+    <Form_Elements fullWidth>
+    <InputLabel id="stipend" sx={{ color:'#253D90', fontWeight:"bold", }}>Stipend amount</InputLabel>
     <Select
       labelId="stipend-label"
       id="stipend-select"
       value={filters.stipend_amount}
       label="Stipend Amount"
       onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }}
+      sx={{ color:'#253D90', fontWeight:"bold", '& .MuiSelect-icon': { color: '#253D90' }}}
     >
-      <MenuItem value={'80000'}>80000</MenuItem>
-      <MenuItem value={'90000'}>90000</MenuItem>
-      <MenuItem value={'34223'}>34223</MenuItem>
-      <MenuItem value={'9000'}>9000</MenuItem>
-    </Select>
-    </FormControl>
+      <MenuItem id="job-menuitem" value={'19999'}>Up to ₹19,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'20000-29999'}>₹20,000 to ₹29,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'30000-49999'}>₹30,000 to ₹49,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'50000-74999'}>₹50,000 to ₹74,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'75000-99999'}>₹75,000 to ₹99,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'100000-124999'}>₹100,000 to ₹124,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'125000-149999'}>₹125,000 to ₹149,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'150000-199999'}>₹150,000 to ₹199,999</MenuItem>
+      <MenuItem id="job-menuitem" value={'200000'}>₹200,000 and More</MenuItem>
 
-    <FormControl fullWidth>
-    <InputLabel id="department_name">Discipline</InputLabel>
+    </Select>
+    </Form_Elements>
+
+
+
+    <Form_Elements fullWidth>
+    <InputLabel id="department_name" sx={{ color:'#253D90', fontWeight:"bold", }}>Discipline</InputLabel>
     <Select
       labelId="department-label"
       id="department-select"
       value={filters.department_name}
       label="Department"
       onChange={(e) => handleFilterChange('department_name', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9' }} 
+      sx={{ color:'#253D90', fontWeight:"bold",'& .MuiSelect-icon': { color: '#253D90'} }}
     >
-      <MenuItem value={'something'}>Something</MenuItem>
-      <MenuItem value={'kaif'}>Kaif</MenuItem>
-      <MenuItem value={'kf'}>KF</MenuItem>
-      <MenuItem value={'somethuingas'}>somethuingas</MenuItem>
+      <MenuItem id="job-menuitem" value={'Artificial Intelligence'}>Artificial Intelligence</MenuItem>
+      <MenuItem id="job-menuitem" value={'Biomedical Engineering'}>Biomedical Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Biotechnology'}>Biotechnology</MenuItem>
+      <MenuItem id="job-menuitem" value={'Chemical Engineering'}>Climate Change</MenuItem>
+      <MenuItem id="job-menuitem" value={'Civil Engineering'}>Civil Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Computer Science and Engineering'}>Computer Science and Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Electrical Engineering'}>Electrical Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Engineering Science'}>Engineering Science</MenuItem>
+      <MenuItem id="job-menuitem" value={'Heritage Science and Technology'}>Heritage Science and Technology</MenuItem>
+      <MenuItem id="job-menuitem" value={'Materials Science and Metallurgical Engineering'}>Materials Science and Metallurgical Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Mechanical and Aerospace Engineering'}>Mechanical and Aerospace Engineering</MenuItem>
+      <MenuItem id="job-menuitem" value={'Liberal Arts'}>Liberal Arts</MenuItem>
+      <MenuItem id="job-menuitem" value={'Design'}>Design</MenuItem>
+      <MenuItem id="job-menuitem" value={'Entrepreneurship and Management'}>Entrepreneurship and Management</MenuItem>
+      <MenuItem id="job-menuitem" value={'Chemistry'}>Chemistry</MenuItem>
+      <MenuItem id="job-menuitem" value={'Physics'}>Physics</MenuItem>
+      <MenuItem id="job-menuitem" value={'Mathematics'}>Mathematics</MenuItem>
     </Select>
-    </FormControl>
+    </Form_Elements>
 
-    <FormControl fullWidth>
-    <InputLabel id="job_title">Job Title</InputLabel>
+   
+    <Form_Elements fullWidth>
+    <InputLabel id="job_title" sx={{ color:'#253D90', fontWeight:"bold", }}>Job Profile</InputLabel>
     <Select
       labelId="job-title-label"
       id="job-title-select"
-      value={filters.job_title}
+      value={filters.job_Profile}
       label="Job Title"
       onChange={(e) => handleFilterChange('job_title', e.target.value)}
-      sx={{ marginBottom: '16px', width: '100%',backgroundColor:'#E3EDF9',color:'white' }} 
+      sx={{ color:'#253D90', fontWeight:"bold",'& .MuiSelect-icon': { color: '#253D90' } }}
     >
-      <MenuItem value={'sfhlsdfuasdlauhtile'}>sfhlsdfuasdlauhtile</MenuItem>
-      <MenuItem value={'sometitile'}>sometitile</MenuItem>
-      <MenuItem value={'somsfd'}>somsfd</MenuItem>
-      <MenuItem value={'sometitile'}>sometitile</MenuItem>
+      <MenuItem id="job-menuitem" value={'Bioinformatician'}>Bioinformatician</MenuItem>
+      <MenuItem id="job-menuitem" value={'Director'}>Director</MenuItem>
+      <MenuItem id="job-menuitem" value={'Faculty Menber'}>Faculty Menber</MenuItem>
+      <MenuItem id="job-menuitem" value={'Head Of Department'}>Head Of Department</MenuItem>
+      <MenuItem id="job-menuitem" value={'PhD Studentship'}>PhD Studentship</MenuItem>
+      <MenuItem id="job-menuitem" value={'Postdoctoral'}>Postdoctoral</MenuItem>
+      <MenuItem id="job-menuitem" value={'Principal Investigator'}>Principal Investigator</MenuItem>
+      <MenuItem id="job-menuitem" value={'Professor'}>Professor</MenuItem>
+      <MenuItem id="job-menuitem" value={'Research Assistant'}>Research Assistant</MenuItem>
+      <MenuItem id="job-menuitem" value={'Researcher'}>Researcher</MenuItem>
     </Select>    
-    </FormControl>    
+    </Form_Elements>    
     
        
         <Button onClick={handleApplyFilters}>Apply Filters</Button>
@@ -205,7 +292,6 @@ const LandingPage = () => {
           
         }}
       >
-      <h1>Search for science jobs on Forsync</h1>
       <Container sx={{
          maxHeight: '90vh',
          overflowY: 'auto',
