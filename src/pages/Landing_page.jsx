@@ -153,7 +153,7 @@ const LandingPage = () => {
   return (
     <>
     <Heading_Box>
-      <Jobs_Heading sx={{ alignItems:'left'}}>Search for science jobs on <span style={{color:'#FFC20E'}}>For</span>sync</Jobs_Heading>
+      <Jobs_Heading sx={{ alignItems:'left'}}>Search for science jobs on <span style={{color:'#FFC20E'}}>Ta</span>yog</Jobs_Heading>
    </Heading_Box>
     <Box
     sx={{
