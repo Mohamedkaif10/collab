@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container,styled,Typography} from '@mui/material';
+import { Button,Box,Select,MenuItem, FormControl,InputLabel,Pagination,Container,styled,Typography,TextField} from '@mui/material';
 import "../styles/landing_page.css"
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import { useBookmarks } from "../Context/bookmarkContext"
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { Autocomplete } from '@mui/material';
 
 const Filter_Button = styled(Button)`
     height: 53.25px;
@@ -44,7 +45,7 @@ const Heading_Box = styled(Box)`
 const Form_Elements = styled(FormControl)`
     margin-bottom: 10px;
     height:54px;
-    width: 300px;
+    width: 28vw;
     background-color:#E3EDF9;
     color:#253D90;
     border-radius: 5px;
@@ -178,39 +179,29 @@ const LandingPage = () => {
       <FilterAltIcon sx={{ color:'#253D90'}}/>
     </Button_Box>
     <Form_Elements fullWidth>
-    <InputLabel id="location" sx={{ color:'#253D90', fontWeight:"bold", }}>Location</InputLabel>
-    <Select
-      labelId="location-label"
-      id="location-select"
-      value={filters.location}
-      label="Location"
-      onChange={(e) => handleFilterChange('location', e.target.value)}
-      sx={{ color:'#253D90',fontWeight:"bold",'& .MuiSelect-icon': { color: '#253D90' }}}
-    >
-      <MenuItem id="job-menuitem" value={'Telangana'}>Telangana</MenuItem>
-      <MenuItem id="job-menuitem" value={'Maharashtra'}>Maharashtra</MenuItem>
-      <MenuItem id="job-menuitem" value={'Uttarakhand'}>Uttarakhand</MenuItem>
-      <MenuItem id="job-menuitem" value={'Punjab'}>Punjab</MenuItem>
-      <MenuItem id="job-menuitem" value={'Odisha'}>Odisha</MenuItem>
-      <MenuItem id="job-menuitem" value={'Karnataka'}>Karnataka</MenuItem>
-      <MenuItem id="job-menuitem" value={'Gujarat'}>Gujarat</MenuItem>
-      <MenuItem id="job-menuitem" value={'Andhra Pradesh'}>Andhra Pradesh</MenuItem>
-      <MenuItem id="job-menuitem" value={'West Bengal'}>West Bengal</MenuItem>
-      <MenuItem id="job-menuitem" value={'Kerala'}>Kerala</MenuItem>
-      <MenuItem id="job-menuitem" value={'More..'}>More..</MenuItem>
-
-    </Select>
-    </Form_Elements>
+  <Autocomplete
+    id="location-select"
+    value={filters.location}
+    options={['Telangana', 'Maharashtra', 'Uttarakhand', 'Punjab', 'Odisha', 'Karnataka', 'Gujarat', 'Andhra Pradesh', 'West Bengal', 'Kerala', 'More..']}
+    onChange={(event, newValue) => handleFilterChange('location', newValue)}
+    renderInput={(params) => (
+      <div>
+        <InputLabel htmlFor="location" sx={{ color:'#253D90', fontWeight:"bold", position: 'absolute', top: '-10px', left: '10px' }}>Location</InputLabel>
+        <TextField {...params} label=" " id="location" sx={{ color:'#253D90', fontWeight:"bold" }} />
+      </div>
+    )}
+  />
+</Form_Elements>
 
     <Form_Elements fullWidth>
-    <InputLabel id="stipend" sx={{ color:'#253D90', fontWeight:"bold", }}>Stipend amount</InputLabel>
+    <InputLabel id="stipend" sx={{ color:'#253D90', fontWeight:"bold" }}>Stipend amount</InputLabel>
     <Select
       labelId="stipend-label"
       id="stipend-select"
       value={filters.stipend_amount}
       label="Stipend Amount"
       onChange={(e) => handleFilterChange('stipend_amount', e.target.value)}
-      sx={{ color:'#253D90', fontWeight:"bold", '& .MuiSelect-icon': { color: '#253D90' }}}
+      sx={{ color:'#253D90', fontWeight:"bold", '& .MuiSelect-icon': { color: '#253D90' } }}
     >
       <MenuItem id="job-menuitem" value={'19999'}>Up to ₹19,999</MenuItem>
       <MenuItem id="job-menuitem" value={'20000-29999'}>₹20,000 to ₹29,999</MenuItem>
