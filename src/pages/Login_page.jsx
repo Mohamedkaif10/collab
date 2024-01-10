@@ -1,5 +1,5 @@
 import GoogleIcon from "../assets/search.png"
-import { useState,useEffect,useCallback } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -26,6 +26,7 @@ const handleInputChange=(e)=>{
        
       };
       fetch("https://for-sky-backend.vercel.app/api/login", {
+        // fetch("http://localhost:8002/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,28 +66,6 @@ const handleInputChange=(e)=>{
       
    
 }
-
-const fetchGoogleData = useCallback(async () => {
-  try {
-   
-    const response = await axios.get('https://for-sky-backend.vercel.app/auth/google/callback');
-
-   
-    const googleId = response.data.googleId;
-
-   
-    console.log("the id is ", googleId);
-    localStorage.setItem('googleId', googleId);
-  } catch (error) {
-    console.error('Error fetching Google data:', error);
-  }
-}, []);
-useEffect(() => {
-  fetchGoogleData();
-}, [fetchGoogleData]);
-const handleGoogleSignIn = () => {
-  fetchGoogleData();
-};
   return (
     <Grid container component="main" justifyContent="center" alignItems="center" sx={{ height: '100vh' }}>
     <Grid item xs={12} sm={8} md={6} lg={5} component={Paper} elevation={6} square sx={{ padding: 4 }}>
@@ -126,7 +105,7 @@ const handleGoogleSignIn = () => {
           <Typography variant="body2" color="textSecondary" sx={{ mt: 2 }}>
             or
           </Typography>
-          <img src={GoogleIcon} alt="Google Sign In" style={{ cursor: 'pointer', mt: 2 }} onClick={handleGoogleSignIn} />
+          <img src={GoogleIcon} alt="Google Sign In" style={{ cursor: 'pointer', mt: 2 }} />
         </form>
       </Grid>
       <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 3 }}>

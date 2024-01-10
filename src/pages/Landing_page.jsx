@@ -32,8 +32,8 @@ const LandingPage = () => {
         : '/get_job';
 
       const response = await axios.get(
-        `https://for-sky-backend.vercel.app/api${endpoint}`,
-        // `http://localhost:8002/api${endpoint}`,
+        // `https://for-sky-backend.vercel.app/api${endpoint}`,
+        `http://localhost:8002/api${endpoint}`,
         {
           params: {
             ...filters,
@@ -58,15 +58,6 @@ const LandingPage = () => {
       console.error('Error fetching job postings', error);
     }
   };
-  // const isLoggedIn = !!localStorage.getItem('authToken');
-
-  // const handleJoinClick = () => {
-  //   if (!isLoggedIn) {
-  //     navigate('/second');
-  //   } else {
-  //     console.log('User is already logged in. Implement additional logic here.');
-  //   }
-  // };
 
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
@@ -122,7 +113,7 @@ const LandingPage = () => {
     sx={{
       display: 'flex',
       height: '100vh',
-      
+      backgroundColor: '#f0f0f0'
     }}
   >
         <Box
@@ -133,6 +124,7 @@ const LandingPage = () => {
       marginTop: '6%',
       display: 'flex',
       flexDirection: 'column', 
+      height: '40vh'
     }}
   >
     <FormControl fullWidth>
@@ -226,7 +218,7 @@ const LandingPage = () => {
          key={posting.job_id}
          className="postings-box"
          sx={{
-           backgroundColor: '#f5f5f5',
+           backgroundColor: '#ffffff',
            borderRadius: '8px',
            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
            padding: '16px',
