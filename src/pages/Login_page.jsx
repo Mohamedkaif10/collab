@@ -27,43 +27,42 @@ const handleInputChange=(e)=>{
       };
        axios.post('https://for-sky-backend.vercel.app/api/login', requestData, {
       // fetch("http://localhost:8002/api/login", {
+        // axios.post('http://localhost:8002/api/login', requestData, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((response) => {
-      console.log("Response Status:", response.status);
-      if (response.status === 401) {
-        alert('Invalid Credentials');
-        return;
-      } else if (response.status === 200) {
-        return response.json();
-      } else {
-        console.error('Error:', response.status, response.statusText);
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          console.log("Response Status:", response.status);
+        
+          if (response.status === 200) {
+            return response.data; // Accessing the data directly from the response
+          } else {
+            console.error('Error:', response.status, response.statusText);
+            return Promise.reject('Failed to login');
+          }
+        })
+        .then((data) => {
+          console.log("Response:", data);
+        
+          if (data && data.token) {
+            console.log('Navigating to /jobs');
+            localStorage.setItem('authToken', data.token);
+            navigate("/jobs");
+          } else {
+            console.error('Token not found in the response data');
+          }
+        
+          setFormData({
+            email:"",
+            password:""
+          });
+        })
+        .catch((error) => {
+          console.error('Fetch Error:', error);
+        });
       }
-   })
-   .catch((error) => {
-    console.error('Fetch Error:', error);
- })
-      .then((data) => {
-        console.log("Response:", data);
-        setLoading(false);
-     if(data && data.token){
-      localStorage.setItem('authToken', data.token);
-      navigate("/jobs");
-     }else {
-      console.error('Token not found in the response data');
-    }
-  
-         setFormData({
-          email:"",
-          password:""
-            });
-           
-      })
-      
-   
-}
+        
   return (
     <Grid container component="main" justifyContent="center" alignItems="center" sx={{ height: '100vh' }}>
     <Grid item xs={12} sm={8} md={6} lg={5} component={Paper} elevation={6} square sx={{ padding: 4 }}>

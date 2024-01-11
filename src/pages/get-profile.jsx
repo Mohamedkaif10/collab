@@ -1,17 +1,19 @@
-
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography, Paper, CircularProgress } from '@mui/material';
-
-
+import axios from 'axios';
 const fetchUserProfile = async () => {
   try {
     const token = localStorage.getItem('authToken');
-    const response = await fetch('https://for-sky-backend.vercel.app/api/user-profile' , {
-      headers: { Authorization: token },
-  }); 
-    const data = await response.json();
+   
+    const response = await axios.get(' https://for-sky-backend.vercel.app/api/user-pro', {
+    // const response = await axios.get('http://localhost:8002/api/user-pro', {
 
-    if (response.ok) {
+      headers: { Authorization: token },
+    });
+   
+    const data = response.data;
+
+    if (response.status === 200 && data.profile) {
       return data.profile;
     } else {
       throw new Error(data.error || 'Error fetching user profile.');
@@ -20,6 +22,8 @@ const fetchUserProfile = async () => {
     throw new Error(error.message || 'Error fetching user profile.');
   }
 };
+
+
 const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
@@ -29,6 +33,7 @@ const UserProfile = () => {
       try {
         const userProfile = await fetchUserProfile();
         setProfile(userProfile);
+        console.log("the name uis",userProfile)
       } catch (error) {
         console.error(error);
       } finally {
@@ -45,10 +50,14 @@ const UserProfile = () => {
         <CircularProgress />
       ) : (
         <>
-          <Typography variant="h5">User Profile</Typography>
-          <Typography>Name: {profile.full_name}</Typography>
-          <Typography>Email: {profile.email}</Typography>
-          
+          <Typography variant="h5">Personal Details</Typography>
+          <Typography>Full Name {profile.full_name}</Typography>
+          <Typography>Email ID {profile.email}</Typography>
+          <Typography>Mobile Number {profile.mobile_number}</Typography>
+          <Typography>Work Status {profile.work_status}</Typography>
+          <Typography>Present Location {profile.present_location}</Typography>
+          <Typography>Description {profile.description}</Typography>
+          <img src={profile.image_url} alt="User Profile" style={{ maxWidth: '100%', height: 'auto' }} />
         </>
       )}
     </Paper>

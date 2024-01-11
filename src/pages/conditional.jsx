@@ -11,6 +11,7 @@ const ProfilePage = () => {
         const token = localStorage.getItem('authToken');
        
         const response = await axios.get('https://for-sky-backend.vercel.app/api/check-profile' , {
+          // const response = await axios.get('http://localhost:8002/api/check-profile' , {
           headers: { Authorization: token },
       });
 

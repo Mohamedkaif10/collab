@@ -15,6 +15,7 @@ import TempPayment from "./pages/TempPayment"
 import GetIdeaPage from "./pages/IndivisualIdea"
 import CreateProfileForm from "./pages/Profile-page"
 import MainProfilePage from "./pages/main_profile"
+import UserProfile from "./pages/get-profile"
 function App() {
   const router = createBrowserRouter([
     {
@@ -27,7 +28,8 @@ function App() {
         { path: '/blogPage', element: <BlogPage /> },
         { path: "/get-idea/:id", element: <GetIdeaPage /> },
         { path: '/profile', element: <MainProfilePage /> },
-        { path: '/profile-page', element: <CreateProfileForm /> }
+        { path: '/profile-page', element: <CreateProfileForm /> },
+        {path:'/get-profile',element:<UserProfile/>}
       ]
     },
     { path: "/login", element: <Login /> },

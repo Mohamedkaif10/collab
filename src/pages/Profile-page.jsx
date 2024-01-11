@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import axios from 'axios';
 import { Button, FormControl,FormHelperText,TextField,Typography } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
 const CreateProfileForm = () => {
   const [formData, setFormData] = useState({
     full_name: '',
@@ -12,7 +12,7 @@ const CreateProfileForm = () => {
     description: '',
     image: null,
   });
-
+  const navigate=useNavigate();
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -36,9 +36,11 @@ const CreateProfileForm = () => {
       formDataToSend.append('image', formData.image);
 
       const response = await axios.post('https://for-sky-backend.vercel.app/api/create-profile', formDataToSend, {
+        // const response = await axios.post('http://localhost:8002/api/create-profile', formDataToSend, {
         headers: { Authorization: token },
   });
       console.log(response.data);
+      navigate('/get-profile');
     } catch (error) {
       console.error('Error creating user profile:', error.response.data.error);
     }
