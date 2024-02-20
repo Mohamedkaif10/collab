@@ -28,9 +28,9 @@ const handleInputChange=(e)=>{
        axios.post('https://for-sky-backend.vercel.app/api/login', requestData, {
       // fetch("http://localhost:8002/api/login", {
         // axios.post('http://localhost:8002/api/login', requestData, {
-      headers: {
-            'Content-Type': 'application/json',
-          },
+      // headers: {
+      //       'Content-Type': 'application/json',
+      //     },
         })
         .then((response) => {
           console.log("Response Status:", response.status);
