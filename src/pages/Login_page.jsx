@@ -26,31 +26,25 @@ const handleInputChange=(e)=>{
        
       };
        axios.post('https://for-sky-backend.vercel.app/api/login', requestData, {
-      // fetch("http://localhost:8002/api/login", {
-        // axios.post('http://localhost:8002/api/login', requestData, {
-      // headers: {
-      //       'Content-Type': 'application/json',
-      //     },
         })
         .then((response) => {
-          console.log("Response Status:", response.status);
         
           if (response.status === 200) {
             return response.data; // Accessing the data directly from the response
           } else {
-            console.error('Error:', response.status, response.statusText);
+            
             return Promise.reject('Failed to login');
           }
         })
         .then((data) => {
-          console.log("Response:", data);
+        
         
           if (data && data.token) {
-            console.log('Navigating to /jobs');
+            
             localStorage.setItem('authToken', data.token);
             navigate("/jobs");
           } else {
-            console.error('Token not found in the response data');
+            
           }
         
           setFormData({
