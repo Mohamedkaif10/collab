@@ -1,243 +1,216 @@
 
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { Grid,CircularProgress } from '@mui/material';
-import { useState,useEffect } from 'react';
-import axios from "axios"
-import hyd from "../assets/hyderabad.png"
-import bom from "../assets/bombay.png"
-import madras from "../assets/madras.png"
-import kanpur from "../assets/kanpur.jpeg"
-import rour from "../assets/rourkela.png"
-import trichy from "../assets/trichy.png"
-import guwathi from "../assets/guwathi.png"
-import kharagpur from "../assets/kharagpur.jpg"
-import gandhi from "../assets/gandhinagar.png"
-import roor from "../assets/roorkee.png"
-import logoMain from "../assets/logoForsync.png"
-import Icon from '@mui/material/Icon';
-import { createTheme } from '@mui/material/styles';
-  const topInstitutePostings = ['IIT Hyderabad', 'IIT Bombay', 'IIT Madras', 'IIT Kanpur', 'NIT Rourkela', 'NIT Tiruchirapalli', 'IIT Guwathi', 'IIT kharaghpur', 'IIT GandhiNagar', 'IIT Roorkee'];
-  const instituteImages = {
-    'IIT Hyderabad': hyd,
-    'IIT Bombay': bom,
-    'IIT Madras': madras,
-    'IIT Kanpur': kanpur,
-    'NIT Rourkela': rour,
-    'NIT Tiruchirapalli': trichy,
-    'IIT Guwathi': guwathi,
-    'IIT kharaghpur': kharagpur,
-    'IIT GandhiNagar': gandhi,
-    'IIT Roorkee': roor,
-  };
-const Pageone = () => {
-  const [subjects, setSubjects] = useState([]);
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [departments, setDepartments] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingDepartments,setloadingDepartments]=useState(false)
-  const [jrfCount, setJrfCount] = useState(0);
-  const [srfCount, setSrfCount] = useState(0);
-  const [pa, setpa] = useState(0);
-  const [pm, setpm] = useState(0);
-  useEffect(() => {
-    setLoading(true);
-    axios.get('https://for-sky-backend.vercel.app/api/subjects')
-      .then((response) => setSubjects(response.data))
-      .catch((error) => console.error('Error fetching subjects:', error))
-      .finally(() => setLoading(false));
-  }, []);
+import { NavLink } from 'react-router-dom';
 
-  const handleSubjectClick = (subjectId) => {
-   
-    setloadingDepartments(true);
-    axios.get(`https://for-sky-backend.vercel.app/api/departments/${subjectId}`)
-      .then((response) => setDepartments(response.data))
-      .catch((error) => console.error('Error fetching departments:', error))
-      .finally(() => setloadingDepartments(false));
-  
-    setSelectedSubject(subjectId);
-  };
-  useEffect(() => {
-    const fetchJrfCount = async () => {
-      try {
-       
-        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-jrf');
-        setJrfCount(response.data.jrfCount);
-        console.log("jrf",response.data)
-      } catch (error) {
-       console.log('Error fetching JRF count');
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchJrfCount();
-  }, []);
-  useEffect(() => {
-    const fetchSrfCount = async () => {
-      try {
-       
-        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-srf');
-        setSrfCount(response.data.srfCount);
-        console.log("srf",response.data)
-      } catch (error) {
-       console.log('Error fetching JRF count');
-      } finally {
-        setLoading(false);
-      }
-    };
+import heroImg from '../assets/img/heroimgtayog.png'
+import './hero.css'
 
-    fetchSrfCount();
-  }, []);
-  useEffect(() => {
-    const fetchProAssociate = async () => {
-      try {
-        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-project-associate');
-        console.log(response.data)
-        setpa(response.data.projectassociate);
-      } catch (error) {
-       console.log('Error fetching JRF count');
-      } finally {
-        setLoading(false);
-      }
-    };
+export default function pageone() {
 
-    fetchProAssociate();
-  }, []);
-  
-  useEffect(() => {
-    const fetchProManager = async () => {
-      try {
-        const response = await axios.get('https://for-sky-backend.vercel.app/api/count-project-manager');
-        setpm(response.data.projectmanager);
-      } catch (error) {
-       console.log('Error fetching JRF count');
-      } finally {
-        setLoading(false);
-      }
-    };
+    const subjects = ["Engineering", "Biology", "Statistics", "Chemistry", "Economics", "Mathematics", "Psyhcology","Physics", "Socialogy", "Social Science", "Earth Science"]
 
-    fetchProManager();
-  }, []);
+    const jobData = [
+        {
+            title: "JRF",
+            openings: "34 Openings",
+            locations: "4 Openings at IIT Bombay,  3 at IISC Bengaluru,...",
+            logos: [
+                "https://www.mahaedunews.com/wp-content/uploads/2020/03/1200px-Indian_Institute_of_Technology_Hyderabad_logo.svg-1014x1024.png",
+                "https://th.bing.com/th/id/R.c0a20bea0927b16f407df8931456bd7b?rik=x1tDXvuopgJICA&riu=http%3a%2f%2fengageindia.ca%2fwp-content%2fuploads%2f2017%2f01%2fIITB-500x500.png&ehk=s9yqa0P0kAwln6C%2f7%2b%2fD%2fFlheCfqdy29AGzON2Q%2bZOM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+                "https://www.userlogos.org/files/logos/jumpordie/iitr-03.png",
+                "https://th.bing.com/th/id/R.a2c920d8a4e8f68660cb185c1b52dfae?rik=MTR8cGfAphOkZg&riu=http%3a%2f%2fevent.iitg.ac.in%2ficann2019%2fProceedings_LaTeX%2f2019%2fIITG_White.png&ehk=81DZb5JCwBqGeINYSHDwkjsPYHln8Kz6bG%2f8FHE6Il0%3d&risl=&pid=ImgRaw&r=0"
+            ]
+        },
+        {
+            title: "SRF",
+            openings: "42 Openings",
+            locations: "9 Openings at IIT, 6 at IISC Bengaluru,...",
+            logos: [
+                "https://www.mahaedunews.com/wp-content/uploads/2020/03/1200px-Indian_Institute_of_Technology_Hyderabad_logo.svg-1014x1024.png",
+                "https://th.bing.com/th/id/R.c0a20bea0927b16f407df8931456bd7b?rik=x1tDXvuopgJICA&riu=http%3a%2f%2fengageindia.ca%2fwp-content%2fuploads%2f2017%2f01%2fIITB-500x500.png&ehk=s9yqa0P0kAwln6C%2f7%2b%2fD%2fFlheCfqdy29AGzON2Q%2bZOM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+                "https://www.userlogos.org/files/logos/jumpordie/iitr-03.png",
+                "https://th.bing.com/th/id/R.a2c920d8a4e8f68660cb185c1b52dfae?rik=MTR8cGfAphOkZg&riu=http%3a%2f%2fevent.iitg.ac.in%2ficann2019%2fProceedings_LaTeX%2f2019%2fIITG_White.png&ehk=81DZb5JCwBqGeINYSHDwkjsPYHln8Kz6bG%2f8FHE6Il0%3d&risl=&pid=ImgRaw&r=0"
+            ]
+        },
+        {
+            title : "Project Associate",
+            openings: "42 openings",
+            locations: "9 openings at...",
+            logos: [
+                "https://www.mahaedunews.com/wp-content/uploads/2020/03/1200px-Indian_Institute_of_Technology_Hyderabad_logo.svg-1014x1024.png",
+                "https://th.bing.com/th/id/R.c0a20bea0927b16f407df8931456bd7b?rik=x1tDXvuopgJICA&riu=http%3a%2f%2fengageindia.ca%2fwp-content%2fuploads%2f2017%2f01%2fIITB-500x500.png&ehk=s9yqa0P0kAwln6C%2f7%2b%2fD%2fFlheCfqdy29AGzON2Q%2bZOM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+                "https://www.userlogos.org/files/logos/jumpordie/iitr-03.png",
+                "https://th.bing.com/th/id/R.a2c920d8a4e8f68660cb185c1b52dfae?rik=MTR8cGfAphOkZg&riu=http%3a%2f%2fevent.iitg.ac.in%2ficann2019%2fProceedings_LaTeX%2f2019%2fIITG_White.png&ehk=81DZb5JCwBqGeINYSHDwkjsPYHln8Kz6bG%2f8FHE6Il0%3d&risl=&pid=ImgRaw&r=0"
+            ]
+        },
+        {
+            title : "Project Maqnager",
+            openings: "12 openings",
+            locations: "9 openings at...",
+            logos: [
+                "https://www.mahaedunews.com/wp-content/uploads/2020/03/1200px-Indian_Institute_of_Technology_Hyderabad_logo.svg-1014x1024.png",
+                "https://th.bing.com/th/id/R.c0a20bea0927b16f407df8931456bd7b?rik=x1tDXvuopgJICA&riu=http%3a%2f%2fengageindia.ca%2fwp-content%2fuploads%2f2017%2f01%2fIITB-500x500.png&ehk=s9yqa0P0kAwln6C%2f7%2b%2fD%2fFlheCfqdy29AGzON2Q%2bZOM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+                "https://www.userlogos.org/files/logos/jumpordie/iitr-03.png",
+                "https://th.bing.com/th/id/R.a2c920d8a4e8f68660cb185c1b52dfae?rik=MTR8cGfAphOkZg&riu=http%3a%2f%2fevent.iitg.ac.in%2ficann2019%2fProceedings_LaTeX%2f2019%2fIITG_White.png&ehk=81DZb5JCwBqGeINYSHDwkjsPYHln8Kz6bG%2f8FHE6Il0%3d&risl=&pid=ImgRaw&r=0"
+            ]
 
-  const popularRoles = [
-    { name: 'JRF', openings: jrfCount },
-    { name: 'SRF', openings: srfCount },
-    { name: 'Project Associate', openings:pa },
-    { name: 'Project Manager', openings: pm },
-    { name: 'View All openings', openings: 15 },
-  ];
+        }
+        
+    ];
+
+    const institutionsLogos = [
+        { name: "IIT Delhi", logo: "https://gyaanarth.com/wp-content/uploads/2022/03/TRANSPARENTiitdlogo.png" },
+        { name: "IIT Bombay", logo: "https://th.bing.com/th/id/R.c0a20bea0927b16f407df8931456bd7b?rik=x1tDXvuopgJICA&riu=http%3a%2f%2fengageindia.ca%2fwp-content%2fuploads%2f2017%2f01%2fIITB-500x500.png&ehk=s9yqa0P0kAwln6C%2f7%2b%2fD%2fFlheCfqdy29AGzON2Q%2bZOM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" },
+        { name: "IIT Madras", logo: "https://home.iitm.ac.in/anand/iitmLogo.png" },
+        { name: "IIT Hyderabad", logo: "https://www.mahaedunews.com/wp-content/uploads/2020/03/1200px-Indian_Institute_of_Technology_Hyderabad_logo.svg-1014x1024.png" },
+        { name: "NIT Rourkela", logo: "https://th.bing.com/th/id/OIP.ZC4_1A5T8XfkRBexkd3VNAAAAA?rs=1&pid=ImgDetMain" },
+        { name: "NIT Tiruchirapalli", logo: "https://upload.wikimedia.org/wikipedia/en/8/8b/National_Institute_of_Technology_Trichy_Logo.png" },
+        { name: "IIT Guwahati", logo: "https://th.bing.com/th/id/R.a2c920d8a4e8f68660cb185c1b52dfae?rik=MTR8cGfAphOkZg&riu=http%3a%2f%2fevent.iitg.ac.in%2ficann2019%2fProceedings_LaTeX%2f2019%2fIITG_White.png&ehk=81DZb5JCwBqGeINYSHDwkjsPYHln8Kz6bG%2f8FHE6Il0%3d&risl=&pid=ImgRaw&r=0" },
+        { name: "IIT khargpur", logo: "https://www.iitk.ac.in/hss/templates/iitk-simple/images/iitk-logo-black.png" }
+    ];
+    
 
   return (
     <>
-    <img src={logoMain}/>
-      <Typography variant="h6"  gutterBottom style={{ marginTop: '16px',color:'#253D90',fontWeight:'700',fontSize:'2rem' }}>
-        Disciplines
-      </Typography>
-      
-      {loading && <CircularProgress />}
-      {!loading && (
-        <div className="flex flex-wrap justify-center">
-          <div className="flex flex-wrap mb-4">
-            {subjects.slice(0, 6).map((subject) => (
-              <button
-                key={subject.id}
-                onClick={() => handleSubjectClick(subject.id)}
-                className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
-              >
-                {subject.name}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap">
-            {subjects.slice(6).map((subject) => (
-              <button
-                key={subject.id}
-                onClick={() => handleSubjectClick(subject.id)}
-                className="mr-4 mb-4 bg-white border border-black text-black px-4 py-2 rounded"
-              >
-                {subject.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+    <div>
+      <div className="heroImg-container">
+        <img src={heroImg} alt="" className='hero-img'/>
+        <div className="hero-inputBox">
+        <label htmlFor="keyword"></label>
+        <input type="text" name='keyword' placeholder='Keyword eg:Artificial Intelligence' id='keyword' />
+        <label htmlFor="locatiom"></label>
+        <input type="text" name='location' placeholder='Location eg:Hyderabad'  id='location' />
+        </div> 
+      </div>
 
-{selectedSubject && (
-  <div>
-    <h2>Departments under {subjects.find((s) => s.id === selectedSubject)?.name}</h2>
-    {loadingDepartments && <CircularProgress />}
-    {!loadingDepartments && (
-      <div className={`grid grid-cols-3 gap-10`}>
-        {departments.map((department) => (
-          <div key={department.id} className="p-4 border border-gray-300 rounded mb-5 bg-white">
-            {department.name}
+      <div className="hero-subjects-container">
+            <h2>Disciplines</h2>
+
+            <div className="hero-subjects">
+                {subjects.map((subject, index) => (
+    <div key={index} className="hero-subBox">
+        {subject}
+    </div>
+))}
+                
+
+                </div>
+                <div className="hero-disciplines-container">
+                <h2>Engineering</h2>
+                <div className="hero-disciplines">
+                    <ul>
+                        <div>
+                        <li>Artificial Intelligence</li>
+                    <li>Biomedical Engineering</li>
+                    <li>Biotechnology</li>
+                    <li>Chemical Engineering</li>
+                    <li>Climate Change</li>
+                    <li>Civil Engineering</li>
+                        </div>
+
+                        <div>
+                        <li>Computer Science and Engineering</li>
+                    <li>Electrical Engineering</li>
+                    <li>Engineering Science</li>
+                    <li>Heritage Science and Technology</li>
+                    <li>Material Science</li>
+                    <li>Mechanical and Aerospace Engineering</li>
+                        </div>
+                   
+                    <div>
+                    <li>Liberal Arts</li>
+                    <li>Design</li>
+                    <li>Entreprenuership and Management</li>
+                    <li>Chemistry</li>
+                    <li>Physics</li>
+                    <li>Mathematics</li>
+                    </div>
+                   
+                    </ul>
+                </div>
+                </div>
+
+                
+            </div>
+
+            <div className="hero-discover-container">
+                <h2>Discover Popular Roles</h2>
+
+                <div className="hero-discover-card-container">
+                
+
+                {jobData.map((job, index) => (
+          <div key={index} className="hero-discover-card">
+            <span className='title'>{job.title}</span>
+            <span className='openings'>{job.openings}</span>
+            <span className='locations'>{job.locations}</span>
+            <div>
+            {job.logos.map((logo, logoIndex) => (
+              <img key={logoIndex} src={logo} alt={`Logo ${logoIndex}`} style={{ width: '20px' }} />
+
+            ))}
+            </div>
+           
+            <button>View Openings</button>
           </div>
         ))}
-      </div>
-    )}
-  </div>
-)}
 
-      <Typography variant="h6" gutterBottom style={{ marginTop: '16px',color:'#253D90',fontWeight:'700',fontSize:'2rem' }}>
-      Discover Popular Roles
-    </Typography>
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' ,justifyContent:'center'}}>
-      {popularRoles.map((role, index) => (
-        <Card key={index} style={{ width: '200px', marginBottom: '32px', marginRight: '16px', padding: '16px', height: '300px', display: 'flex', flexDirection: 'column', }}>
-          <CardContent style={{ flex: 1 }}>
-            <Typography sx={{ color: '#253D90', fontSize: '1.25rem', fontWeight: '600' }} variant="body1">{role.name}</Typography>
-            <Typography variant="body2">{role.openings} Openings</Typography>
-          </CardContent>
-          <Button variant="contained"  style={{ marginTop: '16px', fontSize: '0.75rem', width: '100%',backgroundColor:'#FFC20E',color:'#253D90',fontWeight:600 }}>
-            View Openings
-          </Button>
-        </Card>
-      ))}
+<div className="hero-discover-card">
+            <span className='title'>View all Openings</span>
+            <span className='openings'>143 openings</span>
+            <span className='locations'>tap to view</span>
+            <button>View Openings</button>
+          </div>
+                   
+                </div>
+                </div>
+
+<div className="hero-inst-container">
+
+<h2>Top Institutes Posting</h2>
+
+<div className="hero-inst-container-1">
+
+
+
+
+
+{institutionsLogos.map((institution, index) => (
+    <div className="hero-institudes" key={index}>
+        <div className="hero-inst-Component">
+            <img className="inst-logo" src={institution.logo} alt="Institution Logo" width={'20px'} />
+            <p>{institution.name}</p>
+        </div>
     </div>
+))}
 
-    <Typography variant="h6" gutterBottom style={{ marginTop: '16px',color:'#253D90',fontWeight:'700',fontSize:'2rem' }}>
-  Top Institute Postings
-</Typography>
-<Grid container spacing={2} justifyContent="center">
-  {topInstitutePostings.slice(0, 6).map((institute, index) => (
-    <Grid key={index} item xs={6} sm={2}>
-      <Button  startIcon={
-        <Icon style={{ display: 'block' }}>
-          <img
-            src={instituteImages[institute]}
-            alt={institute}
-            style={{ maxWidth: '100%', maxHeight: '100%', marginBottom: '8px' }}
-          />
-        </Icon>
-      }>
-              <span>{institute}</span>
-            </Button>
-    </Grid>
-  ))}
-</Grid>
-<Grid container spacing={2} justifyContent="center" style={{ marginBottom: '16px' }}>
-    {topInstitutePostings.slice(6, 11).map((institute, index) => (
-      <Grid key={index} item xs={6} sm={2}>
-      <Button  startIcon={
-        <Icon style={{ display: 'block' }}>
-          <img
-            src={instituteImages[institute]}
-            alt={institute}
-            style={{ maxWidth: '100%', maxHeight: '100%', marginBottom: '8px' }}
-          />
-        </Icon>
-      }>
-              <span>{institute}</span>
-            </Button>
-      </Grid>
-    ))}
-  </Grid>
+
+
+
+<div className="hero-institudes">
+        <div className="hero-inst-Component">
+            <p>View More</p>
+        </div>
+        </div>
+
+</div>
+</div>
+
+<div className="prefooter">
+    <p>What are You Searching For? </p>
+    <div className="prefooter-btns">
+    <NavLink to="/login" > <button className="p1-btn">
+Post a Job
+        </button></NavLink>   
+    <NavLink to="/login" > <button className="p2-btn">
+Sign IN
+        </button></NavLink>   
+    </div>
+</div>
+                
+
+        </div>
     </>
-  );
-};
+  )
+}
 
-export default Pageone;
