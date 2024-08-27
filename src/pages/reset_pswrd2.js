@@ -1,19 +1,19 @@
-import  { useState,useEffect } from 'react';
-import { Button, Box,Typography,TextField } from '@mui/material';
-import axios from 'axios';
-import { useNavigate,useLocation } from 'react-router-dom';
-import { MuiOtpInput } from 'mui-one-time-password-input'
+import { useState, useEffect } from "react";
+import { Button, Box, Typography, TextField } from "@mui/material";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import { MuiOtpInput } from "mui-one-time-password-input";
 
 const VerifyOTPForm = () => {
-  const [otp, setOTP] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [otp, setOTP] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const emailFromParams = searchParams.get('email');
+    const emailFromParams = searchParams.get("email");
     if (emailFromParams) {
       setEmail(emailFromParams);
     }
@@ -21,13 +21,16 @@ const VerifyOTPForm = () => {
 
   const handleVerifyOTP = async () => {
     try {
-      const response = await axios.post('https://for-sky-backend.vercel.app/api/verify-otp', {email, otp });
+      const response = await axios.post(
+        "https://for-sky-backend.vercel.app/api/verify-otp",
+        { email, otp }
+      );
       setMessage(response.data.message);
-      setError('');
+      setError("");
       navigate(`/update-password?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      setMessage('');
-      setError(err.response.data.error || 'Internal Server Error');
+      setMessage("");
+      setError(err.response.data.error || "Internal Server Error");
     }
   };
 

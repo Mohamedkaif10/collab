@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import { createContext, useContext, useState } from "react";
+import PropTypes from "prop-types";
 const BookmarksContext = createContext();
 
 export const useBookmarks = () => {
@@ -23,7 +23,7 @@ export const BookmarksProvider = ({ children }) => {
     return bookmarkedJobs.includes(jobId);
   };
   BookmarksProvider.propTypes = {
-    children: PropTypes.node, // Validates that children is a node (e.g., JSX elements, strings, numbers)
+    children: PropTypes.node,
   };
 
   return (

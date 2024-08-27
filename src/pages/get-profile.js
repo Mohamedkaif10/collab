@@ -1,23 +1,24 @@
-
-import  { useState, useEffect } from 'react';
-import { Typography, Paper, CircularProgress } from '@mui/material';
-
+import { useState, useEffect } from "react";
+import { Typography, Paper, CircularProgress } from "@mui/material";
 
 const fetchUserProfile = async () => {
   try {
-    const token = localStorage.getItem('authToken');
-    const response = await fetch('https://for-sky-backend.vercel.app/api/user-profile' , {
-      headers: { Authorization: token },
-  }); 
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(
+      "https://for-sky-backend.vercel.app/api/user-profile",
+      {
+        headers: { Authorization: token },
+      }
+    );
     const data = await response.json();
 
     if (response.ok) {
       return data.profile;
     } else {
-      throw new Error(data.error || 'Error fetching user profile.');
+      throw new Error(data.error || "Error fetching user profile.");
     }
   } catch (error) {
-    throw new Error(error.message || 'Error fetching user profile.');
+    throw new Error(error.message || "Error fetching user profile.");
   }
 };
 const UserProfile = () => {
@@ -48,7 +49,6 @@ const UserProfile = () => {
           <Typography variant="h5">User Profile</Typography>
           <Typography>Name: {profile.full_name}</Typography>
           <Typography>Email: {profile.email}</Typography>
-          
         </>
       )}
     </Paper>

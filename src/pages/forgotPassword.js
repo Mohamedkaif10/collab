@@ -1,7 +1,7 @@
-import "../styles/global.css"
-import 'tailwindcss/tailwind.css';
-import navBarImg from "../assets/navbarBrand.png"
-import firstLogo from "../assets/firstlogo.png"
+import "../styles/global.css";
+import "tailwindcss/tailwind.css";
+import navBarImg from "../assets/navbarBrand.png";
+import firstLogo from "../assets/firstlogo.png";
 const Forgot_pass = () => {
   return (
     <div className="flex">
