@@ -4,8 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color:#253D9080; /* Semi-transparent black background */
-    z-index: 1; /* Ensure the overlay is above the modal */
+    background-color:#253D9080; 
+    z-index: 1;
   }
 .modal {
     position: fixed;
@@ -16,8 +16,8 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 60%; /* Adjust the width as needed */ /* Add a maximum width if desired */
-    text-align: center; /* Center the content horizontally */
+    width: 60%; 
+    text-align: center; 
     width:600px;
     height:420px;
   }

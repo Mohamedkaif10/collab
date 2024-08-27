@@ -9,7 +9,7 @@
 }
 .main_modal_4{
     width: 495px;
-height: 576px;
+    height: 576px;
 
 border-radius: 24px;
 background-color: white;
@@ -31,7 +31,7 @@ margin-top:9%
 height: 72px;
 background-color: #E3EDF9;
 border-radius: 5px;
-/* margin-top: 70%; */
+
 margin-left:55%;
 }
 .input_div > p{

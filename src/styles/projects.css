@@ -300,24 +300,24 @@ background: white;
 }
 .right_eelements{
   margin-left: 670px;
-  display: flex; /* Display the elements horizontally */
+  display: flex;
   align-items: center;
   gap:2%;
 }
-/* Add this CSS to your stylesheets */
+
 table.table_2 {
   border-collapse: collapse;
   width: 100%;
 }
 
 table.table_2 td {
-  border-bottom: 1px solid #ccc; /* Add a border-bottom to each td */
+  border-bottom: 1px solid #ccc; 
   padding: 8px;
   text-align: center;
 }
 
 table.table_2 th {
-  border-bottom: 2px solid #000; /* Add a thicker border to table headers */
+  border-bottom: 2px solid #000;
   padding: 8px;
   text-align: center;
 }
